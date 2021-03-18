@@ -198,8 +198,8 @@ ll ddy[9] = { 0,-1,0,1,-1,1,-1,0,1 };
 ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[100002], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[100002], dd[MM][MM][4], ax[M], ay[M], az[M], d[100002], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll a[1000002], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[100002], dd[MM][MM][4], ax[M], ay[M], az[M], d[100002], dist[M], aa[MM][MM], d1[M], d2[M], tempa[1000002], lazy[M];
 ll qry[M][4],dp[151][11], matn=2;
 bool check[M], visit[M], treecheck[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -930,32 +930,38 @@ ll fibosum(ll from, ll to){
     return (y-x+mod)%mod;
 }
 
-int main(void) {
-    scann;
-    scana;
-    scant;
-    suma;
-    findmax;
-    if (sum <= t) {
-        prmax;
-        return 0;
-    }
-    l=1; r=maxi;
-    maxi=-INF;
+void binary_search(void){
+    l=0;
+    r=a[1];
     w1{
         mid=(l+r)/2;
         sum=0;
-        fori sum += ((mid<a[i]) ? mid : a[i]);
-        if(sum>t) {
-            if(l==r) break;
-            r=mid;
+        fori{
+            if(mid>=a[i]) break;
+            sum+=(a[i]-mid);
         }
-        else{
+        if(sum==m) {
+            maxi=mid;
+            braek;
+        }
+        if(sum<m) { // 왼쪽(값을 작게 해야 함)
+            if(l==r) break;
+            r = mid;
+        }
+        else { // 오른쪽(값을 크게 해야 함)
             maxi=max(maxi,mid);
             if(l==r) break;
-            l=mid+1;
+            l = mid + 1;
         }
         if(l>r) break;
     };
-    prmaxi;
+    pr1(maxi);
+}
+
+int main(void) {
+    scannm;
+    scana;
+    sorta;
+    reversea;
+    binary_search();
 }
