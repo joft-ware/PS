@@ -931,28 +931,31 @@ ll fibosum(ll from, ll to){
 }
 
 int main(void) {
-    scanmn;
-    fori sc3(a[i],b[i],cc[i]);
-    fori{
-        mini=INF;
-        minim=INF;
-        forjn{
-            if(visit[j]) continue;
-            if(b[j]<mini){
-                mini=b[j];
-                minim=a[j];
-                num=j;
-            }
-            if(b[j]==mini){
-                if(a[j]<minim)
-                {
-                    mini=b[j];
-                    minim=a[j];
-                    num=j;
-                }
-            }
-        }
-        pr(cc[num]);
-        visit[num]=true;
+    scann;
+    scana;
+    scant;
+    suma;
+    findmax;
+    if (sum <= t) {
+        prmax;
+        return 0;
     }
-};
+    l=1; r=maxi;
+    maxi=-INF;
+    w1{
+        mid=(l+r)/2;
+        sum=0;
+        fori sum += ((mid<a[i]) ? mid : a[i]);
+        if(sum>t) {
+            if(l==r) break;
+            r=mid;
+        }
+        else{
+            maxi=max(maxi,mid);
+            if(l==r) break;
+            l=mid+1;
+        }
+        if(l>r) break;
+    };
+    prmaxi;
+}
