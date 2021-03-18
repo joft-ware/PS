@@ -12,7 +12,7 @@
 #include <deque>
 #include <map>
 
-#define M 101
+#define M 1001
 #define MM 101
 #define N 1200
 
@@ -81,6 +81,8 @@
 #define scanaa1 fori {scanc;for(ll j=1;j<=m;j++) {scanf("%1lld",&aa[i][j]);}};
 #define scanbb fori for(ll j=1;j<=m;j++) scanf("%lld",&bb[i][j]);
 #define scanline(s) getline(cin,s); slen=s.size();
+#define scanv vll v(n+1); fori sc(v[i]);
+#define scannv scann; scanv;
 
 #define prld(a) printf("%.12g ",a);
 #define printld(a) prld(a)
@@ -188,7 +190,7 @@
 #define prstr for(ll wq=1;wq<=slen;wq++) pr(str[wq]);
 
 using namespace std;
-ll i, j, ii, jj, n, zz, yyy, xxx, maxim, l1, l2, l3, mm, l4, end, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, tx, ty, k, start, num, xx, qq, w, e, no, r, sum, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
+ll i, j, ii, jj, n, zz, yyy, xxx, maxim, l1, l2, l3, mm, l4, end, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, tx, ty, k, start, num, xx, qq, w, e, no, r, sum, minim, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
 ll dx[5] = { 0,0,1,0,-1 };
 ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
@@ -196,11 +198,11 @@ ll ddy[9] = { 0,-1,0,1,-1,1,-1,0,1 };
 ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[1000002], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[1000002], dd[MM][MM][4], ax[M], ay[M], az[M], d[1000002], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll a[100002], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[100002], dd[MM][MM][4], ax[M], ay[M], az[M], d[100002], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
 ll qry[M][4],dp[151][11], matn=2;
 bool check[M], visit[M], treecheck[M];
-char c1, c2, c, c3, c4, cc[MM][MM];
+char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
 
 string str, s, s1, s2, s3, ss[M], ss1[M], ss2[M];
@@ -254,6 +256,17 @@ ll zegob(ll x, ll y)
         y >>= 1;
     }
     return k;
+}
+
+ll binary_search(vll v, ll x, ll left, ll right){
+    ll mid = (left+right)/2;
+    if(v[mid]==x)
+        return mid;
+    if(left>=right)
+        return -1;
+    if(v[mid]<x)
+        return binary_search(v, x, mid+1,right);
+    return binary_search(v, x, left, mid);
 }
 
 bool da(char c)
@@ -918,24 +931,28 @@ ll fibosum(ll from, ll to){
 }
 
 int main(void) {
-    scant;
-    wt {
-        scannm;
-        m++;
-        scana;
-        fori pq.push(a[i]);
-        clean(d,n);
-        x=0;
-        fori{
-            forjn{
-                if(++x==n+1)x=1;
-                if(d[x]||pq.top()>a[x]) continue;
-                d[x]=i;
-                pq.pop();
-                break;
-            };
-        };
-        while(pq.size()) pq.pop();
-        pr1l(d[m]);
-    };
-}
+    scanmn;
+    fori sc3(a[i],b[i],cc[i]);
+    fori{
+        mini=INF;
+        minim=INF;
+        forjn{
+            if(visit[j]) continue;
+            if(b[j]<mini){
+                mini=b[j];
+                minim=a[j];
+                num=j;
+            }
+            if(b[j]==mini){
+                if(a[j]<minim)
+                {
+                    mini=b[j];
+                    minim=a[j];
+                    num=j;
+                }
+            }
+        }
+        pr(cc[num]);
+        visit[num]=true;
+    }
+};
