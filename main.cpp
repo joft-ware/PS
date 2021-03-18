@@ -198,8 +198,8 @@ ll ddy[9] = { 0,-1,0,1,-1,1,-1,0,1 };
 ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[1000002], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[100002], dd[MM][MM][4], ax[M], ay[M], az[M], d[100002], dist[M], aa[MM][MM], d1[M], d2[M], tempa[1000002], lazy[M];
+ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[M], dd[MM][MM][4], p[1000001], h[1000001], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[1000002], lazy[M];
 ll qry[M][4],dp[151][11], matn=2;
 bool check[M], visit[M], treecheck[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -305,22 +305,21 @@ bool bound(ll x, ll y, ll n, ll m)
     return false;
 }
 
-ll find(ll x)
-{
-    if (d[x] == x)
+ll find(ll x) {// p:부모
+    if (p[x] == x)
         return x;
-    d[x] = find(d[x]);
-    return d[x];
+    p[x] = find(p[x]);
+    return p[x];
 }
 
-void un(ll x, ll y)
-{
-    ll q = find(x);
-    ll w = find(y);
-    if (q > w)
-        d[q] = find(w);
-    else
-        d[q] = find(w);
+void uni(ll x, ll y) {// h: height
+    x = find(x);
+    y = find(y);
+    if(x==y) return;
+    if(h[x]>h[y])
+        swap(x,y);
+    p[x]=y;
+    if(h[x]==h[y]) h[y]++;
 }
 
 bool same(ll x, ll y)
@@ -973,39 +972,11 @@ bool f(ll l, ll r){
 }
 
 int main(void) {
-    w1{
-        scanline(s);
-        if(s[0]=='.') break;
-        n=slen;
-        no=0;
-        x=0;
-        y=0;
-        fori0{
-            if(s[i]=='(') st.push(1);
-            if(s[i]==')') {
-                if(st.empty()) {
-                    no=1;
-                    continue;
-                }
-                else if(st.top()!=1)
-                    no=1;
-                st.pop();
-            }
-            if(s[i]=='[') st.push(2);
-            if(s[i]==']'){
-                if(st.empty()) {
-                    no = 1;
-                    continue;
-                }
-                else if(st.top()!=2)
-                    no=1;
-                st.pop();
-            }
-        };
-        if(st.size())no=1;
-        while(st.size()) st.pop();
-        if(no) prno;
-        else pryes;
-        prl;
-    }
+    scannm;
+    fori p[i]=i, h[i]=1;
+    forj{
+        scanxyz;
+        if(x) pr1l((find(y)==find(z))?"yes":"no");
+        else uni(y,z);
+    };
 }
