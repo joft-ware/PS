@@ -971,12 +971,32 @@ bool f(ll l, ll r){
     return true;
 }
 
+void union_find(void){
+    fori h[i]=1,p[i]=i;
+}
+
 int main(void) {
-    scannm;
-    fori p[i]=i, h[i]=1;
-    forj{
-        scanxyz;
-        if(x) pr1l((find(y)==find(z))?"yes":"no");
-        else uni(y,z);
+    scannml;
+    fori {
+        scanx;
+        pqxy.push({-x, i});
     };
+    mm=l;
+    n++;
+    union_find();
+    forj{
+        scanxy;
+        uni(x,y);
+    };
+    while(pqxy.size()){
+        x=pqxy.top().Y;
+        z=-pqxy.top().X;
+        pqxy.pop();
+        if(find(x)==find(n)) continue;
+        if(z>l) {no=1; break;}
+        l-=z;
+        uni(n,x);
+    }
+    if(no) pr("Oh no");
+    else pr(mm-l);
 }
