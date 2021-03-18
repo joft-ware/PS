@@ -932,17 +932,17 @@ ll fibosum(ll from, ll to){
 
 void binary_search(void){
     l=0;
-    r=a[1];
+    r=a[n];
     w1{
         mid=(l+r)/2;
-        sum=0;
+        sum=1;
+        x=a[1];
         fori{
-            if(mid>=a[i]) break;
-            sum+=(a[i]-mid);
-        }
-        if(sum==m) {
-            maxi=mid;
-            braek;
+            if(a[i]-x>=mid)
+            {
+                sum++;
+                x=a[i];
+            }
         }
         if(sum<m) { // 왼쪽(값을 작게 해야 함)
             if(l==r) break;
@@ -962,6 +962,5 @@ int main(void) {
     scannm;
     scana;
     sorta;
-    reversea;
     binary_search();
 }
