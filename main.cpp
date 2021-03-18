@@ -12,7 +12,7 @@
 #include <deque>
 #include <map>
 
-#define M 1001
+#define M 100001
 #define MM 101
 #define N 1200
 
@@ -975,28 +975,38 @@ void union_find(void){
     fori h[i]=1,p[i]=i;
 }
 
+
+
 int main(void) {
-    scannml;
-    fori {
+    scannm;
+    fori p[i]=i;
+    forj {
         scanx;
-        pqxy.push({-x, i});
+
+        if(!visit[x]) {
+            y = x;
+            visit[y] = true;
+            if (visit[y - 1]) {
+                p[y-1]=find(y-1);
+                p[y] = p[y-1];
+            }
+            if(visit[y+1]) {
+                p[y]=find(y);
+                p[y + 1] = p[y];
+            }
+        }
+        else {
+            y = find(x) - 1;
+            if (y <= 0) break;
+            visit[y] = true;
+            if (visit[y - 1]) {
+                p[y-1]=find(y-1);
+                p[y] = p[y-1];
+            }
+            p[y]=find(y);
+            p[y + 1] = p[y];
+        }
+        cnt++;
     };
-    mm=l;
-    n++;
-    union_find();
-    forj{
-        scanxy;
-        uni(x,y);
-    };
-    while(pqxy.size()){
-        x=pqxy.top().Y;
-        z=-pqxy.top().X;
-        pqxy.pop();
-        if(find(x)==find(n)) continue;
-        if(z>l) {no=1; break;}
-        l-=z;
-        uni(n,x);
-    }
-    if(no) pr("Oh no");
-    else pr(mm-l);
+    prcnt;
 }
