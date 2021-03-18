@@ -958,9 +958,54 @@ void binary_search(void){
     pr1(maxi);
 }
 
+bool f(ll l, ll r){
+    fo(i,l,r-1){
+        if(s[i]=='('){
+
+        }
+        if(s[i]=='['){
+
+
+        }
+    }
+
+    return true;
+}
+
 int main(void) {
-    scannm;
-    scana;
-    sorta;
-    binary_search();
+    w1{
+        scanline(s);
+        if(s[0]=='.') break;
+        n=slen;
+        no=0;
+        x=0;
+        y=0;
+        fori0{
+            if(s[i]=='(') st.push(1);
+            if(s[i]==')') {
+                if(st.empty()) {
+                    no=1;
+                    continue;
+                }
+                else if(st.top()!=1)
+                    no=1;
+                st.pop();
+            }
+            if(s[i]=='[') st.push(2);
+            if(s[i]==']'){
+                if(st.empty()) {
+                    no = 1;
+                    continue;
+                }
+                else if(st.top()!=2)
+                    no=1;
+                st.pop();
+            }
+        };
+        if(st.size())no=1;
+        while(st.size()) st.pop();
+        if(no) prno;
+        else pryes;
+        prl;
+    }
 }
