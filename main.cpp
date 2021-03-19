@@ -13,7 +13,7 @@
 #include <map>
 
 #define M 100001
-#define MM 101
+#define MM 501
 #define N 1200
 
 #define ll long long
@@ -176,10 +176,10 @@
 #define prcnt pr1l(cnt)
 #define prx pr1l(x)
 #define prxy pr2l(x, y)
-#define prno pr1("no")
-#define pryes pr1("yes")
-#define prNO pr1("NO")
-#define prYES pr1("YES")
+#define prno pr1l("no")
+#define pryes pr1l("yes")
+#define prNO pr1l("NO")
+#define prYES pr1l("YES")
 #define prgg pr1l("gg")
 #define prmaxi pr1l(maxi)
 #define prmax pr1l(maxi)
@@ -190,7 +190,7 @@
 #define prstr for(ll wq=1;wq<=slen;wq++) pr(str[wq]);
 
 using namespace std;
-ll i, j, ii, jj, n, zz, yyy, xxx, maxim, l1, l2, l3, mm, l4, end, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, tx, ty, k, start, num, xx, qq, w, e, no, r, sum, minim, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
+ll i, j, ii, jj, n, zz, yyy, xxx, maxim, l1, l2, l3, mm, l4, end, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, tx, ty, k, start, num, xx, qq, w, e, no, r, sum, minim=INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
 ll dx[5] = { 0,0,1,0,-1 };
 ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
@@ -975,38 +975,31 @@ void union_find(void){
     fori h[i]=1,p[i]=i;
 }
 
-
-
 int main(void) {
     scannm;
-    fori p[i]=i;
-    forj {
-        scanx;
-
-        if(!visit[x]) {
-            y = x;
-            visit[y] = true;
-            if (visit[y - 1]) {
-                p[y-1]=find(y-1);
-                p[y] = p[y-1];
-            }
-            if(visit[y+1]) {
-                p[y]=find(y);
-                p[y + 1] = p[y];
-            }
+    scant;
+    scanaa;
+    fori{
+        forj{
+            mini=min(mini,aa[i][j]);
+            maxi=max(maxi,aa[i][j]);
         }
-        else {
-            y = find(x) - 1;
-            if (y <= 0) break;
-            visit[y] = true;
-            if (visit[y - 1]) {
-                p[y-1]=find(y-1);
-                p[y] = p[y-1];
-            }
-            p[y]=find(y);
-            p[y + 1] = p[y];
-        }
-        cnt++;
     };
-    prcnt;
+    fo(k,mini,maxi){
+        ll plus=0, minus=0;
+        fori{
+            forj{
+                if(aa[i][j]>k)
+                    plus+=(aa[i][j]-k);
+                else if(aa[i][j]<k)
+                    minus+=(k-aa[i][j]);
+            }
+        }
+        if(t+plus<minus) continue;
+        if(minim>=minus+plus*2) {
+            minim = minus + plus * 2;
+            num=k;
+        }
+    }
+    pr2(minim,num);
 }
