@@ -975,31 +975,26 @@ void union_find(void){
     fori h[i]=1,p[i]=i;
 }
 
-int main(void) {
-    scannm;
-    scant;
-    scanaa;
-    fori{
-        forj{
-            mini=min(mini,aa[i][j]);
-            maxi=max(maxi,aa[i][j]);
-        }
-    };
-    fo(k,mini,maxi){
-        ll plus=0, minus=0;
-        fori{
-            forj{
-                if(aa[i][j]>k)
-                    plus+=(aa[i][j]-k);
-                else if(aa[i][j]<k)
-                    minus+=(k-aa[i][j]);
-            }
-        }
-        if(t+plus<minus) continue;
-        if(minim>=minus+plus*2) {
-            minim = minus + plus * 2;
-            num=k;
-        }
+ll f(ll n, ll num, ll x, ll y){
+    if(n==1){
+        return num;
     }
-    pr2(minim,num);
+    if(xx<x+n/2&&yy<y+n/2)
+        return f(n/2,num,x,y);
+    else if(xx<x+n/2&&yy<y+n)
+        return f(n/2,num+n*n/4,x,y+n/2);
+    else if(xx<x+n&&yy<y+n/2)
+        return f(n/2,num+n*n/2,x+n/2,y);
+    else if(xx<x+n&&yy<y+n)
+        return f(n/2,num+n*n/4*3,x+n/2,y+n/2);
+}
+
+int main(void) {
+    scann;
+    scanxy;
+    xx=x;
+    yy=y;
+    n=zegob(2,n);mn;
+    pr(f(n,0,0,0));
+
 }
