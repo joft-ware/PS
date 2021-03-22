@@ -11,15 +11,19 @@
 #include <stdlib.h>
 #include <deque>
 #include <map>
+#include <set>
+#include <unordered_set>
+#include <unordered_map>
 
-#define M 100001
-#define MM 501
-#define N 1200
+#define M 1001
+#define MM 1
+#define N 1000001
 
 #define ll long long
 #define ull unsigned ll
 #define ld double
 #define vll vector<ll>
+#define vs vector<string>
 #define Yes "Yes"
 #define No "No"
 #define YES "YES"
@@ -28,7 +32,6 @@
 #define X first
 #define Y second
 #define PI 3.14159265358979323846264338327950288419716939937510
-
 
 #define foi(a) for(ll i=1;i<=a;i++)
 #define foi0(a) for(ll i=0;i<a;i++)
@@ -41,7 +44,7 @@
 #define fori0 for(ll i=0;i<n;i++)
 #define forj for(ll j=1;j<=m;j++)
 #define forjn for(ll j=1;j<=n;j++)
-#define forji for(ll j=1;j<=i;j++)
+#define forji for(ll j=1;j<i;j++)
 #define forjn0 for(ll j=0;j<n;j++)
 #define forj0 for(ll j=0;j<m;j++)
 #define fork for(ll k=1;k<=l;k++)
@@ -49,46 +52,47 @@
 #define forkn for(ll k=1;k<=n;k++)
 #define foriw for(ll i=1;;i++)
 
-#define scann scanf("%lld",&n)
-#define scanm scanf("%lld",&m)
-#define scant scanf("%lld",&t)
-#define scanx scanf("%lld",&x)
-#define scany scanf("%lld",&y)
-#define scank scanf("%lld",&k)
-#define scanc scanf("%c",&c)
-#define scanxy scanf("%lld %lld",&x,&y)
+#define scann sc(n)
+#define scanm sc(m);
+#define scant sc(t);
+#define scanx sc(x);
+#define scany sc(y);
+#define scank sc(k);
+#define scanc sc(c);
+#define scanxy sc2(x,y);
 #define scanyx scanf("%lld %lld",&y,&x)
 #define scanzr scanf("%lld %lld",&z,&r)
 #define scanwe scanf("%lld %lld",&w,&e)
-#define scannm scanf("%lld %lld",&n,&m)
+#define scannm sc2(n,m);
 #define scanwe scanf("%lld %lld",&w,&e)
 #define scanmn scanf("%lld %lld",&m,&n)
 #define scannml scanf("%lld %lld %lld",&n,&m,&l)
-#define scanxyz scanf("%lld %lld %lld",&x,&y,&z)
+#define scanxyz sc3(x,y,z);
 #define scanxyzr scanf("%lld %lld %lld %lld",&x,&y,&z,&r)
-#define scans scanline(s)
+#define scans sc(s);slen=s.size();
 #define scansn frees; scanf("%s", &s[1]); len = strlen(&s[1]); n=len;
 #define scansm frees; scanf("%s", &s[1]); len = strlen(&s[1]); m=len;
 #define scans1 cin >> s1; len1 = s1.size();
 #define scans2 cin >> s1; len1 = s1.size();
-#define scana freea; fori scanf("%lld",&a[i]);
+#define scana freea; fori sc(a[i]);
 #define scanna scann; fori scanf("%lld",&a[i]);
 #define scana1d fori scanf("%1d",&a[i]);
 #define scanb1d fori scanf("%1d",&b[i]);
 #define scanb fori scanf("%lld",&b[i]);
 #define scand fori scanf("%lld",&d[i]);
 #define scanaa fori for(ll j=1;j<=m;j++) scanf("%lld",&aa[i][j]);
-#define scanaa1 fori {scanc;for(ll j=1;j<=m;j++) {scanf("%1lld",&aa[i][j]);}};
+#define scanaa1 fori{scans;forj0{aa[i][j+1] = s[j] - '0';}s.clear();}
+#define scanbb1 fori{scans;forj0{bb[i][j+1] = s[j] - '0';}s.clear();}
 #define scanbb fori for(ll j=1;j<=m;j++) scanf("%lld",&bb[i][j]);
 #define scanline(s) getline(cin,s); slen=s.size();
 #define scanv vll v(n+1); fori sc(v[i]);
 #define scannv scann; scanv;
 
-#define prld(a) printf("%.12g ",a);
+#define prld(a,b) {cout << fixed; cout.precision(a); pr1(b);}
 #define printld(a) prld(a)
 #define printsum printf("%lld\n",sum);
-#define printcase printf("Case %lld: ",++casenum);
-#define printcases printf("Case #%lld: ",++casenum);
+#define printcase pr("Case "); pr(++casenum);pr(": ");
+#define printcases pr("Case #"); pr(++casenum);pr(": ");
 #define prints printf("%s",&s[1]);
 #define printc printf("%c",c);
 #define printmax printf("%lld\n",maxi);
@@ -104,6 +108,8 @@
 #define printgg pr1l("gg");
 #define printv(v) for(auto qwe:v) {pr1(qwe);}; prl;
 #define prv(v) printv(v)
+#define printvl(v) for(auto qwe:v) {pr1l(qwe);};
+#define prvl(v) printvl(v)
 #define pra printa
 #define prcase printcase
 #define prcases printcases
@@ -112,10 +118,11 @@
 #define freea for(ll i=0;i<=n;i++) a[i]=0;
 #define cleana for(ll i=0;i<=n;i++) a[i]=0;
 #define cleanb for(ll i=0;i<=n;i++) b[i]=0;
+#define cleanaa(x) for(ll iii=0;iii<=n+1;iii++) {for(ll jjj=0;jjj<=m+1;jjj++) {aa[iii][jjj]=x;}};
 #define sorta sort(a+1,a+n+1);
 #define sortb sort(b+1,b+n+1);
 #define sortd sort(d+1,d+n+1);
-#define sortv sort(v.begin(),v.end());
+#define sortv(v) sort(full(v));
 #define suma sum=0; fori sum+=a[i];
 #define infa fori a[i]=INF;
 #define reversea fori tempa[i]=a[n+1-i]; fori a[i]=tempa[i];
@@ -153,6 +160,12 @@
 #define sc4(a,b,c,d) cin >> a >> b >> c >> d
 #define sc5(a,b,c,d,e) cin >> a >> b >> c >> d >> e
 #define sc6(a,b,c,d,e,f) cin >> a >> b >> c >> d >> e >> f
+#define scn sc(n)
+#define scm sc(m)
+#define scnm sc2(n,m)
+#define scx sc(x)
+#define sct sc(t)
+#define scxy sc2(x,y)
 
 #define pr(a) cout << (a)
 #define pr0 cout << (0);
@@ -190,18 +203,20 @@
 #define prstr for(ll wq=1;wq<=slen;wq++) pr(str[wq]);
 
 using namespace std;
-ll i, j, ii, jj, n, zz, yyy, xxx, maxim, l1, l2, l3, mm, l4, end, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, tx, ty, k, start, num, xx, qq, w, e, no, r, sum, minim=INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
+ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
 ll dx[5] = { 0,0,1,0,-1 };
 ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
 ll ddy[9] = { 0,-1,0,1,-1,1,-1,0,1 };
+ll dddx[9] = { 0,-1,-2,-1,0,0,1,2,1 };
+ll dddy[9] = { 0,-1,0,1,-2,2,-1,0,1 };
 ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], dd[MM][MM][4], p[1000001], h[1000001], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[1000002], lazy[M];
-ll qry[M][4],dp[151][11], matn=2;
-bool check[M], visit[M], treecheck[M];
+ll a[3000001], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[6006], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll qry[M][4], dp[MM][11], matn = 2, mu[1000010];
+bool check[M], visit[M], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
 
@@ -210,27 +225,24 @@ typedef pair<ll, ll> xy;
 typedef vector<vll> matrix;
 ull u1, u2, u3, u4;
 queue<ll> q, qx, qy;
-priority_queue<ll> pq;
+priority_queue<ll> pq, pq2;
 priority_queue<xy> pqxy;
 stack<ll> st;
 deque<ll> dq;
 deque<xy> dqxy;
-map<string, ll> msi;
-map<ll, string> mis;
-vll v, v1, v2, v3, print;
-vector<ll> vv[M];
+vll v, v1, v2, v3, print, vv[M], rv[M], visited;
 vector<xy> vxy, vxya[M];
 xy xy1, xya[M];
-bool boo[M];
+vector<vll> scc;
 ll mod = INF;
 
-matrix operator *(matrix &a, matrix &b){
+matrix operator *(matrix &a, matrix &b) {
     matrix c(2, vll(2));
-    ll n=m=l=2;
+    ll n = m = l = 2;
     fori0
         forj0
             fork0
-                c[i][j]=(c[i][j]+(a[i][k]*b[k][j]))%mod;
+                c[i][j] = (c[i][j] + (a[i][k] * b[k][j])) % mod;
     return c;
 }
 
@@ -239,11 +251,11 @@ ll zegobmod(ll x, ll y)
     ll k = 1;
     while (y > 0) {
         if (y & 1)
-            k = (k%mod*x%mod)%mod;
-        x = (x*x)%mod;
+            k = (k%mod*x%mod) % mod;
+        x = (x*x) % mod;
         y >>= 1;
     }
-    return k%mod;
+    return k % mod;
 }
 
 ll zegob(ll x, ll y)
@@ -258,14 +270,14 @@ ll zegob(ll x, ll y)
     return k;
 }
 
-ll binary_search(vll v, ll x, ll left, ll right){
-    ll mid = (left+right)/2;
-    if(v[mid]==x)
+ll binary_search(vll v, ll x, ll left, ll right) {
+    ll mid = (left + right) / 2;
+    if (v[mid] == x)
         return mid;
-    if(left>=right)
+    if (left >= right)
         return -1;
-    if(v[mid]<x)
-        return binary_search(v, x, mid+1,right);
+    if (v[mid] < x)
+        return binary_search(v, x, mid + 1, right);
     return binary_search(v, x, left, mid);
 }
 
@@ -315,11 +327,11 @@ ll find(ll x) {// p:부모
 void uni(ll x, ll y) {// h: height
     x = find(x);
     y = find(y);
-    if(x==y) return;
-    if(h[x]>h[y])
-        swap(x,y);
-    p[x]=y;
-    if(h[x]==h[y]) h[y]++;
+    if (x == y) return;
+    if (h[x] > h[y])
+        swap(x, y);
+    p[x] = y;
+    if (h[x] == h[y]) h[y]++;
 }
 
 bool same(ll x, ll y)
@@ -336,8 +348,8 @@ ll gcd(ll x, ll y)
     return gcd(y, x % y);
 }
 
-ll lcm(ll x, ll y){
-    return x*y/gcd(x,y);
+ll lcm(ll x, ll y) {
+    return x * y / gcd(x, y);
 }
 
 ll bigger(ll x, ll y)
@@ -354,22 +366,6 @@ ll smaller(ll x, ll y)
     return y;
 }
 
-bool descend(const pair<int, int> & a, const pair<int, int> & b)
-{
-    //If the first number is same
-    if (a.first == b.first)
-        return a.second > b.second; //The second number in Descending order
-    return a.first > b.first; //The first number of bigger numbers to move forward -> Descending order
-}
-
-bool ascend(const pair<int, int> & a, const pair<int, int> & b)
-{
-    //If the first number is same
-    if (a.first == b.first)
-        return a.second < b.second; //The second number in Descending order
-    return a.first > b.first; //The first number of bigger numbers to move forward -> Descending order
-}
-
 ll find_max(long long* a, ll n)
 {
     findmax;
@@ -380,7 +376,7 @@ void clean(long long* a, int n)
 {
     fori
         a[i] = 0;
-    a[0]=0;
+    a[0] = 0;
 }
 
 ll zari(ll n)
@@ -676,18 +672,18 @@ vll kmpll(vll v1, vll v2) { // 벡터 v1에 벡터 v2가 포함된 위치 벡터
 ll lis(ll a[], ll n) {
     vll v;
     ll cnt = 0;
-    fori d[i] = 0;
+    fori alis[i] = 0;
     v.pb(a[1]);
     fo(i, 2, n) {
         if (v[cnt] < a[i])
         {
             v.pb(a[i]);
-            d[i] = ++cnt;
+            alis[i] = ++cnt;
         }
         else {
             x = lower_bound(v.begin(), v.end(), a[i]) - v.begin();
             v[x] = a[i];
-            d[i] = x;
+            alis[i] = x;
         }
     }
     return cnt + 1;
@@ -734,40 +730,40 @@ vll ntov(ll n) { // 정수 n을 vector 로 변환
     return a;
 }
 
-ll banolim(ld a){
+ll banolim(ld a) {
     ll x = (ll)a;
     ld y = (ld)x;
-    if(a-y>=0.5)
-        return x+1;
+    if (a - y >= 0.5)
+        return x + 1;
     else
         return x;
 }
 
-vll dijk(vector<xy> vpa[], ll start, ll n){ // 다익스트라. vpa: {to, cost}
+vll dijk(vector<xy> vpa[], ll start, ll n) { // 다익스트라. vpa: {to, cost}
     fori d[i] = INF;
-    fori check[i]=false;
+    fori check[i] = false;
     priority_queue<xy> ppq;
     vll v;
-    d[start]=0;
+    d[start] = 0;
 
-    ppq.push({-d[start],start}); // cost, 위치
-    while(!ppq.empty()){
+    ppq.push({ -d[start],start }); // cost, 위치
+    while (!ppq.empty()) {
         ll now = ppq.top().second;
-        ll cost=-(ppq.top().first);
+        ll cost = -(ppq.top().first);
         ppq.pop();
 
-        if(check[now]) continue;
-        check[now]=true;
+        if (check[now]) continue;
+        check[now] = true;
 
         ll l = vpa[now].size();
-        fo(i,0,l-1){
+        fo(i, 0, l - 1) {
             ll y = vpa[now][i].first;
             ll tcost = vpa[now][i].second;
-            if(check[y]) continue;
-            if(d[y]>cost+tcost)
+            if (check[y]) continue;
+            if (d[y] > cost + tcost)
             {
-                d[y]=cost+tcost;
-                ppq.push({-d[y],y});
+                d[y] = cost + tcost;
+                ppq.push({ -d[y],y });
             }
         };
     }
@@ -782,46 +778,46 @@ ld ccw(ld x1, ld x2, ld x3, ld y1, ld y2, ld y3) {
     return x / 2;
 }
 
-ld ccw(xy a, xy b, xy c){
-    ld w = (b.X-a.X)*(c.Y-a.Y)-(b.Y-a.Y)*(c.X-a.X);
-    if(w<0) return -1;
-    return (w>0);
+ld ccw(xy a, xy b, xy c) {
+    ld w = (b.X - a.X)*(c.Y - a.Y) - (b.Y - a.Y)*(c.X - a.X);
+    if (w < 0) return -1;
+    return (w > 0);
 }
 
-bool cross(xy a, xy b, xy c, xy d){ // 선분ab와 cd의 cross 여부
-    ll x = ccw(a,b,c)*ccw(a,b,d);
-    ll y = ccw(c,d,a)*ccw(c,d,b);
-    if(!x&&!y){
-        if(a>b) swap(a,b);
-        if(c>d) swap(c,d);
-        if(a<=d&&b>=c) return true;
+bool cross(xy a, xy b, xy c, xy d) { // 선분ab와 cd의 cross 여부
+    ll x = ccw(a, b, c)*ccw(a, b, d);
+    ll y = ccw(c, d, a)*ccw(c, d, b);
+    if (!x && !y) {
+        if (a > b) swap(a, b);
+        if (c > d) swap(c, d);
+        if (a <= d && b >= c) return true;
         return false;
     }
-    return (x<0&&y<0);
+    return (x <= 0 && y <= 0);  // 등호 붙이면 접하는 경우 포함. 안붙이면 불포함
 }
 
-ld distxy(xy a, xy b){ // 좌표 거리
-    ld w = a.X-b.X;
-    ld e = a.Y-b.Y;
-    return sqrt(w*w+e*e);
+ld distxy(xy a, xy b) { // 좌표 거리
+    ld w = a.X - b.X;
+    ld e = a.Y - b.Y;
+    return sqrt(w*w + e * e);
 }
 
-bool ccwcmp(xy a, xy b){
-    if(ccw(xy1,a,b)<0) return true;
-    if(ccw(xy1,a,b)>0) return false;
-    if(distxy(xy1,a)<distxy(xy1,b)) return true;
+bool ccwcmp(xy a, xy b) {
+    if (ccw(xy1, a, b) < 0) return true;
+    if (ccw(xy1, a, b) > 0) return false;
+    if (distxy(xy1, a) < distxy(xy1, b)) return true;
     return false;
 }
 
-bool xycmp(xy a, xy b){ // 시계방향
-    if(a.Y>b.Y)
+bool xycmp(xy a, xy b) { // 시계방향
+    if (a.Y > b.Y)
         return true;
-    if(a.Y<b.Y)
+    if (a.Y < b.Y)
         return false;
-    return (a.X<b.X); // >
+    return (a.X < b.X); // >
 }
 
-vector<xy> convex_hull(xy xya[], ll n){
+vector<xy> convex_hull(xy xya[], ll n) {
     vector<xy> vxy;
     xy1 = xya[1];
     fori if (xycmp(xya[i], xy1)) xy1 = xya[i]; // 극값 검색
@@ -836,165 +832,275 @@ vector<xy> convex_hull(xy xya[], ll n){
     return vxy;
 }
 
-bool xycmpmax(xy a, xy b){
-    if(a.Y>b.Y)
+bool xycmpmax(xy a, xy b) {
+    if (a.Y > b.Y)
         return true;
-    if(a.Y<b.Y)
+    if (a.Y < b.Y)
         return false;
-    return (a.X>b.X);
+    return (a.X > b.X);
 }
 
-bool xycmpmin(xy a, xy b){
-    if(a.Y<b.Y)
+bool xycmpmin(xy a, xy b) {
+    if (a.Y < b.Y)
         return true;
-    if(a.Y>b.Y)
+    if (a.Y > b.Y)
         return false;
-    return (a.X<b.X);
+    return (a.X < b.X);
 }
 
-ld rotating_calipers(vector<xy> vxy){ // 시계방향으로 회전하는 캘리퍼스
-    xy mini=vxy[0];
-    xy maxi=vxy[0];
-    ll x=0,y=0;
+ld rotating_calipers(vector<xy> vxy) { // 시계방향으로 회전하는 캘리퍼스
+    xy mini = vxy[0];
+    xy maxi = vxy[0];
+    ll x = 0, y = 0;
     ll n = vxy.size();
-    fori0 {
-        if(xycmpmin(vxy[i],mini)) {
+    fori0{
+        if (xycmpmin(vxy[i],mini)) {
             mini = vxy[i];
-            x=i;
+            x = i;
         }
-        if(xycmpmax(vxy[i],mini)) {
+        if (xycmpmax(vxy[i],mini)) {
             maxi = vxy[i];
             y = i;
         }
     };
-    l1=vxy[x].X;
-    l2=vxy[x].Y;
-    l3=vxy[y].X;
-    l4=vxy[y].Y;
-    ld maxim = distxy(vxy[x],vxy[y]);
-    foi0(n){
-        ll nextx = (x+1)%n;
-        ll nexty = (y+1)%n;
-        xy xx = {vxy[x].X-vxy[nextx].X,vxy[x].Y-vxy[nextx].Y};
-        xy yy = {vxy[y].X-vxy[nexty].X,vxy[y].Y-vxy[nexty].Y};
-        if(ccw(xx,{0,0},yy)<0) x = nextx; // 원점으로 두 벡터를 옮긴 뒤 비교
+    l1 = vxy[x].X;
+    l2 = vxy[x].Y;
+    l3 = vxy[y].X;
+    l4 = vxy[y].Y;
+    ld maxim = distxy(vxy[x], vxy[y]);
+    foi0(n) {
+        ll nextx = (x + 1) % n;
+        ll nexty = (y + 1) % n;
+        xy xx = { vxy[x].X - vxy[nextx].X,vxy[x].Y - vxy[nextx].Y };
+        xy yy = { vxy[y].X - vxy[nexty].X,vxy[y].Y - vxy[nexty].Y };
+        if (ccw(xx, { 0,0 }, yy) < 0) x = nextx; // 원점으로 두 벡터를 옮긴 뒤 비교
         else y = nexty;
-        if(maxim<distxy(vxy[x],vxy[y])) {
+        if (maxim < distxy(vxy[x], vxy[y])) {
             maxim = max(maxim, distxy(vxy[x], vxy[y]));
-            l1=vxy[x].X;
-            l2=vxy[x].Y;
-            l3=vxy[y].X;
-            l4=vxy[y].Y;
+            l1 = vxy[x].X;
+            l2 = vxy[x].Y;
+            l3 = vxy[y].X;
+            l4 = vxy[y].Y;
         }
     };
     return maxim;
 }
 
-vll changebase(ll n, ll m){
+vll changebase(ll n, ll m) {
     vll a;
     vll b;
     w1{
         a.pb(n%m);
         cnt++;
-        if(n<m)
+        if (n < m)
             break;
-        n/=m;
+        n /= m;
     };
     foi0(cnt) {
-        if(a[n+1-i]<=9)
-            b.pb(a[cnt - i]+'0');
+        if (a[n + 1 - i] <= 9)
+            b.pb(a[cnt - i] + '0');
         else
-            b.pb(a[cnt - i]+55);
+            b.pb(a[cnt - i] + 55);
     }
     return b;
 }
 
-ll fibo(ll n){
-    matrix x = {{1, 0},
-                {0, 1}};
-    matrix a = {{1, 1},
-                {1, 0}};
-    while(n>0){
-        if(n%2)
-            x=x*a;
-        a=a*a;
-        n/=2;
+ll fibo(ll n) {
+    matrix x = { {1, 0},
+                 {0, 1} };
+    matrix a = { {1, 1},
+                 {1, 0} };
+    while (n > 0) {
+        if (n % 2)
+            x = x * a;
+        a = a * a;
+        n /= 2;
     }
-    return x[0][1]%mod;
+    return x[0][1] % mod;
 }
 
-ll fibosum(ll from, ll to){
-    ll x = fibo(from+1)-1;
-    ll y = fibo(to+2)-1;
-    return (y-x+mod)%mod;
+ll fibosum(ll from, ll to) {
+    ll x = fibo(from + 1) - 1;
+    ll y = fibo(to + 2) - 1;
+    return (y - x + mod) % mod;
 }
 
-void binary_search(void){
-    l=0;
-    r=a[n];
+void binary_search(void) {
+    l = 0;
+    r = a[n];
     w1{
-        mid=(l+r)/2;
-        sum=1;
-        x=a[1];
+        mid = (l + r) / 2;
+        sum = 1;
+        x = a[1];
         fori{
-            if(a[i]-x>=mid)
+            if (a[i] - x >= mid)
             {
                 sum++;
-                x=a[i];
+                x = a[i];
             }
         }
-        if(sum<m) { // 왼쪽(값을 작게 해야 함)
-            if(l==r) break;
+        if (sum < m) { // 왼쪽(값을 작게 해야 함)
+            if (l == r) break;
             r = mid;
         }
         else { // 오른쪽(값을 크게 해야 함)
-            maxi=max(maxi,mid);
-            if(l==r) break;
+            maxi = max(maxi,mid);
+            if (l == r) break;
             l = mid + 1;
         }
-        if(l>r) break;
+        if (l > r) break;
     };
     pr1(maxi);
 }
 
-bool f(ll l, ll r){
-    fo(i,l,r-1){
-        if(s[i]=='('){
-
-        }
-        if(s[i]=='['){
-
-
-        }
-    }
-
-    return true;
+void union_find(void) { // 최적화된 union find (균형 트리)
+    fori h[i] = 1, p[i] = i; // h:높이, p: 부모
 }
 
-void union_find(void){
-    fori h[i]=1,p[i]=i;
+struct student {
+    string name;
+    ll kor, eng, math;
+};
+
+bool cmp(student a, student b) {
+    if (a.kor != b.kor) return (a.kor < b.kor);
+    if (a.eng != b.eng) return(a.eng > b.eng);
+    if (a.math != b.math) return (a.math < b.math);
+    return a.name > b.name;
 }
 
-ll f(ll n, ll num, ll x, ll y){
-    if(n==1){
-        return num;
+string lcs(string st1, string st2) {
+    ll maxi = 0, cnt = 0;
+    ll dd[MM][MM] = { { 0 } };
+    string s3;
+    stack<ll> st;
+    s1 = '0' + st1;
+    s2 = '0' + st2;
+    ll n = s1.size();
+    ll m = s2.size();
+    fori0{
+        forj0{
+            if (i == 0 || j == 0) { dd[i][j] = 0; continue; }
+            if (s1[i] == s2[j]) dd[i][j] = dd[i - 1][j - 1] + 1;
+            else dd[i][j] = bigger(dd[i - 1][j],dd[i][j - 1]);
+        }
     }
-    if(xx<x+n/2&&yy<y+n/2)
-        return f(n/2,num,x,y);
-    else if(xx<x+n/2&&yy<y+n)
-        return f(n/2,num+n*n/4,x,y+n/2);
-    else if(xx<x+n&&yy<y+n/2)
-        return f(n/2,num+n*n/2,x+n/2,y);
-    else if(xx<x+n&&yy<y+n)
-        return f(n/2,num+n*n/4*3,x+n/2,y+n/2);
+    ll i = n - 1;
+    ll j = m - 1;
+    while (dd[i][j] != 0) {
+        if (dd[i][j] == dd[i][j - 1])
+            j--;
+        else if (dd[i][j] == dd[i - 1][j])
+            i--;
+        else {
+            st.push(i);
+            i--;
+            j--;
+        }
+    }
+    while (!st.empty()) {
+        s3 += s1[st.top()];
+        st.pop();
+    }
+    return s3;
+}
+
+
+
+void f(ll x, ll y, ll l) {
+    ll len = l / 3;
+    ll goal = len * len;
+
+    if (n == 1)
+        d[aa[x][y]]++;
+    ll no = 0;
+    for (ll i = x; i <= x + l - 1; i++) {
+        for (ll j = y; j <= y + l - 1; j++) {
+            if (aa[i][j] != aa[x][y]) {
+                no = 1; break;
+
+            }
+        }
+        if (no) break;
+    }
+    if (!no)
+    {
+        d[aa[x][y]]++;
+        return;
+    }
+
+    for (ll i = 0; i <= 2; i++) {
+        for (ll j = 0; j <= 2; j++) {
+            ll tx = x + len * i;
+            ll ty = y + len * j;
+            f(tx, ty, l / 3);
+        }
+    }
+}
+
+void scc_(ll x, vll &list) {
+    visit[x]=true;
+    for(auto y:vv[x]) if(!visit[y]) scc_(y, list);
+    list.pb(x);
+}
+
+void scc_reverse(ll x, vll &list) {
+    visit[x]=true;
+    for(auto y:rv[x]) if(!visit[y]) scc_reverse(y, list);
+    list.pb(x);
+}
+
+void make_mu(){
+    mu[0]=0;
+    mu[1]=1;
+    foi(N){
+        for(ll j=i*2;j<=N;j+=i)
+            mu[j]-=mu[i];
+    }
+}
+
+ll square_free(ll x){
+    ll cnt = 0;
+    for(ll i=1;i*i<=x;i++) cnt+=mu[i]*x/(i*i);
+    return cnt;
+}
+
+ll f(ll left, ll right){
+    if(aa[left][right]) return aa[left][right];
+    if(left==right) return 0;
+    if(right==left+1) return (a[left]!=a[right]);
+    ll mini=INF;
+    for(ll mid = left; mid<=right-1; mid++){
+        ll x = f(left, mid)+f(mid+1,right);
+        mini=min(mini,x+(a[left]!=a[mid+1]));
+    }
+    aa[left][right]=mini;
+    return mini;
 }
 
 int main(void) {
-    scann;
+    // 속도 최적화 // --------------------------------------------------
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    // 속도 최적화 // --------------------------------------------------
+    scannm;
     scanxy;
-    xx=x;
-    yy=y;
-    n=zegob(2,n);mn;
-    pr(f(n,0,0,0));
-
+    scana;
+    l=1;r=x;
+    d[y]=n*2;
+    sum++;
+    fo(i,l,r)
+        if(++d[a[i]]==1)
+            sum++;
+    maxi=sum;
+    fori{
+        r=i+x;
+        if(r>n) r-=n;
+        if(--d[a[i]]==0) sum--;
+        if(d[a[r]]==0) sum++;
+        d[a[r]]++;
+        maxi=max(maxi,sum);
+    };
+    prmax;
 }
