@@ -1084,23 +1084,11 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scannm;
-    scanxy;
-    scana;
-    l=1;r=x;
-    d[y]=n*2;
-    sum++;
-    fo(i,l,r)
-        if(++d[a[i]]==1)
-            sum++;
-    maxi=sum;
-    fori{
-        r=i+x;
-        if(r>n) r-=n;
-        if(--d[a[i]]==0) sum--;
-        if(d[a[r]]==0) sum++;
-        d[a[r]]++;
-        maxi=max(maxi,sum);
+    scant;
+    wt {
+        map<string, ll> ma;
+        scann;
+        fori {scans; ma[s]++;}
+        pr1l(ma.size());
     };
-    prmax;
 }
