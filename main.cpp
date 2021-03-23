@@ -15,7 +15,7 @@
 #include <unordered_set>
 #include <unordered_map>
 
-#define M 1001
+#define M 100001
 #define MM 1
 #define N 1000001
 
@@ -213,8 +213,8 @@ ll dddy[9] = { 0,-1,0,1,-2,2,-1,0,1 };
 ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[3000001], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[6006], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll a[100001], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
 ll qry[M][4], dp[MM][11], matn = 2, mu[1000010];
 bool check[M], visit[M], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -1005,39 +1005,6 @@ string lcs(string st1, string st2) {
     return s3;
 }
 
-
-
-void f(ll x, ll y, ll l) {
-    ll len = l / 3;
-    ll goal = len * len;
-
-    if (n == 1)
-        d[aa[x][y]]++;
-    ll no = 0;
-    for (ll i = x; i <= x + l - 1; i++) {
-        for (ll j = y; j <= y + l - 1; j++) {
-            if (aa[i][j] != aa[x][y]) {
-                no = 1; break;
-
-            }
-        }
-        if (no) break;
-    }
-    if (!no)
-    {
-        d[aa[x][y]]++;
-        return;
-    }
-
-    for (ll i = 0; i <= 2; i++) {
-        for (ll j = 0; j <= 2; j++) {
-            ll tx = x + len * i;
-            ll ty = y + len * j;
-            f(tx, ty, l / 3);
-        }
-    }
-}
-
 void scc_(ll x, vll &list) {
     visit[x]=true;
     for(auto y:vv[x]) if(!visit[y]) scc_(y, list);
@@ -1078,17 +1045,44 @@ ll f(ll left, ll right){
     return mini;
 }
 
+ll update(int index, int target, int value, int start, int end) {
+    if (target < start || target > end)
+        return sumtree[index];
+    if (start == end) return sumtree[index] = value;
+    else {
+        int mid = (start + end) / 2;
+        return sumtree[index] = update(index * 2, target, value, start, mid) +
+                             update(index * 2 + 1, target, value, mid + 1, end);
+    }
+}
+
 int main(void) {
     // 속도 최적화 // --------------------------------------------------
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scant;
-    wt {
-        map<string, ll> ma;
-        scann;
-        fori {scans; ma[s]++;}
-        pr1l(ma.size());
+    scann;
+    fori{
+        scx;
+        d[x]=i;
     };
+    fori a[i]=1;
+    maketree_sum(1,n,1);
+    fori{
+        if(i%2) {
+            x=(i+1)/2;
+            y=d[x];
+            pr1(query_sum(1,1,n,1,y-1));
+        }
+        else {
+            cnt++;
+            x=n+1-cnt;
+            y=d[x];
+            pr1l(query_sum(1,1,n,y+1,n));
+        }
+        update(1,y,0,1,n);
+        if(n!=i) prl;
+    };
+
 }
