@@ -16,7 +16,7 @@
 #include <unordered_map>
 
 #define M 100001
-#define MM 1
+#define MM 101
 #define N 1000001
 
 #define ll long long
@@ -213,7 +213,7 @@ ll dddy[9] = { 0,-1,0,1,-2,2,-1,0,1 };
 ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[100001], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
 ll qry[M][4], dp[MM][11], matn = 2, mu[1000010];
 bool check[M], visit[M], treecheck[M], boo[M];
@@ -1045,44 +1045,58 @@ ll f(ll left, ll right){
     return mini;
 }
 
-ll update(int index, int target, int value, int start, int end) {
-    if (target < start || target > end)
-        return sumtree[index];
-    if (start == end) return sumtree[index] = value;
-    else {
-        int mid = (start + end) / 2;
-        return sumtree[index] = update(index * 2, target, value, start, mid) +
-                             update(index * 2 + 1, target, value, mid + 1, end);
-    }
-}
-
 int main(void) {
     // 속도 최적화 // --------------------------------------------------
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scann;
-    fori{
-        scx;
-        d[x]=i;
-    };
-    fori a[i]=1;
-    maketree_sum(1,n,1);
-    fori{
-        if(i%2) {
-            x=(i+1)/2;
-            y=d[x];
-            pr1(query_sum(1,1,n,1,y-1));
+    deque<char> lq, rq;
+    scans1;
+    m=len1;
+    scans;
+    n=slen;
+    l=0;
+    r=n-1;
+    while(l<=r){
+        while(l<=r){
+            lq.pb(s[l++]);
+            t=lq.size();
+            if(t>=m){
+                no=0;
+                sum=0;
+                for(i=t-m+1;i<=t;i++) {
+                    if (lq[i - 1] != s1[sum++]) {
+                        no = 1;
+                        break;
+                    }
+                }
+                if(!no) foi(m) lq.pop_back();
+                if(!no) break;
+            }
         }
-        else {
-            cnt++;
-            x=n+1-cnt;
-            y=d[x];
-            pr1l(query_sum(1,1,n,y+1,n));
+        while(l<=r){
+            rq.pb(s[r--]);
+            t=rq.size();
+            if(t>=m){
+                no=0;
+                sum=0;
+                for(i=t;i>=t-m+1;i--) {
+                    if(rq[i-1]!=s1[sum++]) {
+                        no=1;
+                        break;
+                    }
+                }
+                if(!no) foi(m) rq.pop_back();
+                if(!no) break;
+            }
         }
-        update(1,y,0,1,n);
-        if(n!=i) prl;
-    };
-
+    }
+    string ss;
+    if(lq.size()) for (i = 0; i <= lq.size() - 1; i++) ss += lq[i];
+    if(rq.size()) for (i = rq.size() - 1; i >= 0; i--) ss += rq[i];
+    while(ss.find(s1)<M) {
+        ss.erase(ss.find(s1), m);
+    }
+    pr(ss);
 }
