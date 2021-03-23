@@ -1038,31 +1038,13 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    sc2(m, n);
-    fori p[i]=i;
-    forj{
-        scxy;
-        if(!visit[x]){
-            visit[x]=true;
-            p[find(x)]=find(y);
-            pr1l("LADICA");
-        }
-        else if(!visit[y]){
-            visit[y]=true;
-            p[find(y)]=find(x);
-            pr1l("LADICA");
-        }
-        else if(!visit[find(x)]){
-            visit[find(x)]=true;
-            p[find(x)]=find(y);
-            pr1l("LADICA");
-
-        }
-        else if(!visit[find(y)]){
-            visit[find(y)]=true;
-            p[find(y)]=find(x);
-            pr1l("LADICA");
-        }
-        else pr1l("SMECE");
-    };
+    scant;wt{
+        scann;
+        scana;
+        cnt=0;
+        fori{
+            if(a[i]!=i)cnt++;
+        };
+        prcases; pr(cnt); pr1l(".000000");
+    }
 }
