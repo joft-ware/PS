@@ -15,7 +15,7 @@
 #include <unordered_set>
 #include <unordered_map>
 
-#define M 100001
+#define M 300001
 #define MM 101
 #define N 1000001
 
@@ -669,7 +669,7 @@ vll kmpll(vll v1, vll v2) { // 벡터 v1에 벡터 v2가 포함된 위치 벡터
     return ans;
 }
 
-ll lis(ll a[], ll n) {
+ll lis(ll a[], ll n) { // lis 길이 구하기
     vll v;
     ll cnt = 0;
     fori alis[i] = 0;
@@ -689,7 +689,7 @@ ll lis(ll a[], ll n) {
     return cnt + 1;
 }
 
-vll lisv(ll a[], ll n) { // a의 LIS 구하기
+vll lisv(ll a[], ll n) { // a의 LIS 벡터 구하기
     vll v, ret;
     ll cnt = 0;
     fori d[i] = 0;
@@ -702,7 +702,7 @@ vll lisv(ll a[], ll n) { // a의 LIS 구하기
             d[i] = ++cnt;
         }
         else {
-            x = lower_bound(v.begin(), v.end(), a[i]) - v.begin();
+            x = lower_bound(full(v), a[i]) - v.begin();
             v[x] = a[i];
             d[i] = x;
         }
@@ -1032,71 +1032,37 @@ ll square_free(ll x){
     return cnt;
 }
 
-ll f(ll left, ll right){
-    if(aa[left][right]) return aa[left][right];
-    if(left==right) return 0;
-    if(right==left+1) return (a[left]!=a[right]);
-    ll mini=INF;
-    for(ll mid = left; mid<=right-1; mid++){
-        ll x = f(left, mid)+f(mid+1,right);
-        mini=min(mini,x+(a[left]!=a[mid+1]));
-    }
-    aa[left][right]=mini;
-    return mini;
-}
-
 int main(void) {
     // 속도 최적화 // --------------------------------------------------
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    deque<char> lq, rq;
-    scans1;
-    m=len1;
-    scans;
-    n=slen;
-    l=0;
-    r=n-1;
-    while(l<=r){
-        while(l<=r){
-            lq.pb(s[l++]);
-            t=lq.size();
-            if(t>=m){
-                no=0;
-                sum=0;
-                for(i=t-m+1;i<=t;i++) {
-                    if (lq[i - 1] != s1[sum++]) {
-                        no = 1;
-                        break;
-                    }
-                }
-                if(!no) foi(m) lq.pop_back();
-                if(!no) break;
-            }
+    sc2(m, n);
+    fori p[i]=i;
+    forj{
+        scxy;
+        if(!visit[x]){
+            visit[x]=true;
+            p[find(x)]=find(y);
+            pr1l("LADICA");
         }
-        while(l<=r){
-            rq.pb(s[r--]);
-            t=rq.size();
-            if(t>=m){
-                no=0;
-                sum=0;
-                for(i=t;i>=t-m+1;i--) {
-                    if(rq[i-1]!=s1[sum++]) {
-                        no=1;
-                        break;
-                    }
-                }
-                if(!no) foi(m) rq.pop_back();
-                if(!no) break;
-            }
+        else if(!visit[y]){
+            visit[y]=true;
+            p[find(y)]=find(x);
+            pr1l("LADICA");
         }
-    }
-    string ss;
-    if(lq.size()) for (i = 0; i <= lq.size() - 1; i++) ss += lq[i];
-    if(rq.size()) for (i = rq.size() - 1; i >= 0; i--) ss += rq[i];
-    while(ss.find(s1)<M) {
-        ss.erase(ss.find(s1), m);
-    }
-    pr(ss);
+        else if(!visit[find(x)]){
+            visit[find(x)]=true;
+            p[find(x)]=find(y);
+            pr1l("LADICA");
+
+        }
+        else if(!visit[find(y)]){
+            visit[find(y)]=true;
+            p[find(y)]=find(x);
+            pr1l("LADICA");
+        }
+        else pr1l("SMECE");
+    };
 }
