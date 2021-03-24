@@ -1060,30 +1060,26 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    sct;
-    wt {
-        scn;
-        cnt=0;
-        k=n;
-        w1{
-            if(k==6174) break;
-            cnt++;
-            a[1]=k%10;
-            k/=10;
-            a[2]=k%10;
-            k/=10;
-            a[3]=k%10;
-            k/=10;
-            a[4]=k%10;
-            k/=10;
-            sort(a+1,a+5);
-            sum=e=0;
-            foi(4)
-                sum+=a[i]*zegob(10,4-i);
-            foi(4)
-                e+=a[5-i]*zegob(10,4-i);
-            k=e-sum;
-        };
-        pr1l(cnt);
+    w1 {
+        sc(s1);
+        sc(s2);
+        if (s1 == "END" && s2 == "END") break;
+        no=0;
+        if(s1.size()!=s2.size()){
+            no=1;
+        }
+        foi(26) a[i]=0;
+        foi0(s1.size()){
+            a[to_lower(s1[i])-'a'+1]++;
+            a[to_lower(s2[i])-'a'+1]--;
+        }
+
+        foi(26){
+            if(a[i]) no=1;
+        }
+
+        prcase;
+        if(no) pr1l("different");
+        else pr1l("same");
     };
 }
