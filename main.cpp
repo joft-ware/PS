@@ -1076,16 +1076,22 @@ ll f(ll x, ll y){
 
 int main(void) {
     FASTIO;
-    mod=1000;
-    scant;wt {
-        scann;
-        matrix mat = {{6, -4},
-                      {1, 0}};
-        matrix ma = matrix_pow(mat, n);
-        printcases;
-        x=(ma[1][0]*6+ma[1][1]*2+9999)%mod;
-        if(x<10) pr(0);
-        if(x<100) pr(0);
-        pr1l(x);
-    }
+    scann;
+    fori{
+        sc3(a1[i],a2[i],a3[i]);
+    };
+    foi(3){
+        maxi=-INF;
+        forjn{
+            if(a3[j]>maxi){
+                if(d[a1[j]]<=1){
+                    maxi=a3[j];
+                    num=j;
+                }
+            }
+        }
+        pr2l(a1[num],a2[num]);
+        d[a1[num]]++;
+        a3[num]=-INF;
+    };
 }
