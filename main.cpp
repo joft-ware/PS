@@ -730,6 +730,14 @@ vll ntov(ll n) { // 정수 n을 vector 로 변환
     return a;
 }
 
+vll stov(string s) //문자열 s를 vector로 변환
+{
+    vll a;
+    ll n=s.size();
+    fori0 a.pb(s[i]-'0');
+    return a;
+}
+
 ll banolim(ld a) {
     ll x = (ll)a;
     ld y = (ld)x;
@@ -1039,43 +1047,12 @@ int main(void) {
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
     scans;
-
-    n=5;
-    m=5;
-    fori{
-        foj(slen){
-            if(j==1) {
-                if (i == 1 || i == 5)
-                    pr("..#..");
-                else if (i == 3)
-                    cout << "#." << s[0] << ".#";
-                else
-                    pr(".#.#.");
-                continue;
-            }
-            if(j%3){ // #
-                if (i == 1 || i == 5)
-                    pr(".#..");
-                else if (i == 3) {
-                    cout << "." << s[j-1] << ".";
-                    if(j==slen) pr("#");
-                    else{
-                        if((j+1)%3==0) pr("*");
-                        else pr("#");
-                    }
-                }
-                else
-                    pr("#.#.");
-            }
-            else{
-                if (i == 1 || i == 5)
-                    pr(".*..");
-                else if (i == 3)
-                    cout << "." << s[j-1] << ".*";
-                else
-                    pr("*.*.");
-            }
-        }
-        prl;
-    };
+    n=slen;
+    k=s[1]-s[0];
+    for(i=1;i<=n-1;i++){
+        if(s[i]-s[i-1]!=k)
+            no=1;
+    }
+    if(no) pr("흥칫뿡!! <(￣ ﹌ ￣)>");
+    else pr("◝(⑅•ᴗ•⑅)◜..°♡ 뀌요미!!");
 }
