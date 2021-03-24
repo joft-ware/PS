@@ -75,7 +75,7 @@
 #define scans1 cin >> s1; len1 = s1.size();
 #define scans2 cin >> s1; len1 = s1.size();
 #define scana freea; fori sc(a[i]);
-#define scanna scann; fori scanf("%lld",&a[i]);
+#define scanna scann; scana;
 #define scana1d fori scanf("%1d",&a[i]);
 #define scanb1d fori scanf("%1d",&b[i]);
 #define scanb fori scanf("%lld",&b[i]);
@@ -1054,24 +1054,26 @@ ll square_free(ll x){
     return cnt;
 }
 
+ll f(ll x, ll y){
+    ll k=1;
+    fo(i,x,y)
+        k*=a[i];
+    return k;
+}
+
 int main(void) {
     // 속도 최적화 // --------------------------------------------------
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scann;
-    scans;
-    m=slen/n;
-    swap(n,m);
-    char cc[202][202];
-    fori{
-        forj{
-            if(i%2) cc[i][j]=s[cnt++];
-            else cc[i][m+1-j]=s[cnt++];
+    scanna;
+    for(i=1;i<=n-3;i++){
+        for(j=i+1;j<=n-2;j++){
+            for(k=j+1;k<=n-1;k++){
+                maxi=max(maxi,f(1,i)+f(i+1,j)+f(j+1,k)+f(k+1,n));
+            }
         }
-    };
-    forj
-        fori
-            pr(cc[i][j]);
+    }
+    prmax;
 }
