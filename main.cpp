@@ -1038,13 +1038,17 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scant;wt{
-        scann;
-        scana;
-        cnt=0;
-        fori{
-            if(a[i]!=i)cnt++;
+    scannm;
+    m*=2;
+    fori sc(ss[i]);
+    fori{
+        sc(s);
+        forj0{
+            if(ss[i][j/2]!=s[j]) no=1;
         };
-        prcases; pr(cnt); pr1l(".000000");
-    }
+    };
+    if(!no)
+        pr1l("Eyfa");
+    else
+        pr1l("Not Eyfa");
 }
