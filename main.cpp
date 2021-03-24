@@ -1060,29 +1060,15 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scant;scline(s);
-    wt {
-        prcases;
-        vs v;
-        s.clear();
-        s1.clear();
-        v.clear();
-        scline(s);
+    w1{
+        scanline(s);
+        if(s[0]=='#') break;
         n=slen;
         fori0{
-            s1+=s[i];
-            if(s[i]==' '){
-                v.pb(s1);
-                s1.clear();
-            }
-        }
-        s1+=' ';
-        v.pb(s1);
-        s1.clear();
-        reverse(all(v));
-        for(auto i:v)
-            pr(i);
-        prl;
-        s.clear();
+            if(s[i]==' ') continue;
+            sum+=(i+1)*(s[i]-'A'+1);
+        };
+        pr1l(sum);
+        sum=0;
     };
 }
