@@ -212,6 +212,7 @@ ll dddx[9] = { 0,-1,-2,-1,0,0,1,2,1 };
 ll dddy[9] = { 0,-1,0,1,-2,2,-1,0,1 };
 ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
+ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
@@ -1046,26 +1047,27 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scant;
-    wt {
-        cnt=0;
-        sc2(n, m);
-        l=0,r=0;
-        forj{
-            scanx;
-            l+=x*zegob(10,m-j);
-        };
-        forj{
-            scanx;
-            r+=x*zegob(10,m-j);
-        };
-        scana;
-        fori a[n+i]=a[i];
-        fori{
-            e=0;
-            for(j=i;j<=i+m-1;j++) e+=a[j]*zegob(10,i+m-1-j);
-            if(e>=l&&e<=r) cnt++;
-        };
-        pr1l(cnt);
+    scannm;
+    sc2(s1,s2);
+    foi(s1.size()+s2.size()){
+        if(cnt==s1.size())
+            s+=s2[sum++];
+        else if(sum==s2.size())
+            s+=s1[cnt++];
+        else if(i%2)
+            s+=s1[cnt++];
+        else
+            s+=s2[sum++];
+    }
+    n=cnt+sum;
+    fori
+        a[i]=alphabet_lines[s[i-1]-'A'+1];
+    fori{
+        len=n-i;
+        for(j=1;j<=len;j++)
+            a[j]=(a[j]+a[j+1])%10;
+        if(len<=2) break;
     };
+    pr(a[1]*10+a[2]);
+    pr("%");
 }
