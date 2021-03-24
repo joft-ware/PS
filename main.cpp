@@ -1060,26 +1060,21 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    w1 {
-        sc(s1);
-        sc(s2);
-        if (s1 == "END" && s2 == "END") break;
-        no=0;
-        if(s1.size()!=s2.size()){
-            no=1;
+    n=m=4;
+    fori{
+        forj{
+            a[++cnt]=i;
+            b[cnt]=j;
         }
-        foi(26) a[i]=0;
-        foi0(s1.size()){
-            a[to_lower(s1[i])-'a'+1]++;
-            a[to_lower(s2[i])-'a'+1]--;
-        }
-
-        foi(26){
-            if(a[i]) no=1;
-        }
-
-        prcase;
-        if(no) pr1l("different");
-        else pr1l("same");
     };
-}
+    cnt=0;
+    fori{
+        scans;
+        foj0(slen) {
+            if(s[j]=='.') continue;
+            else x=s[j]-'A'+1;
+            cnt+=(abs(i-a[x])+abs(j+1-b[x]));
+        }
+    }
+    prcnt;
+};
