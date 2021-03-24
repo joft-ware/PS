@@ -1060,15 +1060,25 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    w1{
-        scanline(s);
-        if(s[0]=='#') break;
-        n=slen;
-        fori0{
-            if(s[i]==' ') continue;
-            sum+=(i+1)*(s[i]-'A'+1);
-        };
-        pr1l(sum);
-        sum=0;
+    scant;
+    scline(s);
+    wt{
+        scline(s);
+        n=slen-1;
+        if(s[n]=='u'||s[n]=='a'||s[n]=='o')
+            s+='s';
+        else if(s[n]=='l'||s[n]=='r'||s[n]=='v')
+            s+="es";
+        else if(s[n]=='t'||s[n]=='w')
+            s+="as";
+        else if(s[n]=='n')
+            s=s.substr(0,n)+"anes";
+        else if(s[n-1]=='n'&&s[n]=='e')
+            s=s.substr(0,n-1)+"anes";
+        else if(s[n]=='i'||s[n]=='y')
+            s=s.substr(0,n)+"ios";
+        else s+="us";
+        pr1l(s);
+        s.clear();
     };
 }
