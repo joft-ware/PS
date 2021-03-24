@@ -1060,17 +1060,16 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scn;
-    scana;
-    foi0(10001){
-        cnt=0;
+    scann;
+    scanxy;
+    l=(x+y)%2;
+    fori{
         forjn{
-            if(a[j]>=i) cnt++;
-        };
-        if(cnt<=i)
-        {
-            pr(cnt);
-            return 0;
+            if((i+j)%2==l)
+                pr("v");
+            else
+                pr(".");
         }
+        prl;
     };
 };
