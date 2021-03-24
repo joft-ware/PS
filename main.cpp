@@ -15,9 +15,9 @@
 #include <unordered_set>
 #include <unordered_map>
 
-#define M 300001
+#define M 100001
 #define MM 101
-#define N 1000001
+#define N 100001
 
 #define ll long long
 #define ull unsigned ll
@@ -1046,13 +1046,26 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scans;
-    n=slen;
-    k=s[1]-s[0];
-    for(i=1;i<=n-1;i++){
-        if(s[i]-s[i-1]!=k)
-            no=1;
-    }
-    if(no) pr("흥칫뿡!! <(￣ ﹌ ￣)>");
-    else pr("◝(⑅•ᴗ•⑅)◜..°♡ 뀌요미!!");
+    scant;
+    wt {
+        cnt=0;
+        sc2(n, m);
+        l=0,r=0;
+        forj{
+            scanx;
+            l+=x*zegob(10,m-j);
+        };
+        forj{
+            scanx;
+            r+=x*zegob(10,m-j);
+        };
+        scana;
+        fori a[n+i]=a[i];
+        fori{
+            e=0;
+            for(j=i;j<=i+m-1;j++) e+=a[j]*zegob(10,i+m-1-j);
+            if(e>=l&&e<=r) cnt++;
+        };
+        pr1l(cnt);
+    };
 }
