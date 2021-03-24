@@ -1038,17 +1038,22 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scannm;
-    m*=2;
-    fori sc(ss[i]);
+    sc2(n, m);
     fori{
-        sc(s);
-        forj0{
-            if(ss[i][j/2]!=s[j]) no=1;
-        };
+        forj {
+            scx;
+            cnt = 0;
+            w1 {
+                if (x % 10 == 9) cnt++;
+                x /= 10;
+                if (x <= 8) break;
+            };
+            a[i]+=cnt;
+            d[j]+=cnt;
+            sum += cnt;
+        }
     };
-    if(!no)
-        pr1l("Eyfa");
-    else
-        pr1l("Not Eyfa");
+    sort(a+1,a+1+n);
+    sort(d+1,d+1+m);
+    pr(sum-max(a[n],d[m]));
 }
