@@ -1060,21 +1060,19 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    sc(n);
-    scline(s);
+    sc2(n,m);
     fori{
-        foj(26) visit[j]=false;
-        scline(s);
-        foj0(slen)
-            visit[to_lower(s[j])-'a'+1]=true;
-        foj(26)
-            if(!visit[j])
-                s1+=(j+'a'-1);
-        if(s1.size())
-            pr2l("missing",s1);
-        else
-            pr1l("pangram");
-        s1.clear();
-        s.clear();
+        forj{
+            sc3(x,y,z);
+            l=x*2126;
+            l+=y*7152;
+            l+=z*722;
+            if(l>=2040000) pr('.');
+            else if(l>=1530000) pr('-');
+            else if(l>=1020000) pr('+');
+            else if(l>=510000) pr('o');
+            else pr('#');
+        }
+        if(i!=n) prl;
     };
 }
