@@ -1060,20 +1060,18 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scant;
-    wt{
-        scn;
-        sum=0;
-        for(i=1;i*i<=n;i++){
-            if(n%i==0)
-                sum+=(i+n/i);
-            if(n%i==0&&i*i==n)
-                sum-=i;
+    scann;
+    scans;
+    m=slen/n;
+    swap(n,m);
+    char cc[202][202];
+    fori{
+        forj{
+            if(i%2) cc[i][j]=s[cnt++];
+            else cc[i][m+1-j]=s[cnt++];
         }
-        sum-=n;
-        if(n==1) sum=0;
-        if(sum==n) pr1l("Perfect");
-        else if(sum>n) pr1l("Abundant");
-        else pr1l("Deficient");
     };
+    forj
+        fori
+            pr(cc[i][j]);
 }
