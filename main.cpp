@@ -32,6 +32,7 @@
 #define X first
 #define Y second
 #define PI 3.14159265358979323846264338327950288419716939937510
+#define FASTIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
 #define foi(a) for(ll i=1;i<=a;i++)
 #define foi0(a) for(ll i=0;i<a;i++)
@@ -941,6 +942,18 @@ ll fibo(ll n) {
     return x[0][1] % mod;
 }
 
+matrix matrix_pow(matrix a, ll n) {
+    matrix x = { {1, 0},
+                 {0, 1} };
+    while (n) {
+        if (n % 2)
+            x = x * a;
+        a = a * a;
+        n /= 2;
+    }
+    return x;
+}
+
 ll fibosum(ll from, ll to) {
     ll x = fibo(from + 1) - 1;
     ll y = fibo(to + 2) - 1;
@@ -1062,18 +1075,17 @@ ll f(ll x, ll y){
 }
 
 int main(void) {
-    // 속도 최적화 // --------------------------------------------------
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    // 속도 최적화 // --------------------------------------------------
-    scanna;
-    for(i=1;i<=n-3;i++){
-        for(j=i+1;j<=n-2;j++){
-            for(k=j+1;k<=n-1;k++){
-                maxi=max(maxi,f(1,i)+f(i+1,j)+f(j+1,k)+f(k+1,n));
-            }
-        }
+    FASTIO;
+    mod=1000;
+    scant;wt {
+        scann;
+        matrix mat = {{6, -4},
+                      {1, 0}};
+        matrix ma = matrix_pow(mat, n);
+        printcases;
+        x=(ma[1][0]*6+ma[1][1]*2+9999)%mod;
+        if(x<10) pr(0);
+        if(x<100) pr(0);
+        pr1l(x);
     }
-    prmax;
 }
