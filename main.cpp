@@ -919,10 +919,10 @@ vll changebase(ll n, ll m) {
         n /= m;
     };
     foi0(cnt) {
-        if (a[n + 1 - i] <= 9)
-            b.pb(a[cnt - i] + '0');
+        if (a[cnt-1 - i] <= 9)
+            b.pb(a[cnt-1 - i] + '0');
         else
-            b.pb(a[cnt - i] + 55);
+            b.pb(a[cnt-1 - i] + 55);
     }
     return b;
 }
@@ -1060,21 +1060,8 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    n=m=4;
-    fori{
-        forj{
-            a[++cnt]=i;
-            b[cnt]=j;
-        }
-    };
-    cnt=0;
-    fori{
-        scans;
-        foj0(slen) {
-            if(s[j]=='.') continue;
-            else x=s[j]-'A'+1;
-            cnt+=(abs(i-a[x])+abs(j+1-b[x]));
-        }
-    }
-    prcnt;
+    scn;
+    auto v=changebase(n,2);
+    foi0(v.size()) sum+=zegob(3,v.size()-1-i)*(v[i]-'0');
+    prsum;
 };
