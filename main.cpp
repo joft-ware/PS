@@ -1060,19 +1060,30 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    sc2(n,m);
-    fori{
-        forj{
-            sc3(x,y,z);
-            l=x*2126;
-            l+=y*7152;
-            l+=z*722;
-            if(l>=2040000) pr('.');
-            else if(l>=1530000) pr('-');
-            else if(l>=1020000) pr('+');
-            else if(l>=510000) pr('o');
-            else pr('#');
-        }
-        if(i!=n) prl;
+    sct;
+    wt {
+        scn;
+        cnt=0;
+        k=n;
+        w1{
+            if(k==6174) break;
+            cnt++;
+            a[1]=k%10;
+            k/=10;
+            a[2]=k%10;
+            k/=10;
+            a[3]=k%10;
+            k/=10;
+            a[4]=k%10;
+            k/=10;
+            sort(a+1,a+5);
+            sum=e=0;
+            foi(4)
+                sum+=a[i]*zegob(10,4-i);
+            foi(4)
+                e+=a[5-i]*zegob(10,4-i);
+            k=e-sum;
+        };
+        pr1l(cnt);
     };
 }
