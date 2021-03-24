@@ -166,6 +166,7 @@
 #define scx sc(x)
 #define sct sc(t)
 #define scxy sc2(x,y)
+#define scline scanline
 
 #define pr(a) cout << (a)
 #define pr0 cout << (0);
@@ -294,6 +295,18 @@ bool so(char c)
     if (c >= 'a' && c <= 'z')
         return true;
     return false;
+}
+
+char to_lower(char c){
+    if(c<'a')
+        return c+32;
+    return c;
+}
+
+char to_upper(char c){
+    if(c>='a')
+        return c-32;
+    return c;
 }
 
 bool isnum(char c) {
@@ -1047,27 +1060,21 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    scannm;
-    sc2(s1,s2);
-    foi(s1.size()+s2.size()){
-        if(cnt==s1.size())
-            s+=s2[sum++];
-        else if(sum==s2.size())
-            s+=s1[cnt++];
-        else if(i%2)
-            s+=s1[cnt++];
-        else
-            s+=s2[sum++];
-    }
-    n=cnt+sum;
-    fori
-        a[i]=alphabet_lines[s[i-1]-'A'+1];
+    sc(n);
+    scline(s);
     fori{
-        len=n-i;
-        for(j=1;j<=len;j++)
-            a[j]=(a[j]+a[j+1])%10;
-        if(len<=2) break;
+        foj(26) visit[j]=false;
+        scline(s);
+        foj0(slen)
+            visit[to_lower(s[j])-'a'+1]=true;
+        foj(26)
+            if(!visit[j])
+                s1+=(j+'a'-1);
+        if(s1.size())
+            pr2l("missing",s1);
+        else
+            pr1l("pangram");
+        s1.clear();
+        s.clear();
     };
-    pr(a[1]*10+a[2]);
-    pr("%");
 }
