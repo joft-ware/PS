@@ -1061,7 +1061,16 @@ int main(void) {
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
     scn;
-    auto v=changebase(n,2);
-    foi0(v.size()) sum+=zegob(3,v.size()-1-i)*(v[i]-'0');
-    prsum;
+    scana;
+    foi0(10001){
+        cnt=0;
+        forjn{
+            if(a[j]>=i) cnt++;
+        };
+        if(cnt<=i)
+        {
+            pr(cnt);
+            return 0;
+        }
+    };
 };
