@@ -215,7 +215,7 @@ ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
-ll qry[M][4], dp[MM][11], matn = 2, mu[1000010];
+ll qry[M][4], dp[MM][11], matn = 2, mu[M];
 bool check[M], visit[M], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
@@ -1038,22 +1038,44 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
     // 속도 최적화 // --------------------------------------------------
-    sc2(n, m);
+    scans;
+
+    n=5;
+    m=5;
     fori{
-        forj {
-            scx;
-            cnt = 0;
-            w1 {
-                if (x % 10 == 9) cnt++;
-                x /= 10;
-                if (x <= 8) break;
-            };
-            a[i]+=cnt;
-            d[j]+=cnt;
-            sum += cnt;
+        foj(slen){
+            if(j==1) {
+                if (i == 1 || i == 5)
+                    pr("..#..");
+                else if (i == 3)
+                    cout << "#." << s[0] << ".#";
+                else
+                    pr(".#.#.");
+                continue;
+            }
+            if(j%3){ // #
+                if (i == 1 || i == 5)
+                    pr(".#..");
+                else if (i == 3) {
+                    cout << "." << s[j-1] << ".";
+                    if(j==slen) pr("#");
+                    else{
+                        if((j+1)%3==0) pr("*");
+                        else pr("#");
+                    }
+                }
+                else
+                    pr("#.#.");
+            }
+            else{
+                if (i == 1 || i == 5)
+                    pr(".*..");
+                else if (i == 3)
+                    cout << "." << s[j-1] << ".*";
+                else
+                    pr("*.*.");
+            }
         }
+        prl;
     };
-    sort(a+1,a+1+n);
-    sort(d+1,d+1+m);
-    pr(sum-max(a[n],d[m]));
 }
