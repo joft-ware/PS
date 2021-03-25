@@ -1096,40 +1096,48 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 int main(void) {
     FASTIO;
     scann;
-    if(n==2){
-        pr1l("** **");
-        pr1l(" ***");
-        pr("** **");
-        return 0;
-    }
     //
-    for(j=1;j<=5;j++) pr("*");
+    for(j=1;j<=n;j++) pr("*");
     for(j=1;j<=(n*2-3);j++) pr(" ");
-    for(j=1;j<=5;j++) pr("*");
+    for(j=1;j<=n;j++) pr("*");
     prl;
     //
     foi(n-2){
         foj(i) pr(" ");
-        pr("*   *");
+        pr("*");
+        foj(n-2) pr(" ");
+        pr("*");
         foj(n*2-3-2*i) pr(" ");
-        pr("*   *");prl;
+        pr("*");
+        foj(n-2) pr(" ");
+        pr("*");
+        prl;
     }
     //
     foj(n-1) pr(" ");
-    pr1l("*   *   *");
+    pr("*");
+    foj(n-2) pr(" ");
+    pr("*");
+    foj(n-2) pr(" ");
+    pr("*");
+    prl;
     //
     foi(n-2){
         k=n-1-i;
         foj(k) pr(" ");
-        pr("*   *");
+        pr("*");
+        foj(n-2) pr(" ");
+        pr("*");
         foj(n*2-3-2*k) pr(" ");
-        pr("*   *");
+        pr("*");
+        foj(n-2) pr(" ");
+        pr("*");
         prl;
     }
     //
-    for(j=1;j<=5;j++) pr("*");
+    for(j=1;j<=n;j++) pr("*");
     for(j=1;j<=(n*2-3);j++) pr(" ");
-    for(j=1;j<=5;j++) pr("*");
+    for(j=1;j<=n;j++) pr("*");
     //
 
 }
