@@ -216,7 +216,7 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll a[1000001], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
 ll qry[M][4], dp[350][350][2], matn = 2, mu[M];
 bool check[M], visit[M], treecheck[M], boo[M];
@@ -1067,38 +1067,53 @@ ll square_free(ll x){
     return cnt;
 }
 
-ll f(ll left, ll right, ll state, ll remain){ // left부터 right까지 있는 사탕을 먹을 때 버려지는
-    if(left>right) INF;                     // 사탕의 수를 계산. remain=앞으로 더 먹을 사탕 수
-    if(remain==0) return 0;
-    ll &ret=dp[left][right][state];
-    if(ret!=-1) return ret;                // 이미 계산된 값이면 바로 return
-    ret=INF;
-    if(state){ // 왼쪽 점에 있을 경우
-        if(right<n)  // 다음으로 right+1 사탕을 먹을 경우
-            ret=min(ret,f(left,right+1,0,remain-1))+remain*(v[right+1]-v[left]);
-        if(left>0) // 다음으로 left-1 사탕을 더 먹을 경우
-            ret=min(ret,f(left-1,right,1,remain-1)+remain*(v[left]-v[left-1]));
+bool dfs(ll x, ll xx){
+    if(visit[x])
+        return false;
+    visit[x]=true;
+    ll y=aa[x][0];
+    fo(i,1,y){
+        ll e = aa[x][i];
+        if(e==xx||e==1)
+            continue;
+        if(d[e]==-1||(visit[d[e]]==false&&dfs(d[e],xx)))
+        {
+            d[e]=x;
+            d[x]=e;
+            return true;
+        }
     }
-    else{ // 오른쪽 점에 있을 경우
-        if(right<n)   // 다음으로 right+1 사탕을 먹을 경우
-            ret=min(ret,f(left,right+1,0,remain-1)+remain*(v[right+1]-v[right]));
-        if(left>0)  // 다음으로 left-1 사탕을 더 먹을 경우
-            ret=min(ret,f(left-1,right,1,remain-1)+remain*(v[right]-v[left-1]));
-    }
-    return ret;
+    return false;
+}
+
+bool f(ll x1, ll y1, ll x2, ll y2){
+    ll l=r=0;
+    if(x1>y1) swap(x1,y1);
+    if(x2>y2) swap(x2,y2);
+    return (y2-y1)*(x2-x1)<=0;
 }
 
 int main(void) {
     FASTIO;
-    scannm;
-    scana;
-    fori v.pb(a[i]);
-    v.pb(0);
-    vsort(v);
-    x=lower_bound(full(v),0)-v.begin();
-    fo(i,0,n){
-        memset(dp,-1,sizeof(dp));
-        maxi=max(maxi,i*m-f(x,x,0,i));
+    scann;
+    fori{
+        if(i==1) continue;
+        sc2(x,y);
+        vv[x].pb(y);
+        vv[y].pb(x);
+    }
+    q.push(1);
+    while(q.size()){
+        x=q.front();
+        q.pop();
+        for(auto i:vv[x]){
+            if(d[i]) continue;
+            d[i]=x;
+            q.push(i);
+        }
+    }
+    fori{
+        if(i!=1) pr1l(d[i]);
     };
-    pr(maxi);
+
 }
