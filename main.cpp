@@ -1096,24 +1096,40 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 int main(void) {
     FASTIO;
     scann;
-    fori{
-        if(i==1) continue;
-        sc2(x,y);
-        vv[x].pb(y);
-        vv[y].pb(x);
+    if(n==2){
+        pr1l("** **");
+        pr1l(" ***");
+        pr("** **");
+        return 0;
     }
-    q.push(1);
-    while(q.size()){
-        x=q.front();
-        q.pop();
-        for(auto i:vv[x]){
-            if(d[i]) continue;
-            d[i]=x;
-            q.push(i);
-        }
+    //
+    for(j=1;j<=5;j++) pr("*");
+    for(j=1;j<=(n*2-3);j++) pr(" ");
+    for(j=1;j<=5;j++) pr("*");
+    prl;
+    //
+    foi(n-2){
+        foj(i) pr(" ");
+        pr("*   *");
+        foj(n*2-3-2*i) pr(" ");
+        pr("*   *");prl;
     }
-    fori{
-        if(i!=1) pr1l(d[i]);
-    };
+    //
+    foj(n-1) pr(" ");
+    pr1l("*   *   *");
+    //
+    foi(n-2){
+        k=n-1-i;
+        foj(k) pr(" ");
+        pr("*   *");
+        foj(n*2-3-2*k) pr(" ");
+        pr("*   *");
+        prl;
+    }
+    //
+    for(j=1;j<=5;j++) pr("*");
+    for(j=1;j<=(n*2-3);j++) pr(" ");
+    for(j=1;j<=5;j++) pr("*");
+    //
 
 }
