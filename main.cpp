@@ -1142,22 +1142,26 @@ ll f(ll l, ll r, ll x){
 
 int main(void) {
     FASTIO;
-    scannm;
-    for(i=1;i<=5000000;i++){
-        k=i;
-        no=0;
-        w1{
-            if(k%10==m){
-                no=1;break;
+    w1{
+        scannm;
+        if(!(n+m)) break;
+        fori{
+            sc4(w,e,a[i],b[i]);
+            b[i]+=a[i];
+        };
+        forj{
+            scanxy;
+            y=y+x;
+            cnt=0;
+            fori{
+                if(x<=a[i]&&b[i]<=y) cnt++;
+                else if(a[i]<=x&&x<b[i]) cnt++;
+                else if(a[i]<y&&y<=b[i]) cnt++;
+                else if(a[i]<=x&&y<=b[i]) cnt++;
             }
-            if(k<10) break;
-            k/=10;
-        }
-        if(!no) cnt++;
-        if(cnt==n){
-            num=i;
-            break;
-        }
-    }
-    pr(num);
+            pr1l(cnt);
+        };
+        fori a[i]=0;
+        fori b[i]=0;
+    };
 }
