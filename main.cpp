@@ -16,7 +16,7 @@
 #include <unordered_map>
 
 #define M 100001
-#define MM 101
+#define MM 1001
 #define N 100001
 
 #define ll long long
@@ -216,10 +216,10 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[1000001], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll a[200002], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[200002], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[200002], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[200002], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
 ll qry[M][4], dp[350][350][2], matn = 2, mu[M];
-bool check[M], visit[M], treecheck[M], boo[M];
+bool check[200002], visit[200002], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
 
@@ -1093,51 +1093,71 @@ bool f(ll x1, ll y1, ll x2, ll y2){
     return (y2-y1)*(x2-x1)<=0;
 }
 
+void update_lazy(ll node, ll left, ll right, ll start) {
+    if (!lazy[node])
+        return;
+    sumtree[node] += ((right - left + 1)*lazy[node]);
+    if (right != left) {
+        mid=(left+right)/2;
+        ll x=left;
+        ll y= mid;
+        lazy[node * 2] += ((y-start+1)*(y-start*2)-(x-start)*(x-start+1));
+        x=mid+1;
+        y=right;
+        lazy[node * 2 + 1] += ((y-start+1)*(y-start*2)-(x-start)*(x-start+1));
+    }
+    lazy[node] = 0;
+}
+
+ll query(ll node, ll left, ll right, ll start, ll end) {
+    update_lazy(node, left, right, start);
+    if (right < start || end < left)
+        return 0; // 겹치지 않는 경우(영향이 없는 값을 반환)
+    if (start <= left && end >= right) // 범위 내부에 속함
+        return sumtree[node]; // 포함되는 경우
+    ll mid = (left + right) / 2; // 일부만 겹치는 경우
+    return (query(node * 2, left, mid, start, end)) + (query(node * 2 + 1, mid + 1, right, start, end));
+}
+
+ll update(ll left, ll right, ll val, ll node, ll start, ll end) {
+    update_lazy(node, left, right, start);
+    if (end<left || start>right) // 범위 밖
+        return sumtree[node];
+    if (start <= left && end >= right) { // 범위 내부에 속함
+        lazy[node] += ((right-start+1)*(right-start*2)-(left-start)*(left-start+1));
+        update_lazy(node, left, right, start);
+        return sumtree[node];
+    }
+    ll mid = (left + right) / 2; // 걸쳐 있음
+    sumtree[node] = update(left, mid, val, node * 2, start, end) + update(mid + 1, right, val, node * 2 + 1, start, end);
+    return sumtree[node];
+}
+
+ll f(ll l, ll r, ll x){
+    ll mid=(l+r)/2;
+    if(l>=r) return l;
+    if(dq[mid]<=x) return f(l,mid,x);
+    return (mid+1,r,x);
+}
+
 int main(void) {
     FASTIO;
-    scann;
-    //
-    for(j=1;j<=n;j++) pr("*");
-    for(j=1;j<=(n*2-3);j++) pr(" ");
-    for(j=1;j<=n;j++) pr("*");
-    prl;
-    //
-    foi(n-2){
-        foj(i) pr(" ");
-        pr("*");
-        foj(n-2) pr(" ");
-        pr("*");
-        foj(n*2-3-2*i) pr(" ");
-        pr("*");
-        foj(n-2) pr(" ");
-        pr("*");
-        prl;
+    scannm;
+    for(i=1;i<=5000000;i++){
+        k=i;
+        no=0;
+        w1{
+            if(k%10==m){
+                no=1;break;
+            }
+            if(k<10) break;
+            k/=10;
+        }
+        if(!no) cnt++;
+        if(cnt==n){
+            num=i;
+            break;
+        }
     }
-    //
-    foj(n-1) pr(" ");
-    pr("*");
-    foj(n-2) pr(" ");
-    pr("*");
-    foj(n-2) pr(" ");
-    pr("*");
-    prl;
-    //
-    foi(n-2){
-        k=n-1-i;
-        foj(k) pr(" ");
-        pr("*");
-        foj(n-2) pr(" ");
-        pr("*");
-        foj(n*2-3-2*k) pr(" ");
-        pr("*");
-        foj(n-2) pr(" ");
-        pr("*");
-        prl;
-    }
-    //
-    for(j=1;j<=n;j++) pr("*");
-    for(j=1;j<=(n*2-3);j++) pr(" ");
-    for(j=1;j<=n;j++) pr("*");
-    //
-
+    pr(num);
 }
