@@ -216,10 +216,10 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[200002], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[200002], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[200002], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[200002], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
 ll qry[M][4], dp[350][350][2], matn = 2, mu[M];
-bool check[200002], visit[200002], treecheck[M], boo[M];
+bool check[M], visit[M], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
 
@@ -1142,26 +1142,23 @@ ll f(ll l, ll r, ll x){
 
 int main(void) {
     FASTIO;
-    w1{
-        scannm;
-        if(!(n+m)) break;
-        fori{
-            sc4(w,e,a[i],b[i]);
-            b[i]+=a[i];
-        };
-        forj{
-            scanxy;
-            y=y+x;
-            cnt=0;
-            fori{
-                if(x<=a[i]&&b[i]<=y) cnt++;
-                else if(a[i]<=x&&x<b[i]) cnt++;
-                else if(a[i]<y&&y<=b[i]) cnt++;
-                else if(a[i]<=x&&y<=b[i]) cnt++;
-            }
-            pr1l(cnt);
-        };
-        fori a[i]=0;
-        fori b[i]=0;
+
+    scannm;
+    fori{
+        scanxy;
+        foj(x) sc(a[j]);
+        sort(a+1,a+x+1);
+        if(y>x)
+            b[i]=1;
+        else
+            b[i]=a[x+1-y];
     };
+    forj a[j]=0;
+    fori{
+        for(j=m;j>=1;j--){
+            if(j-b[i]>=0)
+                a[j]=max(a[j],a[j-b[i]]+1);
+        }
+    };
+    pr(*max_element(a+1,a+m+1));
 }
