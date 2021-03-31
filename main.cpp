@@ -14,6 +14,7 @@
 #include <set>
 #include <unordered_set>
 #include <unordered_map>
+#include <regex>
 
 #define M 100001
 #define MM 1001
@@ -41,6 +42,7 @@
 #define fok(a) for(ll k=1;k<=a;k++)
 #define fori for(ll i=1;i<=n;i++)
 #define forin for(ll i=1;i<=n;i++)
+#define foris for(ll i=0;i<=s.size();i++)
 #define forin1 for(ll i=n;i>=1;i--)
 #define fori0 for(ll i=0;i<n;i++)
 #define forj for(ll j=1;j<=m;j++)
@@ -218,7 +220,7 @@ ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
-ll qry[M][4], dp[350][350][2], matn = 2, mu[M];
+ll qry[M][4], dp[350][350][4], matn = 2, mu[M];
 bool check[M], visit[M], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
@@ -230,6 +232,7 @@ ull u1, u2, u3, u4;
 queue<ll> q, qx, qy;
 priority_queue<ll> pq, pq2;
 priority_queue<xy> pqxy;
+priority_queue<xy> pqxy2;
 stack<ll> st;
 deque<ll> dq;
 deque<xy> dqxy;
@@ -1140,25 +1143,14 @@ ll f(ll l, ll r, ll x){
     return (mid+1,r,x);
 }
 
+
 int main(void) {
     FASTIO;
 
-    scannm;
-    fori{
-        scanxy;
-        foj(x) sc(a[j]);
-        sort(a+1,a+x+1);
-        if(y>x)
-            b[i]=1;
-        else
-            b[i]=a[x+1-y];
+    scant;wt{
+        scans;
+        regex regex1(R"((100+1+|01)+)");
+        if(regex_match(s,regex1)) pr1l("YES");
+        else pr1l("NO");
     };
-    forj a[j]=0;
-    fori{
-        for(j=m;j>=1;j--){
-            if(j-b[i]>=0)
-                a[j]=max(a[j],a[j-b[i]]+1);
-        }
-    };
-    pr(*max_element(a+1,a+m+1));
 }
