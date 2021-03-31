@@ -155,6 +155,8 @@
 #define sc4(a,b,c,d) cin >> a >> b >> c >> d
 #define sc5(a,b,c,d,e) cin >> a >> b >> c >> d >> e
 #define sc6(a,b,c,d,e,f) cin >> a >> b >> c >> d >> e >> f
+#define sc7(a,b,c,d,e,f,g) cin >> a >> b >> c >> d >> e >> f >> g
+#define sc8(a,b,c,d,e,f,g,h) cin >> a >> b >> c >> d >> e >> f >> g >> h
 #define scn sc(n)
 #define scm sc(m)
 #define scnm sc2(n,m)
@@ -216,6 +218,7 @@ ll qry[M][4], dp[350][350][4], matn = 2, mu[M];
 bool check[M], visit[1000001], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
+ld ldx1,ldx2,ldx3,ldx4,ldy1,ldy2,ldy3,ldy4;
 
 string str, s, s1, s2, s3, ss[M], ss1[M], ss2[M];
 typedef pair<ll, ll> xy;
@@ -1152,24 +1155,28 @@ struct node{
     node* parent = 0;
 };
 
-ll f(ll x){
-    ll sum=0;
-    fori0 sum+=abs(i*x-v[i]);
-    return sum;
+ld distance(ld x1, ld y1, ld x2, ld y2){
+    return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+}
+
+ld f(ld x){
+    ld x1=(ldx1*x+ldx2*(1-x));
+    ld y1=(ldy1*x+ldy2*(1-x));
+    ld x2=(ldx3*x+ldx4*(1-x));
+    ld y2=(ldy3*x+ldy4*(1-x));
+    return distance(x1,y1,x2,y2);
 }
 
 int main(void) {
     FASTIO;
-    scann;
-    scanv;
-    ll left = 1, right = 1000000000;
-    while(left+3<=right){
-        ll l=(2*left+right)/3;
-        ll r=(left+2*right)/3;
+    sc8(ldx1,ldy1,ldx2,ldy2,ldx3,ldy3,ldx4,ldy4);
+    ld left=0;
+    ld right=1;
+    while(++cnt<=1000000){
+        ld l=(2.0*left+right)/3.0;
+        ld r=(left+2.0*right)/3.0;
         if(f(l)<f(r)) right=r;
         else left=l;
     }
-    mini=1e18;
-    fo(i,left,right) mini=min(mini,f(i));
-    pr(mini);
+    prld(20,f((left+right)/2.0));
 }
