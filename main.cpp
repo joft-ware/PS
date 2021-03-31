@@ -16,8 +16,8 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 100001
-#define MM 1001
+#define M 1
+#define MM 1
 #define N 100001
 
 #define ll long long
@@ -79,7 +79,7 @@
 #define scanbb1 fori{scans;forj0{bb[i][j+1] = s[j] - '0';}s.clear();}
 #define scanbb fori forj sc(bb[i][j]);
 #define scanline(s) getline(cin,s); slen=s.size();
-#define scanv vll v(n+1); fori sc(v[i]);
+#define scanv v.resize(n); fori0 sc(v[i]);
 #define scannv scann; scanv;
 
 #define prld(a,b) {cout << fixed; cout.precision(a); pr1(b);}
@@ -134,7 +134,7 @@
 #define test pr1l("TEST!");
 #define wt while(t--)
 #define w1 while(1)
-#define INF (ll)0x7f7f7f7f
+#define INF (ll) 1e18
 #define br break
 #define braek break
 #define bk break
@@ -199,7 +199,7 @@
 #define prstr for(ll wq=1;wq<=slen;wq++) pr(str[wq]);
 
 using namespace std;
-ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
+ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
 ll dx[5] = { 0,0,1,0,-1 };
 ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
@@ -211,9 +211,9 @@ ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll b[1000001], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[1000001], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
 ll qry[M][4], dp[350][350][4], matn = 2, mu[M];
-bool check[M], visit[M], treecheck[M], boo[M];
+bool check[M], visit[1000001], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
 
@@ -1145,17 +1145,31 @@ void f(ll x, ll y, ll n){
     f(x+nn,y+nn,nn);
 }
 
+struct node{
+    ll value;
+    node* left=0;
+    node* right=0;
+    node* parent = 0;
+};
+
+ll f(ll x){
+    ll sum=0;
+    fori0 sum+=abs(i*x-v[i]);
+    return sum;
+}
+
 int main(void) {
-    scn;
-    fori{
-        sc2(s,s2);
-        x=0;y=0;
-        foris{
-            if(s[i]=='0'&&s2[i]=='1')
-                x++;
-            else if(s[i]=='1'&&s2[i]=='0')
-                y++;
-        };
-        pr1l(x+y-min(x,y));
-    };
+    FASTIO;
+    scann;
+    scanv;
+    ll left = 1, right = 1000000000;
+    while(left+3<=right){
+        ll l=(2*left+right)/3;
+        ll r=(left+2*right)/3;
+        if(f(l)<f(r)) right=r;
+        else left=l;
+    }
+    mini=1e18;
+    fo(i,left,right) mini=min(mini,f(i));
+    pr(mini);
 }
