@@ -35,6 +35,7 @@
 #define PI 3.14159265358979323846264338327950288419716939937510
 #define FASTIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
+#define fo(i,a,b) for(ll i = a; i <= b; i++)
 #define foi(a) for(ll i=1;i<=a;i++)
 #define foi0(a) for(ll i=0;i<a;i++)
 #define foj(a) for(ll j=1;j<=a;j++)
@@ -63,57 +64,50 @@
 #define scank sc(k);
 #define scanc sc(c);
 #define scanxy sc2(x,y);
-#define scanyx scanf("%lld %lld",&y,&x)
-#define scanzr scanf("%lld %lld",&z,&r)
-#define scanwe scanf("%lld %lld",&w,&e)
 #define scannm sc2(n,m);
-#define scanwe scanf("%lld %lld",&w,&e)
-#define scanmn scanf("%lld %lld",&m,&n)
-#define scannml scanf("%lld %lld %lld",&n,&m,&l)
 #define scanxyz sc3(x,y,z);
-#define scanxyzr scanf("%lld %lld %lld %lld",&x,&y,&z,&r)
+#define scanxyzr sc4(x,y,z,r);
 #define scans sc(s);slen=s.size();
-#define scansn frees; scanf("%s", &s[1]); len = strlen(&s[1]); n=len;
-#define scansm frees; scanf("%s", &s[1]); len = strlen(&s[1]); m=len;
 #define scans1 cin >> s1; len1 = s1.size();
 #define scans2 cin >> s1; len1 = s1.size();
 #define scana fori sc(a[i]);
 #define scanna scann; scana;
-#define scana1d fori scanf("%1d",&a[i]);
-#define scanb1d fori scanf("%1d",&b[i]);
-#define scanb fori scanf("%lld",&b[i]);
-#define scand fori scanf("%lld",&d[i]);
-#define scanaa fori for(ll j=1;j<=m;j++) scanf("%lld",&aa[i][j]);
+#define scanb fori sc(b[i]);
+#define scand fori sc(d[i]);
+#define scanaa fori forj sc(aa[i][j]);
 #define scanaa1 fori{scans;forj0{aa[i][j+1] = s[j] - '0';}s.clear();}
 #define scanbb1 fori{scans;forj0{bb[i][j+1] = s[j] - '0';}s.clear();}
-#define scanbb fori for(ll j=1;j<=m;j++) scanf("%lld",&bb[i][j]);
+#define scanbb fori forj sc(bb[i][j]);
 #define scanline(s) getline(cin,s); slen=s.size();
 #define scanv vll v(n+1); fori sc(v[i]);
 #define scannv scann; scanv;
 
 #define prld(a,b) {cout << fixed; cout.precision(a); pr1(b);}
 #define printld(a) prld(a)
-#define printsum printf("%lld\n",sum);
+#define printsum pr1(sum);
 #define printcase pr("Case "); pr(++casenum);pr(": ");
 #define printcases pr("Case #"); pr(++casenum);pr(": ");
-#define prints printf("%s",&s[1]);
-#define printc printf("%c",c);
-#define printmax printf("%lld\n",maxi);
-#define printmin printf("%lld\n",mini);
-#define printmini printf("%lld\n",mini);
-#define printa fori {printf("%lld ",a[i]); }printf("\n");
-#define printa1 fori {printf("%lld ",a1[i]); }printf("\n");
-#define printa2 fori {printf("%lld ",a2[i]); }printf("\n");
-#define printb fori {printf("%lld ",b[i]); }printf("\n");
-#define printd fori {printf("%lld ",d[i]); }printf("\n");
-#define printaa fori {for(ll j=1;j<=m;j++) {printf("%3d ",aa[i][j]);} printf("\n");}printf("\n");
-#define printbb fori {for(ll j=1;j<=m;j++) {printf("%3d ",bb[i][j]);} printf("\n");}printf("\n");
+#define prints pr(s);
+#define printc pr(c);
+#define printmax pr(maxi);
+#define printmin pr(min);
+#define printmini pr(mini);
+#define printa fori {pr1(a[i]); }prl;
+#define printal fori {pr1(a[i]); prl;}
+#define printa1 fori {pr1(a1[i]); }prl;
+#define printa2 fori {pr1(a2[i]); }prl;
+#define printb fori {pr1(b[i]); }prl;
+#define printd fori {pr1(d[i]); }prl;
+#define printaa fori {forj {pr1(aa[i][j]);} prl;}prl;
+#define printbb fori {forj {pr1(bb[i][j]);} prl;}prl;
 #define printgg pr1l("gg");
+#define printggg pr1l("ggg");
 #define printv(v) for(auto qwe:v) {pr1(qwe);}; prl;
-#define prv(v) printv(v)
 #define printvl(v) for(auto qwe:v) {pr1l(qwe);};
 #define prvl(v) printvl(v)
+#define prv(v) printv(v)
 #define pra printa
+#define pral printal
 #define prcase printcase
 #define prcases printcases
 
@@ -126,36 +120,34 @@
 #define sortb sort(b+1,b+n+1);
 #define sortd sort(d+1,d+n+1);
 #define sortv(v) sort(full(v));
+#define vsort(v) sort(v.begin(),v.end());
 #define suma sum=0; fori sum+=a[i];
-#define infa fori a[i]=INF;
-#define reversea fori tempa[i]=a[n+1-i]; fori a[i]=tempa[i];
-#define findmax maxi=a[1]; fori if(a[i]>maxi) maxi=a[i];
-#define findmaxn maxi=a[1]; fori if(a[i]>maxi) {maxi=a[i]; num=i;}
-#define findmin mini=a[1]; fori if(a[i]<mini) mini=a[i];
-#define issmall(a)      ((a>='a')&&(a<='z'))
-#define isbig(a)      ((a>='A')&&(a<='Z'))
+#define inf(a) fori a[i]=INF;
+#define reverse(a) fori tempa[i]=a[n+1-i]; fori a[i]=tempa[i];
+#define findmax(a) maxi=a[1]; fori if(a[i]>maxi) maxi=a[i];
+#define findmaxn(a) maxi=a[1]; fori if(a[i]>maxi) {maxi=a[i]; num=i;}
+#define findmin(a) mini=a[1]; fori if(a[i]<mini) mini=a[i];
+#define issmall(a) ((a>='a')&&(a<='z'))
+#define isbig(a) ((a>='A')&&(a<='Z'))
 
 #define lens len = strlen(s);
-#define test printf("TEST!");
+#define test pr1l("TEST!");
 #define wt while(t--)
 #define w1 while(1)
 #define INF (ll)0x7f7f7f7f
 #define br break
 #define braek break
 #define bk break
-#define nbreak if(n==0) break;
 #define boundcheck(tx,ty) if(tx>=1&&ty>=1&&tx<=n&&ty<=m)
-#define strint fori a[i] = s[i] - '0';
 #define full(v) v.begin(), v.end()
 #define all(v) v.begin(), v.end()
 
 #define X first
 #define Y second
-#define fo(i,a,b) for(ll i = a; i <= b; i++)
 #define pb push_back
 #define mp make_pair
 #define pbm(a,b) push_back(make_pair(a,b))
-#define vsort(v) sort(v.begin(),v.end());
+
 #define sc(a) cin >> a
 #define sc1(a) cin >> a
 #define sc2(a,b) cin >> a >> b
@@ -386,7 +378,7 @@ ll smaller(ll x, ll y)
 
 ll find_max(long long* a, ll n)
 {
-    findmax;
+    findmax(a);
     return maxi;
 }
 
@@ -570,7 +562,7 @@ ll fact(ll n)
     return k;
 }
 
-ll reverse(ll x)
+ll llreverse(ll x)
 {
     ll sum = 0;
     ll t = x;
@@ -1135,21 +1127,35 @@ ll update(ll left, ll right, ll val, ll node, ll start, ll end) {
     sumtree[node] = update(left, mid, val, node * 2, start, end) + update(mid + 1, right, val, node * 2 + 1, start, end);
     return sumtree[node];
 }
-
-ll f(ll l, ll r, ll x){
-    ll mid=(l+r)/2;
-    if(l>=r) return l;
-    if(dq[mid]<=x) return f(l,mid,x);
-    return (mid+1,r,x);
+void f(ll x, ll y, ll n){
+    ll sum=0;
+    fo(i,x,x+n-1)
+        fo(j,y,y+n-1)
+            sum+=aa[i][j];
+    if(sum==n*n)    {
+        w++; return;
+    }
+    if(sum==0){
+        e++; return;
+    }
+    ll nn=n/2;
+    f(x,y,nn);
+    f(x+nn,y,nn);
+    f(x,y+nn,nn);
+    f(x+nn,y+nn,nn);
 }
 
-
 int main(void) {
-    FASTIO;
-    {
-        scans;
-        regex regex1(R"((100+1+|01)+)");
-        if(regex_match(s,regex1)) pr1l("SUBMARINE");
-        else pr1l("NOISE");
+    sc(m);
+    sc(n);
+    scana;
+    sorta;
+    fori d[i]=a[i]+d[i-1];
+    fori {
+        if(d[i]>m){
+            w=i-1;
+            break;
+        }
     };
+    pr(w);
 }
