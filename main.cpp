@@ -16,8 +16,8 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 1
-#define MM 1
+#define M 1001
+#define MM 100
 #define N 100001
 
 #define ll long long
@@ -213,9 +213,9 @@ ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[1000001], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[1000001], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
 ll qry[M][4], dp[350][350][4], matn = 2, mu[M];
-bool check[M], visit[1000001], treecheck[M], boo[M];
+bool check[M], visit[M], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
 ld ldx1,ldx2,ldx3,ldx4,ldy1,ldy2,ldy3,ldy4;
@@ -805,7 +805,7 @@ ld ccw(xy a, xy b, xy c) {
     return (w > 0);
 }
 
-bool cross(xy a, xy b, xy c, xy d) { // 선분ab와 cd의 cross 여부
+bool cross(xy a, xy b, xy c, xy d) { // 선분ab와 cd의 cross 여부(교차 판정)
     ll x = ccw(a, b, c)*ccw(a, b, d);
     ll y = ccw(c, d, a)*ccw(c, d, b);
     if (!x && !y) {
@@ -1169,14 +1169,32 @@ ld f(ld x){
 
 int main(void) {
     FASTIO;
-    sc8(ldx1,ldy1,ldx2,ldy2,ldx3,ldy3,ldx4,ldy4);
-    ld left=0;
-    ld right=1;
-    while(++cnt<=1000000){
-        ld l=(2.0*left+right)/3.0;
-        ld r=(left+2.0*right)/3.0;
-        if(f(l)<f(r)) right=r;
-        else left=l;
-    }
-    prld(20,f((left+right)/2.0));
+    ll x1,x2,x4,x3,Y1,y2,y3,y4, xx1, xx2, yy1, yy2;
+    sct;wt{
+        sc8(x3,y3,x4,y4,x1,Y1,x2,y2);
+        a[1]=x1;
+        a[2]=x2;
+        a[3]=x3;
+        a[4]=x4;
+        b[1]=Y1;
+        b[2]=y2;
+        b[3]=y3;
+        b[4]=y4;
+        sort(a+1,a+5);
+        sort(b+1,b+5);
+        xx1=min(x3,x4);
+        yy1=min(y3,y4);
+        xx2=max(x3,x4);
+        yy2=max(y3,y4);
+
+        if(     cross({x1,Y1},{x1,y2},{x3,y3},{x4,y4})||
+                cross({x1,Y1},{x2,Y1},{x3,y3},{x4,y4})||
+                cross({x1,y2},{x2,y2},{x3,y3},{x4,y4})||
+                cross({x2,Y1},{x2,y2},{x3,y3},{x4,y4}))
+            pr1l("T");
+        else if(a[2]==xx1&&a[3]==xx2&&b[2]==yy1&&b[3]==yy2)
+            pr1l("T");
+        else
+            pr1l("F");
+    };
 }
