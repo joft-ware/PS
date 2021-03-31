@@ -1146,11 +1146,10 @@ ll f(ll l, ll r, ll x){
 
 int main(void) {
     FASTIO;
-
-    scant;wt{
+    {
         scans;
         regex regex1(R"((100+1+|01)+)");
-        if(regex_match(s,regex1)) pr1l("YES");
-        else pr1l("NO");
+        if(regex_match(s,regex1)) pr1l("SUBMARINE");
+        else pr1l("NOISE");
     };
 }
