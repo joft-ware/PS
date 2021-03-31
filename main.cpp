@@ -1146,16 +1146,16 @@ void f(ll x, ll y, ll n){
 }
 
 int main(void) {
-    sc(m);
-    sc(n);
-    scana;
-    sorta;
-    fori d[i]=a[i]+d[i-1];
-    fori {
-        if(d[i]>m){
-            w=i-1;
-            break;
-        }
+    scn;
+    fori{
+        sc2(s,s2);
+        x=0;y=0;
+        foris{
+            if(s[i]=='0'&&s2[i]=='1')
+                x++;
+            else if(s[i]=='1'&&s2[i]=='0')
+                y++;
+        };
+        pr1l(x+y-min(x,y));
     };
-    pr(w);
 }
