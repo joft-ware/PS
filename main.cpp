@@ -1182,13 +1182,30 @@ void f(ll x, ll lev){
 
 int main(void) {
     FASTIO;
-    scant;wt {
-        scann;
-        if (n == 0) pr(0);
-        else if (6 % n == 0) pr(0);
-        else if (n == 4) pr(2);
-        else
-            pr(1);
-        prl;
+    w1 {
+        vector<pair<ll,pair<ll,pair<ll,ll>>>> v;
+        sc3(n, b[1], b[2]);
+        if(n==0) break;
+        sum=0;
+        fori {
+            sc3(x, y, z);
+            v.pb({-abs(y-z),{y, {i, 1}}});
+            v.pb({-abs(y-z),{z, {i, 2}}});
+            d[i] = x;
+        };
+        vsort(v);
+        foi0(2 * n) {
+            x = v[i].Y.X;
+            y = v[i].Y.Y.X;
+            z = v[i].Y.Y.Y;
+            if (d[y] == 0) continue;
+            if (b[z] == 0) continue;
+            m = min(b[z], d[y]);
+            sum += m * x;
+            b[z] -= m;
+            d[y] -= m;
+        }
+        pr1l(sum);
+        v.clear();
     }
 }
