@@ -16,11 +16,11 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 3001
-#define MM 3001
-#define N 100001
+#define M 1
+#define MM 1
+#define N 1
 
-#define ll int
+#define ll long long
 #define ull unsigned ll
 #define ld double
 #define vll vector<ll>
@@ -212,8 +212,8 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], alis[M], dd[MM][MM], p[N], h[M], ax[M], un[N], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[M], alis[M], dd[MM][MM], p[N], h[M], ax[M], un[N], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
 ll qry[M][4], dp[M][2], matn = 2, mu[M];
 bool check[M], visit[M], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -510,7 +510,7 @@ ll query_max(ll node, ll left, ll right, ll start, ll end)
     return bigger(query_max(node * 2, left, mid, start, end), query_max(node * 2 + 1, mid + 1, right, start, end));
 }
 
-ll maketree_sum(ll left, ll right, ll node)
+ll maketree_sum(ll left, ll right, ll node) // 총 개수 tree
 {
     if (left == right)
     {
@@ -526,14 +526,14 @@ ll maketree_sum(ll left, ll right, ll node)
 }
 
 void update_lazy_sum(ll node, ll left, ll right) {
-    if (!lazy[node])
+    if (!sumlazy[node])
         return;
-    sumtree[node] += ((right - left + 1)*lazy[node]);
+    sumtree[node] += ((right - left + 1)*sumlazy[node]);
     if (right != left) {
-        lazy[node * 2] += lazy[node];
-        lazy[node * 2 + 1] += lazy[node];
+        sumlazy[node * 2] += sumlazy[node];
+        sumlazy[node * 2 + 1] += sumlazy[node];
     }
-    lazy[node] = 0;
+    sumlazy[node] = 0;
 }
 
 ll update_sum(ll left, ll right, ll val, ll node, ll start, ll end) {
@@ -541,7 +541,7 @@ ll update_sum(ll left, ll right, ll val, ll node, ll start, ll end) {
     if (end<left || start>right) // 범위 밖
         return sumtree[node];
     if (start <= left && end >= right) { // 범위 내부에 속함
-        lazy[node] += val;
+        sumlazy[node] += val;
         update_lazy_sum(node, left, right);
         return sumtree[node];
     }
@@ -558,6 +558,56 @@ ll query_sum(ll node, ll left, ll right, ll start, ll end) {
         return sumtree[node]; // 포함되는 경우
     ll mid = (left + right) / 2; // 일부만 겹치는 경우
     return (query_sum(node * 2, left, mid, start, end)) + (query_sum(node * 2 + 1, mid + 1, right, start, end));
+}
+
+ll maketree_hab(ll left, ll right, ll node) // 합계 tree
+{
+    if (left == right)
+    {
+        habtree[node] = a[left];
+        return habtree[node];
+    }
+    else
+    {
+        ll mid = (left + right) / 2;
+        habtree[node] = (maketree_hab(left, mid, node * 2) + maketree_hab(mid + 1, right, node * 2 + 1));
+        return habtree[node];
+    }
+}
+
+void update_lazy_hab(ll node, ll left, ll right) {
+    if (!hablazy[node])
+        return;
+    habtree[node] += ((right - left + 1)*hablazy[node]);
+    if (right != left) {
+        hablazy[node * 2] += hablazy[node];
+        hablazy[node * 2 + 1] += hablazy[node];
+    }
+    hablazy[node] = 0;
+}
+
+ll update_hab(ll left, ll right, ll val, ll node, ll start, ll end) {
+    update_lazy_hab(node, left, right);
+    if (end<left || start>right) // 범위 밖
+        return habtree[node];
+    if (start <= left && end >= right) { // 범위 내부에 속함
+        hablazy[node] += val;
+        update_lazy_hab(node, left, right);
+        return habtree[node];
+    }
+    ll mid = (left + right) / 2; // 걸쳐 있음
+    habtree[node] = update_hab(left, mid, val, node * 2, start, end) + update_hab(mid + 1, right, val, node * 2 + 1, start, end);
+    return habtree[node];
+}
+
+ll query_hab(ll node, ll left, ll right, ll start, ll end) {
+    update_lazy_sum(node, left, right);
+    if (right < start || end < left)
+        return 0; // 겹치지 않는 경우(영향이 없는 값을 반환)
+    if (start <= left && end >= right) // 범위 내부에 속함
+        return habtree[node]; // 포함되는 경우
+    ll mid = (left + right) / 2; // 일부만 겹치는 경우
+    return (query_hab(node * 2, left, mid, start, end)) + (query_hab(node * 2 + 1, mid + 1, right, start, end));
 }
 
 ll fact(ll n)
@@ -1094,128 +1144,31 @@ bool f(ll x1, ll y1, ll x2, ll y2){
     return (y2-y1)*(x2-x1)<=0;
 }
 
-void update_lazy(ll node, ll left, ll right, ll start) {
-    if (!lazy[node])
-        return;
-    sumtree[node] += ((right - left + 1)*lazy[node]);
-    if (right != left) {
-        mid=(left+right)/2;
-        ll x=left;
-        ll y= mid;
-        lazy[node * 2] += ((y-start+1)*(y-start*2)-(x-start)*(x-start+1));
-        x=mid+1;
-        y=right;
-        lazy[node * 2 + 1] += ((y-start+1)*(y-start*2)-(x-start)*(x-start+1));
-    }
-    lazy[node] = 0;
-}
 
-ll query(ll node, ll left, ll right, ll start, ll end) {
-    update_lazy(node, left, right, start);
-    if (right < start || end < left)
-        return 0; // 겹치지 않는 경우(영향이 없는 값을 반환)
-    if (start <= left && end >= right) // 범위 내부에 속함
-        return sumtree[node]; // 포함되는 경우
-    ll mid = (left + right) / 2; // 일부만 겹치는 경우
-    return (query(node * 2, left, mid, start, end)) + (query(node * 2 + 1, mid + 1, right, start, end));
-}
-
-ll update(ll left, ll right, ll val, ll node, ll start, ll end) {
-    update_lazy(node, left, right, start);
-    if (end<left || start>right) // 범위 밖
-        return sumtree[node];
-    if (start <= left && end >= right) { // 범위 내부에 속함
-        lazy[node] += ((right-start+1)*(right-start*2)-(left-start)*(left-start+1));
-        update_lazy(node, left, right, start);
-        return sumtree[node];
-    }
-    ll mid = (left + right) / 2; // 걸쳐 있음
-    sumtree[node] = update(left, mid, val, node * 2, start, end) + update(mid + 1, right, val, node * 2 + 1, start, end);
-    return sumtree[node];
-}
-void f(ll x, ll y, ll n){
-    ll sum=0;
-    fo(i,x,x+n-1)
-        fo(j,y,y+n-1)
-            sum+=aa[i][j];
-    if(sum==n*n)    {
-        w++; return;
-    }
-    if(sum==0){
-        e++; return;
-    }
-    ll nn=n/2;
-    f(x,y,nn);
-    f(x+nn,y,nn);
-    f(x,y+nn,nn);
-    f(x+nn,y+nn,nn);
-}
-
-struct node{
-    ll value;
-    node* left=0;
-    node* right=0;
-    node* parent = 0;
-};
 
 ld distance(ld x1, ld y1, ld x2, ld y2){
     return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
-}
-
-void f(ll x, ll lev){
-    a[lev]=x;
-    if(yes) return;
-    if(lev==n){
-        fori
-            forji
-                if (cross(vxy[i], vxy2[a[i]], vxy[j],vxy2[a[j]]))
-                    return;
-        printal;
-        yes=1;
-        return;
-    }
-    fori{
-        if(!check[i]){
-            check[i]=true;
-            f(i,lev+1);
-            check[i]=false;
-        }
-    };
-}
-
-void merge(ll num1, ll num2)
-{
-    p[num2] = num1;
-    un[num1] += un[num2];
-    un[num2] = 1;
-}
-
-ll find2(ll num)
-{
-    if (num == p[num])
-        return num;
-    return p[num] = find(p[num]);
 }
 
 
 int main(void) {
     FASTIO;
     scann;
-    scana;
-    sorta;
-    scanxy;
-    fori b[i]=a[i]+b[i-1];
-    fori
-        foj(i)
-            aa[j][i]=b[i]-b[j-1];
+    mod=1000000007;
+    k=1;
     fori{
-        d[i]=d[i-1]+x*a[i];
-        for(j=i;j>=1;j--){
-            mid=(i+j)/2;
-            l=a[mid]*(mid-j+1)-aa[j][mid];
-            r=aa[mid][i]-a[mid]*(i-mid+1);
-            d[i]=min(d[i],d[j-1]+(l+r)*x+y);
+        scanx;
+        if(i!=1) {
+            y = query_sum(1, 0, 200000, 0, x - 1);
+            z = query_sum(1, 0, 200000, x + 1, 200000);
+            l = query_hab(1, 0, 200000, 0, x - 1);
+            r = query_hab(1, 0, 200000, x + 1, 200000);
+            sum = ((y * x - l) + (r - x * z)) % mod;
+            k *= sum;
+            k %= mod;
         }
+        update_hab(0,200000,x,1,x,x);
+        update_sum(0,200000,1,1,x,x);
     };
-    pr(d[n]);
+    pr(k%mod);
 }
