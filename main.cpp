@@ -16,11 +16,11 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 100001
-#define MM 100
+#define M 3001
+#define MM 3001
 #define N 100001
 
-#define ll long long
+#define ll int
 #define ull unsigned ll
 #define ld double
 #define vll vector<ll>
@@ -134,7 +134,7 @@
 #define test pr1l("TEST!");
 #define wt while(t--)
 #define w1 while(1)
-#define INF (ll) 1e18
+#define INF (ll) 1e10
 #define br break
 #define braek break
 #define bk break
@@ -213,8 +213,8 @@ ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
-ll qry[M][4], dp[350][350][4], matn = 2, mu[M];
+ll b[M], alis[M], dd[MM][MM], p[N], h[M], ax[M], un[N], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll qry[M][4], dp[M][2], matn = 2, mu[M];
 bool check[M], visit[M], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
@@ -233,6 +233,7 @@ deque<ll> dq;
 deque<xy> dqxy;
 vll v, v1, v2, v3, print, vv[M], rv[M], visited;
 vector<xy> vxy, vxya[M], vxy2;
+vector<pair<ll,xy>> vxyz;
 xy xy1, xya[M];
 vector<vll> scc;
 ll mod = INF;
@@ -344,6 +345,8 @@ void uni(ll x, ll y) {// h: height
     if (h[x] > h[y])
         swap(x, y);
     p[x] = y;
+    un[y]+=un[x];
+    un[x]=1;
     if (h[x] == h[y]) h[y]++;
 }
 
@@ -1180,18 +1183,39 @@ void f(ll x, ll lev){
     };
 }
 
+void merge(ll num1, ll num2)
+{
+    p[num2] = num1;
+    un[num1] += un[num2];
+    un[num2] = 1;
+}
+
+ll find2(ll num)
+{
+    if (num == p[num])
+        return num;
+    return p[num] = find(p[num]);
+}
+
+
 int main(void) {
     FASTIO;
     scann;
-    fori {
-        scxy;
-        vxy.pb({x,1});
-        vxy.pb({y,-1});
+    scana;
+    sorta;
+    scanxy;
+    fori b[i]=a[i]+b[i-1];
+    fori
+        foj(i)
+            aa[j][i]=b[i]-b[j-1];
+    fori{
+        d[i]=d[i-1]+x*a[i];
+        for(j=i;j>=1;j--){
+            mid=(i+j)/2;
+            l=a[mid]*(mid-j+1)-aa[j][mid];
+            r=aa[mid][i]-a[mid]*(i-mid+1);
+            d[i]=min(d[i],d[j-1]+(l+r)*x+y);
+        }
     };
-    vsort(vxy);
-    foi0(2*n){
-        sum+=vxy[i].Y;
-        maxi=max(sum,maxi);
-    }
-    prmax;
+    pr(d[n]);
 }
