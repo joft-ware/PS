@@ -16,7 +16,7 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 1001
+#define M 100001
 #define MM 100
 #define N 100001
 
@@ -1182,20 +1182,13 @@ void f(ll x, ll lev){
 
 int main(void) {
     FASTIO;
-    scann;
-    vxy.resize(n+1);
-    vxy2.resize(n+1);
-    fori{
-        scanxy;
-        vxy[i]={x,y};
-    };
-    fori{
-        scanxy;
-        vxy2[i]={x,y};
-    };
-    fori{
-        check[i]=true;
-        f(i,1);
-        check[i]=false;
-    };
+    scant;wt {
+        scann;
+        if (n == 0) pr(0);
+        else if (6 % n == 0) pr(0);
+        else if (n == 4) pr(2);
+        else
+            pr(1);
+        prl;
+    }
 }
