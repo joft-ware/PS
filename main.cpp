@@ -232,7 +232,7 @@ stack<ll> st;
 deque<ll> dq;
 deque<xy> dqxy;
 vll v, v1, v2, v3, print, vv[M], rv[M], visited;
-vector<xy> vxy, vxya[M];
+vector<xy> vxy, vxya[M], vxy2;
 xy xy1, xya[M];
 vector<vll> scc;
 ll mod = INF;
@@ -1159,42 +1159,43 @@ ld distance(ld x1, ld y1, ld x2, ld y2){
     return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 }
 
-ld f(ld x){
-    ld x1=(ldx1*x+ldx2*(1-x));
-    ld y1=(ldy1*x+ldy2*(1-x));
-    ld x2=(ldx3*x+ldx4*(1-x));
-    ld y2=(ldy3*x+ldy4*(1-x));
-    return distance(x1,y1,x2,y2);
+void f(ll x, ll lev){
+    a[lev]=x;
+    if(yes) return;
+    if(lev==n){
+        fori
+            forji
+                if (cross(vxy[i], vxy2[a[i]], vxy[j],vxy2[a[j]]))
+                    return;
+        printal;
+        yes=1;
+        return;
+    }
+    fori{
+        if(!check[i]){
+            check[i]=true;
+            f(i,lev+1);
+            check[i]=false;
+        }
+    };
 }
 
 int main(void) {
     FASTIO;
-    ll x1,x2,x4,x3,Y1,y2,y3,y4, xx1, xx2, yy1, yy2;
-    sct;wt{
-        sc8(x3,y3,x4,y4,x1,Y1,x2,y2);
-        a[1]=x1;
-        a[2]=x2;
-        a[3]=x3;
-        a[4]=x4;
-        b[1]=Y1;
-        b[2]=y2;
-        b[3]=y3;
-        b[4]=y4;
-        sort(a+1,a+5);
-        sort(b+1,b+5);
-        xx1=min(x3,x4);
-        yy1=min(y3,y4);
-        xx2=max(x3,x4);
-        yy2=max(y3,y4);
-
-        if(     cross({x1,Y1},{x1,y2},{x3,y3},{x4,y4})||
-                cross({x1,Y1},{x2,Y1},{x3,y3},{x4,y4})||
-                cross({x1,y2},{x2,y2},{x3,y3},{x4,y4})||
-                cross({x2,Y1},{x2,y2},{x3,y3},{x4,y4}))
-            pr1l("T");
-        else if(a[2]==xx1&&a[3]==xx2&&b[2]==yy1&&b[3]==yy2)
-            pr1l("T");
-        else
-            pr1l("F");
+    scann;
+    vxy.resize(n+1);
+    vxy2.resize(n+1);
+    fori{
+        scanxy;
+        vxy[i]={x,y};
+    };
+    fori{
+        scanxy;
+        vxy2[i]={x,y};
+    };
+    fori{
+        check[i]=true;
+        f(i,1);
+        check[i]=false;
     };
 }
