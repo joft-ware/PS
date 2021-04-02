@@ -1172,11 +1172,13 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
+    scann;
     scans;
     auto v = manacher(s);
-    for(auto i:v) {
-        k=(i+1)/2;
-        cnt += k;
+    l=v.size();
+    for(i=l-2;i>=0;i--){
+        if(v[i]>=l-2-i)
+            num=v[i];
     }
-    prcnt;
+    pr(n-num);
 }
