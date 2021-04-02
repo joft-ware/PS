@@ -18,7 +18,7 @@
 
 #define M 1
 #define MM 1
-#define N 1
+#define N 1000001
 
 #define ll long long
 #define ull unsigned ll
@@ -212,8 +212,8 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], alis[M], dd[MM][MM], p[N], h[M], ax[M], un[N], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
+ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[N], alis[M], dd[MM][MM], p[N], h[M], ax[M], un[N], ay[M], az[M], d[N], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
 ll qry[M][4], dp[M][2], matn = 2, mu[M];
 bool check[M], visit[M], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -1055,7 +1055,7 @@ bool cmp(student a, student b) {
     return a.name > b.name;
 }
 
-string lcs(string st1, string st2) {
+string lcs(string st1, string st2) { //string st1, st2의 lcs 구하기.
     ll maxi = 0, cnt = 0;
     ll dd[MM][MM] = { { 0 } };
     string s3;
@@ -1089,6 +1089,23 @@ string lcs(string st1, string st2) {
         st.pop();
     }
     return s3;
+}
+
+vll manacher(string s){
+    ll r=0, p=0;
+    ll n=s.size();
+    vll v(n);
+    fori0{
+        if(i<=r) v[i]=min(v[2*p-i], r-i);
+        else v[i]=0;
+        while(i-(v[i]+1)>=0&&i+v[i]+1<n&&s[i-(v[i]+1)]==s[i+v[i]+1])
+            v[i]++;
+        if(r<i+v[i]){
+            r=i+v[i];
+            p=i;
+        }
+    };
+    return v;
 }
 
 void scc_(ll x, vll &list) {
@@ -1136,6 +1153,9 @@ bool dfs(ll x, ll xx){
     }
     return false;
 }
+ld distance(ld x1, ld y1, ld x2, ld y2){
+    return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+}
 
 bool f(ll x1, ll y1, ll x2, ll y2){
     ll l=r=0;
@@ -1144,31 +1164,34 @@ bool f(ll x1, ll y1, ll x2, ll y2){
     return (y2-y1)*(x2-x1)<=0;
 }
 
-
-
-ld distance(ld x1, ld y1, ld x2, ld y2){
-    return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
-}
-
-
 int main(void) {
     FASTIO;
     scann;
-    mod=1000000007;
-    k=1;
+    scana;
     fori{
-        scanx;
-        if(i!=1) {
-            y = query_sum(1, 0, 200000, 0, x - 1);
-            z = query_sum(1, 0, 200000, x + 1, 200000);
-            l = query_hab(1, 0, 200000, 0, x - 1);
-            r = query_hab(1, 0, 200000, x + 1, 200000);
-            sum = ((y * x - l) + (r - x * z)) % mod;
-            k *= sum;
-            k %= mod;
+        v.pb(-1);
+        v.pb(a[i]);
+    }
+    v.pb(-1);
+    ll r=0, p=0;
+    n=v.size();
+    fori0{
+        if(i<=r) d[i]=min(d[2*p-i], r-i);
+        else d[i]=0;
+        while(i-(d[i]+1)>=0&&i+d[i]+1<n&&v[i-(d[i]+1)]==v[i+d[i]+1])
+            d[i]++;
+        if(r<i+d[i]){
+            r=i+d[i];
+            p=i;
         }
-        update_hab(0,200000,x,1,x,x);
-        update_sum(0,200000,1,1,x,x);
+        b[i+1]=d[i];
     };
-    pr(k%mod);
+    scanm;
+    forj{
+        scanxy;
+        t=x+y;
+        x*=2;
+        y*=2;
+        pr1l(b[t]>=y-t);
+    };
 }
