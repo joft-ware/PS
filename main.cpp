@@ -16,9 +16,9 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 1
-#define MM 1
-#define N 1000001
+#define M 100001
+#define MM 1001
+#define N 100001
 
 #define ll long long
 #define ull unsigned ll
@@ -79,7 +79,7 @@
 #define scanbb1 fori{scans;forj0{bb[i][j+1] = s[j] - '0';}s.clear();}
 #define scanbb fori forj sc(bb[i][j]);
 #define scanline(s) getline(cin,s); slen=s.size();
-#define scanv v.resize(n); fori0 sc(v[i]);
+#define scanv vll v(n+1); fori sc(v[i]);
 #define scannv scann; scanv;
 
 #define prld(a,b) {cout << fixed; cout.precision(a); pr1(b);}
@@ -134,7 +134,7 @@
 #define test pr1l("TEST!");
 #define wt while(t--)
 #define w1 while(1)
-#define INF (ll) 1e10
+#define INF (ll)0x7f7f7f7f
 #define br break
 #define braek break
 #define bk break
@@ -155,8 +155,6 @@
 #define sc4(a,b,c,d) cin >> a >> b >> c >> d
 #define sc5(a,b,c,d,e) cin >> a >> b >> c >> d >> e
 #define sc6(a,b,c,d,e,f) cin >> a >> b >> c >> d >> e >> f
-#define sc7(a,b,c,d,e,f,g) cin >> a >> b >> c >> d >> e >> f >> g
-#define sc8(a,b,c,d,e,f,g,h) cin >> a >> b >> c >> d >> e >> f >> g >> h
 #define scn sc(n)
 #define scm sc(m)
 #define scnm sc2(n,m)
@@ -201,7 +199,7 @@
 #define prstr for(ll wq=1;wq<=slen;wq++) pr(str[wq]);
 
 using namespace std;
-ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
+ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
 ll dx[5] = { 0,0,1,0,-1 };
 ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
@@ -212,13 +210,12 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[N], alis[M], dd[MM][MM], p[N], h[M], ax[M], un[N], ay[M], az[M], d[N], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
-ll qry[M][4], dp[M][2], matn = 2, mu[M];
+ll a[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[M], alis[M], dd[MM][MM], p[M], h[M], ax[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], lazy[M];
+ll qry[M][4], dp[350][350][4], matn = 2, mu[M];
 bool check[M], visit[M], treecheck[M], boo[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
-ld ldx1,ldx2,ldx3,ldx4,ldy1,ldy2,ldy3,ldy4;
 
 string str, s, s1, s2, s3, ss[M], ss1[M], ss2[M];
 typedef pair<ll, ll> xy;
@@ -232,8 +229,7 @@ stack<ll> st;
 deque<ll> dq;
 deque<xy> dqxy;
 vll v, v1, v2, v3, print, vv[M], rv[M], visited;
-vector<xy> vxy, vxya[M], vxy2;
-vector<pair<ll,xy>> vxyz;
+vector<xy> vxy, vxya[M];
 xy xy1, xya[M];
 vector<vll> scc;
 ll mod = INF;
@@ -345,8 +341,6 @@ void uni(ll x, ll y) {// h: height
     if (h[x] > h[y])
         swap(x, y);
     p[x] = y;
-    un[y]+=un[x];
-    un[x]=1;
     if (h[x] == h[y]) h[y]++;
 }
 
@@ -510,7 +504,7 @@ ll query_max(ll node, ll left, ll right, ll start, ll end)
     return bigger(query_max(node * 2, left, mid, start, end), query_max(node * 2 + 1, mid + 1, right, start, end));
 }
 
-ll maketree_sum(ll left, ll right, ll node) // 총 개수 tree
+ll maketree_sum(ll left, ll right, ll node)
 {
     if (left == right)
     {
@@ -526,14 +520,14 @@ ll maketree_sum(ll left, ll right, ll node) // 총 개수 tree
 }
 
 void update_lazy_sum(ll node, ll left, ll right) {
-    if (!sumlazy[node])
+    if (!lazy[node])
         return;
-    sumtree[node] += ((right - left + 1)*sumlazy[node]);
+    sumtree[node] += ((right - left + 1)*lazy[node]);
     if (right != left) {
-        sumlazy[node * 2] += sumlazy[node];
-        sumlazy[node * 2 + 1] += sumlazy[node];
+        lazy[node * 2] += lazy[node];
+        lazy[node * 2 + 1] += lazy[node];
     }
-    sumlazy[node] = 0;
+    lazy[node] = 0;
 }
 
 ll update_sum(ll left, ll right, ll val, ll node, ll start, ll end) {
@@ -541,7 +535,7 @@ ll update_sum(ll left, ll right, ll val, ll node, ll start, ll end) {
     if (end<left || start>right) // 범위 밖
         return sumtree[node];
     if (start <= left && end >= right) { // 범위 내부에 속함
-        sumlazy[node] += val;
+        lazy[node] += val;
         update_lazy_sum(node, left, right);
         return sumtree[node];
     }
@@ -558,56 +552,6 @@ ll query_sum(ll node, ll left, ll right, ll start, ll end) {
         return sumtree[node]; // 포함되는 경우
     ll mid = (left + right) / 2; // 일부만 겹치는 경우
     return (query_sum(node * 2, left, mid, start, end)) + (query_sum(node * 2 + 1, mid + 1, right, start, end));
-}
-
-ll maketree_hab(ll left, ll right, ll node) // 합계 tree
-{
-    if (left == right)
-    {
-        habtree[node] = a[left];
-        return habtree[node];
-    }
-    else
-    {
-        ll mid = (left + right) / 2;
-        habtree[node] = (maketree_hab(left, mid, node * 2) + maketree_hab(mid + 1, right, node * 2 + 1));
-        return habtree[node];
-    }
-}
-
-void update_lazy_hab(ll node, ll left, ll right) {
-    if (!hablazy[node])
-        return;
-    habtree[node] += ((right - left + 1)*hablazy[node]);
-    if (right != left) {
-        hablazy[node * 2] += hablazy[node];
-        hablazy[node * 2 + 1] += hablazy[node];
-    }
-    hablazy[node] = 0;
-}
-
-ll update_hab(ll left, ll right, ll val, ll node, ll start, ll end) {
-    update_lazy_hab(node, left, right);
-    if (end<left || start>right) // 범위 밖
-        return habtree[node];
-    if (start <= left && end >= right) { // 범위 내부에 속함
-        hablazy[node] += val;
-        update_lazy_hab(node, left, right);
-        return habtree[node];
-    }
-    ll mid = (left + right) / 2; // 걸쳐 있음
-    habtree[node] = update_hab(left, mid, val, node * 2, start, end) + update_hab(mid + 1, right, val, node * 2 + 1, start, end);
-    return habtree[node];
-}
-
-ll query_hab(ll node, ll left, ll right, ll start, ll end) {
-    update_lazy_sum(node, left, right);
-    if (right < start || end < left)
-        return 0; // 겹치지 않는 경우(영향이 없는 값을 반환)
-    if (start <= left && end >= right) // 범위 내부에 속함
-        return habtree[node]; // 포함되는 경우
-    ll mid = (left + right) / 2; // 일부만 겹치는 경우
-    return (query_hab(node * 2, left, mid, start, end)) + (query_hab(node * 2 + 1, mid + 1, right, start, end));
 }
 
 ll fact(ll n)
@@ -858,7 +802,7 @@ ld ccw(xy a, xy b, xy c) {
     return (w > 0);
 }
 
-bool cross(xy a, xy b, xy c, xy d) { // 선분ab와 cd의 cross 여부(교차 판정)
+bool cross(xy a, xy b, xy c, xy d) { // 선분ab와 cd의 cross 여부
     ll x = ccw(a, b, c)*ccw(a, b, d);
     ll y = ccw(c, d, a)*ccw(c, d, b);
     if (!x && !y) {
@@ -1055,7 +999,7 @@ bool cmp(student a, student b) {
     return a.name > b.name;
 }
 
-string lcs(string st1, string st2) { //string st1, st2의 lcs 구하기.
+string lcs(string st1, string st2) {
     ll maxi = 0, cnt = 0;
     ll dd[MM][MM] = { { 0 } };
     string s3;
@@ -1089,29 +1033,6 @@ string lcs(string st1, string st2) { //string st1, st2의 lcs 구하기.
         st.pop();
     }
     return s3;
-}
-
-vll manacher(string temp){
-    string s;
-    foi0(temp.size()){
-        s+='*';
-        s+=temp[i];
-    }
-    s+='*';
-    ll r=0, p=0;
-    ll n=s.size();
-    vll v(n);
-    fori0{
-        if(i<=r) v[i]=min(v[2*p-i], r-i);
-        else v[i]=0;
-        while(i-(v[i]+1)>=0&&i+v[i]+1<n&&s[i-(v[i]+1)]==s[i+v[i]+1])
-            v[i]++;
-        if(r<i+v[i]){
-            r=i+v[i];
-            p=i;
-        }
-    };
-    return v;
 }
 
 void scc_(ll x, vll &list) {
@@ -1159,9 +1080,6 @@ bool dfs(ll x, ll xx){
     }
     return false;
 }
-ld distance(ld x1, ld y1, ld x2, ld y2){
-    return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
-}
 
 bool f(ll x1, ll y1, ll x2, ll y2){
     ll l=r=0;
@@ -1170,11 +1088,78 @@ bool f(ll x1, ll y1, ll x2, ll y2){
     return (y2-y1)*(x2-x1)<=0;
 }
 
+void update_lazy(ll node, ll left, ll right, ll start) {
+    if (!lazy[node])
+        return;
+    sumtree[node] += ((right - left + 1)*lazy[node]);
+    if (right != left) {
+        mid=(left+right)/2;
+        ll x=left;
+        ll y= mid;
+        lazy[node * 2] += ((y-start+1)*(y-start*2)-(x-start)*(x-start+1));
+        x=mid+1;
+        y=right;
+        lazy[node * 2 + 1] += ((y-start+1)*(y-start*2)-(x-start)*(x-start+1));
+    }
+    lazy[node] = 0;
+}
+
+ll query(ll node, ll left, ll right, ll start, ll end) {
+    update_lazy(node, left, right, start);
+    if (right < start || end < left)
+        return 0; // 겹치지 않는 경우(영향이 없는 값을 반환)
+    if (start <= left && end >= right) // 범위 내부에 속함
+        return sumtree[node]; // 포함되는 경우
+    ll mid = (left + right) / 2; // 일부만 겹치는 경우
+    return (query(node * 2, left, mid, start, end)) + (query(node * 2 + 1, mid + 1, right, start, end));
+}
+
+ll update(ll left, ll right, ll val, ll node, ll start, ll end) {
+    update_lazy(node, left, right, start);
+    if (end<left || start>right) // 범위 밖
+        return sumtree[node];
+    if (start <= left && end >= right) { // 범위 내부에 속함
+        lazy[node] += ((right-start+1)*(right-start*2)-(left-start)*(left-start+1));
+        update_lazy(node, left, right, start);
+        return sumtree[node];
+    }
+    ll mid = (left + right) / 2; // 걸쳐 있음
+    sumtree[node] = update(left, mid, val, node * 2, start, end) + update(mid + 1, right, val, node * 2 + 1, start, end);
+    return sumtree[node];
+}
+void f(ll x, ll y, ll n){
+    ll sum=0;
+    fo(i,x,x+n-1)
+        fo(j,y,y+n-1)
+            sum+=aa[i][j];
+    if(sum==n*n)    {
+        w++; return;
+    }
+    if(sum==0){
+        e++; return;
+    }
+    ll nn=n/2;
+    f(x,y,nn);
+    f(x+nn,y,nn);
+    f(x,y+nn,nn);
+    f(x+nn,y+nn,nn);
+}
+
 int main(void) {
-    FASTIO;
-    scannm;
-    t=m*(m+1)/2;
-    if(t>n) pr(-1);
-    else if((n-t)%m==0) pr(m-1);
-    else pr(m);
+    scanna;
+    sorta;
+    l=1;r=n;
+    while(l<r){
+        sum=a[l]+a[r];
+        if(mini>abs(sum)){
+            x=l;
+            y=r;
+            mini=abs(sum);
+        }
+        if(sum<0)
+            l++;
+        else
+            r--;
+    }
+    pr2l(min(a[y],a[x]),max(a[y],a[x]));
 }
