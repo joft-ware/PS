@@ -1,3 +1,3 @@
-C:/Users/JJH/CLionProjects/BOJ/cmake-build-debug/CMakeFiles/BOJ.dir
-C:/Users/JJH/CLionProjects/BOJ/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/JJH/CLionProjects/BOJ/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/user/CLionProjects/BOJ_FOLDER/cmake-build-debug/CMakeFiles/BOJ.dir
+C:/Users/user/CLionProjects/BOJ_FOLDER/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/user/CLionProjects/BOJ_FOLDER/cmake-build-debug/CMakeFiles/rebuild_cache.dir
