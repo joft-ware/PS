@@ -212,7 +212,7 @@ ll dddy[9] = { 0,-1,0,1,-2,2,-1,0,1 };
 ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
-ld ld1, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
+ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[N], alis[M], dd[MM][MM], p[N], h[M], ax[M], un[N], ay[M], az[M], d[N], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
 ll qry[M][4], dp[M][2], matn = 2, mu[M];
@@ -1173,18 +1173,18 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scannm;
-    scans;
-    fori0 if(s[i]=='H') a[i]=1;
-    fori0{
-        if(a[i]) continue;
-        for(j=max(0LL,i-m);j<=min(n-1,i+m);j++){
-            if(a[j]==1){
-                cnt++;
-                a[j]=-1;
-                break;
-            }
-        }
-    };
-    prcnt;
+    scanxyz;
+    t=x+y+z;
+    ld0=(ld)t/2.0;
+    ld3=ld0-(ld)x;
+    ld1=ld0-(ld)z;
+    ld2=ld0-(ld)y;
+    if(ld1<=0||ld2<=0||ld3<=0) no=1;
+    if(no){
+        pr(-1);
+        return 0;
+    }
+    pr1l(1);
+    prld(1,ld1);
+    pr2l(ld2,ld3);
 }
