@@ -1173,30 +1173,18 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scann;
-    fori sc1(ss[i]);
-    fori{
-        forji{
-            s1=ss[i];
-            s2=ss[j];
-            if(s1.size()<s2.size()){
-                swap(ss[i],ss[j]);
-                continue;
+    scannm;
+    scans;
+    fori0 if(s[i]=='H') a[i]=1;
+    fori0{
+        if(a[i]) continue;
+        for(j=max(0LL,i-m);j<=min(n-1,i+m);j++){
+            if(a[j]==1){
+                cnt++;
+                a[j]=-1;
+                break;
             }
-            else if(s1.size()>s2.size()) continue;
-            x=0,y=0;
-            fok0(s1.size())
-            {
-                if(isnum(s1[k])) x+=s1[k]-'0';
-                if(isnum(s2[k])) y+=s2[k]-'0';
-            }
-            if(x<y) {
-                swap(ss[i],ss[j]);
-                continue;
-            }
-            else if(x>y) continue;
-            if(s1<s2) swap(ss[i],ss[j]);
         }
     };
-    fori pr1l(ss[i]);
+    prcnt;
 }
