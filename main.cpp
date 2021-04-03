@@ -41,6 +41,7 @@
 #define foj(a) for(ll j=1;j<=a;j++)
 #define foj0(a) for(ll j=0;j<a;j++)
 #define fok(a) for(ll k=1;k<=a;k++)
+#define fok0(a) for(ll k=0;k<a;k++)
 #define fori for(ll i=1;i<=n;i++)
 #define forin for(ll i=1;i<=n;i++)
 #define foris for(ll i=0;i<=s.size();i++)
@@ -1173,12 +1174,29 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 int main(void) {
     FASTIO;
     scann;
-    scana;
-    sorta;
-    suma;
+    fori sc1(ss[i]);
     fori{
-        sum-=a[i];
-        cnt+=sum*a[i];
+        forji{
+            s1=ss[i];
+            s2=ss[j];
+            if(s1.size()<s2.size()){
+                swap(ss[i],ss[j]);
+                continue;
+            }
+            else if(s1.size()>s2.size()) continue;
+            x=0,y=0;
+            fok0(s1.size())
+            {
+                if(isnum(s1[k])) x+=s1[k]-'0';
+                if(isnum(s2[k])) y+=s2[k]-'0';
+            }
+            if(x<y) {
+                swap(ss[i],ss[j]);
+                continue;
+            }
+            else if(x>y) continue;
+            if(s1<s2) swap(ss[i],ss[j]);
+        }
     };
-    prcnt;
+    fori pr1l(ss[i]);
 }
