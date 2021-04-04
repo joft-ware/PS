@@ -1170,21 +1170,11 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scanxyz;
-    aa[1][1]=1;
-    aa[2][1]=1;
-    aa[2][2]=1;
-    foi(x+z-1){
-        if(i<=2) continue;
-        foj(i){
-            aa[i][j]=aa[i-1][j-1]+aa[i-1][j];
-        }
+    scannm;
+    k=gcd(n,m);
+    for(i=1;i<=k;i++){
+        if(k%i==0)
+            pr3l(i,n/i,m/i);
     }
-    fo(i,x,x+z-1){
-        fo(j,y,y+(i-x)) {
-            sum += aa[i][j];
-        }
-    }
-    prsum;
 
 }
