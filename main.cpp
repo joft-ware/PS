@@ -1171,9 +1171,15 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 int main(void) {
     FASTIO;
     scann;
-    scana;
-    sorta;
-    fori b[i]=n+1-i+a[i];
-    sortb;
-    pr(b[n]+1);
-}
+    fori{
+        scanxy;
+        cnt=0;
+        fo(j,x,y){
+            auto v = ntov(j);
+            for(auto k:v)
+                if(k==0) cnt++;
+        }
+        pr1l(cnt);
+    }
+
+    };
