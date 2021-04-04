@@ -1170,14 +1170,10 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scannm;
+    scann;
     scana;
     sorta;
-    fori{
-        if(a[i]<=m)
-            m++;
-        else
-            break;
-    };
-    pr(m);
+    fori b[i]=n+1-i+a[i];
+    sortb;
+    pr(b[n]+1);
 }
