@@ -1172,10 +1172,17 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 }
 
 int main(void) {
-    FASTIO;
     scann;
-    fori{
-        if(30%(i+1)==0)
-            pr1l(i);
+    scans;
+    fori0{
+        if(i==0) {
+            if(s[i]=='B') cnt++;
+            else sum++;
+            continue;
+        }
+        if(s[i]!=s[i-1]&&s[i]=='B') cnt++;
+        if(s[i]!=s[i-1]&&s[i]=='R') sum++;
     };
+    m=min(cnt,sum);
+    pr(m+1);
 }
