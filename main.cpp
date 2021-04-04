@@ -1172,15 +1172,20 @@ int main(void) {
     FASTIO;
     scann;
     fori{
-        scanxy;
-        vxy.pb({x,y});
+        sc(ss[i]);
     };
-    vsort(vxy);
-
-    fori0 {
-        z = max(z, vxy[i].X);
-        z += vxy[i].Y;
-    }
-    pr(z);
+    fori{
+        if(i==1) continue;
+        if(ss[i]>ss[i-1])
+            w=1;
+        else
+            e=1;
+    };
+    if(!w)
+        pr("DECREASING");
+    else if(!e)
+        pr("INCREASING");
+    else
+        pr("NEITHER");
 
 }
