@@ -1170,16 +1170,14 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scann;
+    scannm;
     fori{
-        scanxy;
-        cnt=0;
-        fo(j,x,y){
-            auto v = ntov(j);
+        {
+            auto v = ntov(i);
             for(auto k:v)
-                if(k==0) cnt++;
+                if(k==m) cnt++;
         }
-        pr1l(cnt);
     }
+    pr1l(cnt);
 
     };
