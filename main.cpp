@@ -1173,18 +1173,13 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scanxyz;
-    t=x+y+z;
-    ld0=(ld)t/2.0;
-    ld3=ld0-(ld)x;
-    ld1=ld0-(ld)z;
-    ld2=ld0-(ld)y;
-    if(ld1<=0||ld2<=0||ld3<=0) no=1;
-    if(no){
-        pr(-1);
-        return 0;
+    scann;
+    fori{
+        sc2(x,y);
+        vxy.pb({-x*x-y*y,i});
+    };
+    vsort(vxy);
+    for(auto i:vxy){
+        pr1l(i.Y);
     }
-    pr1l(1);
-    prld(1,ld1);
-    pr2l(ld2,ld3);
 }
