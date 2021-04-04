@@ -1175,11 +1175,7 @@ int main(void) {
     FASTIO;
     scann;
     fori{
-        sc2(x,y);
-        vxy.pb({-x*x-y*y,i});
+        if(30%(i+1)==0)
+            pr1l(i);
     };
-    vsort(vxy);
-    for(auto i:vxy){
-        pr1l(i.Y);
-    }
 }
