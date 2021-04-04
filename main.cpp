@@ -1170,22 +1170,21 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scann;
-    fori{
-        sc(ss[i]);
-    };
-    fori{
-        if(i==1) continue;
-        if(ss[i]>ss[i-1])
-            w=1;
-        else
-            e=1;
-    };
-    if(!w)
-        pr("DECREASING");
-    else if(!e)
-        pr("INCREASING");
-    else
-        pr("NEITHER");
+    scanxyz;
+    aa[1][1]=1;
+    aa[2][1]=1;
+    aa[2][2]=1;
+    foi(x+z-1){
+        if(i<=2) continue;
+        foj(i){
+            aa[i][j]=aa[i-1][j-1]+aa[i-1][j];
+        }
+    }
+    fo(i,x,x+z-1){
+        fo(j,y,y+(i-x)) {
+            sum += aa[i][j];
+        }
+    }
+    prsum;
 
 }
