@@ -1170,22 +1170,16 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scann;
-    scana;
-    w1{
-        maxi=0;
-        fori{
-            if(maxi<=a[i])
-            {
-                maxi=a[i];
-                num=i;
-            }
-        }
-        if(num==1) break;
-        cnt++;
-        a[1]++;
-        a[num]--;
+    n=11;
+    fori{
+        scanxy;
+        v.pb(x);
+        sum+=y*20;
     };
-    prcnt;
-
+    vsort(v);
+    fori0{
+        cnt+=v[i];
+        sum+=cnt;
+    };
+    prsum;
 }
