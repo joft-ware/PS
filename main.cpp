@@ -1170,11 +1170,22 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scannm;
-    k=gcd(n,m);
-    for(i=1;i<=k;i++){
-        if(k%i==0)
-            pr3l(i,n/i,m/i);
-    }
+    scann;
+    scana;
+    w1{
+        maxi=0;
+        fori{
+            if(maxi<=a[i])
+            {
+                maxi=a[i];
+                num=i;
+            }
+        }
+        if(num==1) break;
+        cnt++;
+        a[1]++;
+        a[num]--;
+    };
+    prcnt;
 
 }
