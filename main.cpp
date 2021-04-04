@@ -1170,14 +1170,17 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scannm;
+    scann;
     fori{
-        {
-            auto v = ntov(i);
-            for(auto k:v)
-                if(k==m) cnt++;
-        }
-    }
-    pr1l(cnt);
-
+        scanxy;
+        vxy.pb({x,y});
     };
+    vsort(vxy);
+
+    fori0 {
+        z = max(z, vxy[i].X);
+        z += vxy[i].Y;
+    }
+    pr(z);
+
+}
