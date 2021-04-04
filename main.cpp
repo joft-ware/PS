@@ -167,7 +167,7 @@
 #define scline scanline
 
 #define pr(a) cout << (a)
-#define pr0 cout << (0);
+#define pr0 cout << (0)
 #define prl cout << '\n'
 #define pr1(a) cout << (a) << ' '
 #define pr2(a,b) cout << (a) << ' ' << (b) << ' '
@@ -214,7 +214,7 @@ ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[N], alis[M], dd[MM][MM], p[N], h[M], ax[M], un[N], ay[M], az[M], d[N], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
+ll b[N], alis[M], dd[M][5], p[N], h[M], ax[M], un[N], ay[M], az[M], d[N], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
 ll qry[M][4], dp[M][2], matn = 2, mu[M];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -352,17 +352,10 @@ void uni(ll x, ll y) {// h: height
     if (h[x] == h[y]) h[y]++;
 }
 
-bool same(ll x, ll y)
-{
-    return (find(x) == find(y));
-}
-
 ll gcd(ll x, ll y)
 {
-    if (x < y)
-        swap(x, y);
-    if (y == 0)
-        return x;
+    if (x < y) swap(x, y);
+    if (y == 0) return x;
     return gcd(y, x % y);
 }
 
@@ -1177,27 +1170,18 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scannm;
-    fori
-        fo(j,0,m)
-            dd[i][j]=INF;
-    dd[1][0]=0;
-    fori {
-        sc2(a[i], b[i]);
-        if(i==1) continue;
-        dd[i][0]=taxi(a[i],b[i],a[i-1],b[i-1])+dd[i-1][0];
-    };
-    // dd[i][j] = i 도착. j개 건너뜀.
-    for(i=2;i<=n;i++) {
-        for(j=0;j<=m;j++) // j: i랑 떨어진 거리
+    scanxyz;
+    r=0;
+    foi(x){
+        scant;
+        if(t==y&&yes==0)
         {
-            y = i - j - 1;
-            if (y < 1) break;
-            for (k = 0; k + j <= m; k++) {
-                dd[i][k + j] = min(dd[i][k + j], dd[y][k] + taxi(a[y], b[y], a[i], b[i]));
-            }
+            yes=1;
+            r=t;
         }
-    };
-    forj mini=min(mini,dd[n][j]);
-    prmini;
+        if(yes&&t==r+z)
+            r=r+z;
+    }
+    if(r==0) pr0;
+    else pr((r - y) / z + 1);
 }
