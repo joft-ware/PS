@@ -17,7 +17,7 @@
 #include <regex>
 
 #define M 100001
-#define MM 1
+#define MM 1001
 #define N 100001
 
 #define ll long long
@@ -1164,6 +1164,9 @@ bool dfs(ll x, ll xx){
 ld distance(ld x1, ld y1, ld x2, ld y2){
     return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 }
+ll taxi(ll x1, ll y1, ll x2, ll y2){
+    return abs(x1-x2)+abs(y1-y2);
+}
 
 bool f(ll x1, ll y1, ll x2, ll y2){
     ll l=r=0;
@@ -1174,13 +1177,27 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scann;
-    fori sc2(a[i],b[i]);
-    forin1{
-        if(mini>=b[i]){
-            cnt++;
-            mini=b[i];
+    scannm;
+    fori
+        fo(j,0,m)
+            dd[i][j]=INF;
+    dd[1][0]=0;
+    fori {
+        sc2(a[i], b[i]);
+        if(i==1) continue;
+        dd[i][0]=taxi(a[i],b[i],a[i-1],b[i-1])+dd[i-1][0];
+    };
+    // dd[i][j] = i 도착. j개 건너뜀.
+    for(i=2;i<=n;i++) {
+        for(j=0;j<=m;j++) // j: i랑 떨어진 거리
+        {
+            y = i - j - 1;
+            if (y < 1) break;
+            for (k = 0; k + j <= m; k++) {
+                dd[i][k + j] = min(dd[i][k + j], dd[y][k] + taxi(a[y], b[y], a[i], b[i]));
+            }
         }
     };
-    prcnt;
+    forj mini=min(mini,dd[n][j]);
+    prmini;
 }
