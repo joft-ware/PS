@@ -1170,18 +1170,33 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scanxyz;
-    r=0;
-    foi(x){
-        scant;
-        if(t==y&&yes==0)
-        {
-            yes=1;
-            r=t;
+    scann;
+    fori{
+        sc3(x,y,z);
+        a[3]=x%10;
+        a[2]=(x/10)%10;
+        a[1]=x/100;
+        for(j=111;j<=999;j++){
+            b[3]=j%10;
+            b[2]=(j/10)%10;
+            b[1]=j/100;
+            w=0;
+            e=0;
+            fok(9) a1[k]=0,a2[k]=0;
+            for(k=1;k<=3;k++){
+                if(a[k]==b[k])
+                    w++;
+                a1[a[k]]++;
+                a2[b[k]]++;
+            }
+            fok(9)
+                if (a1[k] == a2[k]&&a1[k])
+                    e++;
+
+            if(w!=y||e-w!=z) d[j]=1;
         }
-        if(yes&&t==r+z)
-            r=r+z;
-    }
-    if(r==0) pr0;
-    else pr((r - y) / z + 1);
+    };
+    for(i=111;i<=999;i++)
+        cnt+=(!d[i]);
+    prcnt;
 }
