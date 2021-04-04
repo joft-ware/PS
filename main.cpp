@@ -18,7 +18,7 @@
 
 #define M 100001
 #define MM 1
-#define N 1000001
+#define N 100001
 
 #define ll long long
 #define ull unsigned ll
@@ -216,7 +216,7 @@ ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[N], alis[M], dd[MM][MM], p[N], h[M], ax[M], un[N], ay[M], az[M], d[N], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
 ll qry[M][4], dp[M][2], matn = 2, mu[M];
-bool check[M], visit[M], treecheck[M], boo[M];
+bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
 ld ldx1,ldx2,ldx3,ldx4,ldy1,ldy2,ldy3,ldy4;
@@ -227,12 +227,13 @@ typedef vector<vll> matrix;
 ull u1, u2, u3, u4;
 queue<ll> q, qx, qy;
 priority_queue<ll> pq, pq2;
+// priority_queue<xy, vector<xy>, greater<xy>> pqxy;
 priority_queue<xy> pqxy;
 priority_queue<xy> pqxy2;
 stack<ll> st;
 deque<ll> dq;
 deque<xy> dqxy;
-vll v, v1, v2, v3, print, vv[M], rv[M], visited;
+vll v, v1, v2, v3, print, vv[M], rv[M];
 vector<xy> vxy, vxya[M], vxy2;
 vector<pair<ll,xy>> vxyz;
 xy xy1, xya[M];
@@ -1172,17 +1173,14 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 }
 
 int main(void) {
+    FASTIO;
     scann;
-    scans;
-    fori0{
-        if(i==0) {
-            if(s[i]=='B') cnt++;
-            else sum++;
-            continue;
+    fori sc2(a[i],b[i]);
+    forin1{
+        if(mini>=b[i]){
+            cnt++;
+            mini=b[i];
         }
-        if(s[i]!=s[i-1]&&s[i]=='B') cnt++;
-        if(s[i]!=s[i-1]&&s[i]=='R') sum++;
     };
-    m=min(cnt,sum);
-    pr(m+1);
+    prcnt;
 }
