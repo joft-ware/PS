@@ -1170,15 +1170,12 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scanna;
+    scann;
+    n*=2;
+    scana;
     sorta;
-    fo(i,3,n)
-    {
-        x=a[i-2];
-        y=a[i-1];
-        z=a[i];
-        if(x+y>z) num=x+y+z;
-    }
-    if(!num) num--;
-    prnum;
+    fori{
+        mini=min(a[i]+a[n+1-i],mini);
+    };
+    prmin;
 }
