@@ -18,7 +18,7 @@
 
 #define M 100001
 #define MM 1001
-#define N 100001
+#define N 1000001
 
 #define ll long long
 #define ull unsigned ll
@@ -214,7 +214,7 @@ ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[N], alis[M], dd[M][5], p[N], h[M], ax[M], un[N], ay[M], az[M], d[N], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
+ll b[M], alis[M], dd[M][5], p[N], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
 ll qry[M][4], dp[M][2], matn = 2, mu[M];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -1170,29 +1170,15 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scannm;
-    scana;
+    scanna;
     sorta;
-    if(n<=m){
-        pr0;
-        return 0;
+    fo(i,3,n)
+    {
+        x=a[i-2];
+        y=a[i-1];
+        z=a[i];
+        if(x+y>z) num=x+y+z;
     }
-    foi(n-1) vxy.pb({a[i+1]-a[i],i});
-    vsort(vxy);
-    t=vxy.size();
-    m--;
-    forj d[vxy[t-j].Y]=1;
-    mini=a[1];
-    maxi=a[1];
-    fori{
-        mini=min(mini,a[i]);
-        maxi=max(maxi,a[i]);
-        if(d[i]){
-            sum+=maxi-mini;
-            mini=a[i+1];
-            maxi=a[i+1];
-        }
-    };
-    sum+=maxi-mini;
-    prsum;
+    if(!num) num--;
+    prnum;
 }
