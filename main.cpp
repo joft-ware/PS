@@ -1171,20 +1171,24 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 int main(void) {
     FASTIO;
     scannm;
+    scana;
+    sorta;
+    foi(n-1) vxy.pb({a[i+1]-a[i],i});
+    vsort(vxy);
+    t=vxy.size();
+    m--;
+    forj d[vxy[t-j].Y]=1;
+    mini=a[1];
+    maxi=a[1];
     fori{
-        scanxy;
-        fo(j,t+1,t+x) a[j]=y;
-        t+=x;
+        mini=min(mini,a[i]);
+        maxi=max(maxi,a[i]);
+        if(d[i]){
+            sum+=maxi-mini;
+            mini=a[i+1];
+            maxi=a[i+1];
+        }
     };
-    t=0;
-    forj{
-        scanxy;
-        fo(j,t+1,t+x) b[j]=y;
-        t+=x;
-    };
-    foi(t){
-        maxi=max(maxi,b[i]-a[i]);
-    }
-    if(maxi<=0) maxi=0;
-    pr(maxi);
+    sum+=maxi-mini;
+    prsum;
 }
