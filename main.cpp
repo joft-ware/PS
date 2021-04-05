@@ -66,6 +66,7 @@
 #define scanc sc(c);
 #define scanxy sc2(x,y);
 #define scannm sc2(n,m);
+#define scanmn sc2(m,n);
 #define scanxyz sc3(x,y,z);
 #define scanxyzr sc4(x,y,z,r);
 #define scans sc(s);slen=s.size();
@@ -1170,12 +1171,14 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scann;
-    n*=2;
-    scana;
-    sorta;
-    fori{
-        mini=min(a[i]+a[n+1-i],mini);
-    };
-    prmin;
+    scanmn;scana;sorta;
+    foj(min(m,n)){
+        x=a[n+1-j]*j;
+        if(maxi<x){
+            maxi=x;
+            num=a[n+1-j];
+        }
+        maxi=max(x,maxi);
+    }
+    pr2l(num,maxi);
 }
