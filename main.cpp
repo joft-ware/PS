@@ -1173,6 +1173,10 @@ int main(void) {
     scannm;
     scana;
     sorta;
+    if(n<=m){
+        pr0;
+        return 0;
+    }
     foi(n-1) vxy.pb({a[i+1]-a[i],i});
     vsort(vxy);
     t=vxy.size();
