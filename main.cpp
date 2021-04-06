@@ -1171,16 +1171,27 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    w1{
-        scant; if(!t)break;
-        vector<pair<string, string>> v;
-        wt{
-            string s, s2;
-            scans;
-            for(auto j:s) s2+=to_lower(j);
-            v.pb({s2,s});
-        };
-        sortv(v);
-        pr1l(v[0].Y);
+    scann;
+    fori{
+        scanxy;
+        if(x>y) swap(x,y);
+        aa[x][y]=1;
     };
+    n=5;
+    fori{
+        forjn{
+            if(aa[i][j]){
+                if(i==1&&j==3)
+                    yes+=4;
+                else if(i==1&&j==4)
+                    yes+=2;
+                else if(i==3&&j==4)
+                    yes+=1;
+                else
+                    no=1;
+            }
+        }
+    };
+    if(no||yes!=7) pr("Woof-meow-tweet-squeek");
+    else pr("Wa-pa-pa-pa-pa-pa-pow!");
 }
