@@ -191,6 +191,8 @@
 #define prxy pr2l(x, y)
 #define prno pr1l("no")
 #define pryes pr1l("yes")
+#define prNo pr1l("No")
+#define prYes pr1l("Yes")
 #define prNO pr1l("NO")
 #define prYES pr1l("YES")
 #define prgg pr1l("gg")
@@ -1171,14 +1173,14 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scans;
-    scann;
+    n=9;
+    scana;
+    scanb;
     fori{
-        string s1;
-        sc(s1);
-        s1+=s1;
-        auto v=kmp(s1,s);
-        if(v.size())cnt++;
+        x+=a[i];
+        if(x>y) yes=1;
+        y+=b[i];
     };
-    prcnt;
+    if(yes) prYes;
+    else prNo;
 }
