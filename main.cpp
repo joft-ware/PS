@@ -1173,41 +1173,18 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    n=36;
+    scannm;
     fori{
-        scans;
-        x=s[0]-'A'+1;
-        y=s[1]-'0';
-        if(x<1||x>6||y<1||y>6) no=1;
-        aa[x][y]++;
-
-        if(i==1) {
-            xx=x;
-            yy=y;
-            xxx=x;
-            yyy=y;
-            continue;
-        }
-        yes=0;
-        foj(8){
-            tx=xx+knightdx[j];
-            ty=yy+knightdy[j];
-            if(tx==x&&ty==y) yes=1;
-        }
-        if(!yes) no=1;
-        xx=x;
-        yy=y;
+        sc(s);
+        last=-1;
+        forj0{
+            if(s[j]=='c') last=0;
+            if(last==-1)
+                pr1(-1);
+            else
+                pr1(last++);
+        };
+        prl;
     };
-    yes=0;
-    foj(8){
-        tx=xx+knightdx[j];
-        ty=yy+knightdy[j];
-        if(tx==xxx&&ty==yyy) yes=1;
-    }
-    if(!yes) no=1;
-    n=6;
-    fori forjn if(aa[i][j]!=1) no=1;
 
-    if(no) pr("Invalid");
-    else pr("Valid");
 }
