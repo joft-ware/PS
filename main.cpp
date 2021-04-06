@@ -1171,24 +1171,11 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scannm;
-    scana;
-    foi(m){
-        scant;
-        sum=0;
-        if(t==1){
-            scanxy;
-            for(j=x;j<=y;j++) sum+=a[j];
-            pr1l(sum);
-            swap(a[x],a[y]);
-        }
-        else {
-            scanxyzr;
-            for(j=x;j<=y;j++) sum+=a[j];
-            for(j=z;j<=r;j++) sum-=a[j];
-            pr1l(sum);
-
-        }
-
-    };
+    scann;
+    fori sc2(a[i], b[i]);
+    sorta;
+    sortb;
+    if (a[n] <= b[1]) pr0;
+    else  pr(a[n] - b[1]);
+    return 0;
 }
