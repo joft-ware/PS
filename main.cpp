@@ -1173,18 +1173,24 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scannm;
-    fori{
-        sc(s);
-        last=-1;
-        forj0{
-            if(s[j]=='c') last=0;
-            if(last==-1)
-                pr1(-1);
-            else
-                pr1(last++);
-        };
-        prl;
+    scann;
+    fori forjn aa[i][j]=INF;
+    fori aa[i][i]=0;
+    w1{
+        scanxy;
+        if(x<0) break;
+        aa[x][y]=1;
+        aa[y][x]=1;
     };
 
+    forkn fori forjn if(aa[i][k]&&aa[k][j]) aa[i][j]=min(aa[i][j],aa[i][k]+aa[k][j]);
+
+    fori{
+        d[i]=*max_element(aa[i]+1,aa[i]+n+1);
+        vv[d[i]].pb(i);
+        mini=min(mini,d[i]);
+    };
+
+    pr2l(mini,vv[mini].size());
+    for(auto i:vv[mini]) pr1(i);
 }
