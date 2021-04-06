@@ -1171,33 +1171,17 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scann;
-    vector<ll> v, v1;
+    scannm;scant;
     fori{
-        scanx;
-        if(x>=0) v.pb(x);
-        else v1.pb(-x);
-    };
-    vsort(v);
-    vsort(v1);
-    x=v.size();
-    y=v1.size();
-    for(i=v.size()-1;i>=max(x-x,x-4);i--)
-        a[++cnt]=v[i];
-    for(i=v1.size()-1;i>=max(y-y,y-4);i--)
-        a[++cnt]=-v1[i];
-    n=cnt;
-    fori{
-        forjn{
-            if(i==j) continue;
-            maxi=max(maxi,a[i]*a[j]);
-            forkn{
-                if(i!=k&&j!=k) {
-                    x = a[i] * a[j] * a[k];
-                    maxi=max(maxi,x);
-                }
-            }
+        sum=0,yes=0;
+        foj(3) sc(a[j]);
+        sum=a[1]+a[2]+a[3];
+        foj(3) if(a[j]>=t) yes++;
+        if(sum>=m&&yes==3){
+            cnt++;
+            foj(3) v.pb(a[j]);
         }
     };
-    prmaxi;
+    prcnt;
+    for(auto i:v) pr1(i);
 }
