@@ -1171,21 +1171,16 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scant;wt{
-        n=1000;
-        maxi=0;
-        fori a[i]=0;
-        scanm;
-        forj{
-            scx;
-            a[x]++;
+    w1{
+        scant; if(!t)break;
+        vector<pair<string, string>> v;
+        wt{
+            string s, s2;
+            scans;
+            for(auto j:s) s2+=to_lower(j);
+            v.pb({s2,s});
         };
-        fori{
-            if(maxi<a[i]){
-                maxi=a[i];
-                num=i;
-            }
-        };
-        pr1l(num);
+        sortv(v);
+        pr1l(v[0].Y);
     };
 }
