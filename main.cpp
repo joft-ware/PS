@@ -1171,11 +1171,22 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scann;
-    fori sc2(a[i], b[i]);
-    sorta;
-    sortb;
-    if (a[n] <= b[1]) pr0;
-    else  pr(a[n] - b[1]);
+    scanna;
+    fori d[a[i]]++;
+    foi0(53) b[i]=d[i];
+    scanline(s);
+    scanline(s);
+    foi0(53) d[i]=0;
+    foi0(s.size()){
+        if(s[i]==' ') x=0;
+        else if(so(s[i])) x=s[i]-'a'+27;
+        else x=s[i]-'A'+1;
+        d[x]++;
+    }
+    foi0(53)
+        if (d[i] != b[i])
+            no = 1;
+    if(no) pr1l("n");
+    else pr1l("y");
     return 0;
 }
