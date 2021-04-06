@@ -18,7 +18,7 @@
 
 #define M 100001
 #define MM 1001
-#define N 1000001
+#define N 100001
 
 #define ll long long
 #define ull unsigned ll
@@ -1173,14 +1173,8 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    n=9;
-    scana;
-    scanb;
-    fori{
-        x+=a[i];
-        if(x>y) yes=1;
-        y+=b[i];
-    };
-    if(yes) prYes;
-    else prNo;
+    scann;
+    m=(ll)sqrt(n);
+    if(m*m>=n) pr(m);
+    else pr(m+1);
 }
