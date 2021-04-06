@@ -1171,17 +1171,21 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scannm;scant;
-    fori{
-        sum=0,yes=0;
-        foj(3) sc(a[j]);
-        sum=a[1]+a[2]+a[3];
-        foj(3) if(a[j]>=t) yes++;
-        if(sum>=m&&yes==3){
-            cnt++;
-            foj(3) v.pb(a[j]);
-        }
+    scant;wt{
+        n=1000;
+        maxi=0;
+        fori a[i]=0;
+        scanm;
+        forj{
+            scx;
+            a[x]++;
+        };
+        fori{
+            if(maxi<a[i]){
+                maxi=a[i];
+                num=i;
+            }
+        };
+        pr1l(num);
     };
-    prcnt;
-    for(auto i:v) pr1(i);
 }
