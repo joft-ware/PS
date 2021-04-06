@@ -1171,22 +1171,14 @@ bool f(ll x1, ll y1, ll x2, ll y2){
 
 int main(void) {
     FASTIO;
-    scanna;
-    fori d[a[i]]++;
-    foi0(53) b[i]=d[i];
-    scanline(s);
-    scanline(s);
-    foi0(53) d[i]=0;
-    foi0(s.size()){
-        if(s[i]==' ') x=0;
-        else if(so(s[i])) x=s[i]-'a'+27;
-        else x=s[i]-'A'+1;
-        d[x]++;
-    }
-    foi0(53)
-        if (d[i] != b[i])
-            no = 1;
-    if(no) pr1l("n");
-    else pr1l("y");
-    return 0;
+    scans;
+    scann;
+    fori{
+        string s1;
+        sc(s1);
+        s1+=s1;
+        auto v=kmp(s1,s);
+        if(v.size())cnt++;
+    };
+    prcnt;
 }
