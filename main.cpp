@@ -16,9 +16,9 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 100001
-#define MM 1001
-#define N 100001
+#define M 100002
+#define MM 1002
+#define N 100002
 
 #define ll long long
 #define ull unsigned ll
@@ -1177,37 +1177,42 @@ ll ff(void){
     return summ;
 }
 
-void f(ll lev, ll x){
-    d[lev]=x;
-    if(lev==t){
-        ll ans =ff();
-        minim=min(ans,minim);
-        return;
-    }
-    y=t-lev;
-    for(ll i=x+1;i<=cnt-y+1;i++) f(lev+1,i);
-    return;
-}
 
 int main(void) {
     FASTIO;
-    scann;
-    scant;
-    mn;
-    scanaa;
-    fori{
-        forjn{
-            if(aa[i][j]==2) {
-                a[++cnt]=i;
-                b[cnt]=j;
-            }
-            else if(aa[i][j]==1){
-                a1[++sum]=i;
-                a2[sum]=j;
-            }
+    scannm;
+    if(n>=m){
+        pr(n-m);
+        prl;
+        pr(1);
+        return 0;
+    }
+    q.push(n);
+    for(ll i=0;i<=200000;i++) d[i]=INF;
+
+    while(q.size()){
+        cnt++;
+        while(q.size()) {
+            x = q.front();
+            q.pop();
+            v.pb(x);
         }
-    };
-    for(i=1;i<=cnt-t+1;i++)
-        f(1,i);
-    pr(minim);
+        for(auto i:v){
+            if(d[i]<cnt) continue;
+            d[i]=cnt;
+            if(i==m) {
+                sum++;
+                continue;
+            }
+            if(i>0)
+                if(d[i-1]>=cnt+1) q.push(i-1);
+            if(d[i+1]>=cnt+1) q.push(i+1);
+            if(d[i*2]>=cnt+1&&i<=50000&&x>0) q.push(i*2);
+        }
+        v.clear();
+    }
+    pr(d[m]-1);
+    prl;
+    prsum;
+
 }
