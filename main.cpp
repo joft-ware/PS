@@ -1184,11 +1184,14 @@ int main(void) {
     if(n>=m){
         pr(n-m);
         prl;
-        pr(1);
+
+        for(ll i=n;i>=m;i--)
+            pr1(i);
         return 0;
     }
     q.push(n);
-    for(ll i=0;i<=200000;i++) d[i]=INF;
+    for(ll i=0;i<=200000;i++) d[i]=INF, p[i]=i;
+
 
     while(q.size()){
         cnt++;
@@ -1198,21 +1201,39 @@ int main(void) {
             v.pb(x);
         }
         for(auto i:v){
-            if(d[i]<cnt) continue;
             d[i]=cnt;
             if(i==m) {
                 sum++;
                 continue;
             }
-            if(i>0)
-                if(d[i-1]>=cnt+1) q.push(i-1);
-            if(d[i+1]>=cnt+1) q.push(i+1);
-            if(d[i*2]>=cnt+1&&i<=50000&&x>0) q.push(i*2);
+            if(i>0) {
+                if (d[i - 1] >d[i]+1) {
+                    q.push(i - 1);
+                    p[i-1]=i;
+                    d[i-1]=d[i]+1;
+                }
+            }
+            if(d[i+1]>d[i]+1) {
+                q.push(i+1);
+                p[i+1]=i;
+                d[i+1]=d[i]+1;
+            }
+            if(d[i*2]>d[i]+1&&i<=50000&&i>0) {
+                q.push(i * 2);
+                p[i*2]=i;
+                d[i*2]=d[i]+1;
+            }
         }
         v.clear();
     }
-    pr(d[m]-1);
-    prl;
-    prsum;
-
+    pr1l(d[m]-1);
+    t=m;
+    cnt=0;
+    while(1){
+       if(p[t]==t) break;
+       a[++cnt]=t;
+       t=p[t];
+    }
+    pr1(n);
+    for(i=cnt;i>=1;i--) pr1(a[i]);
 }
