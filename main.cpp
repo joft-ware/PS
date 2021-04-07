@@ -1166,34 +1166,48 @@ ll taxi(ll x1, ll y1, ll x2, ll y2){
     return abs(x1-x2)+abs(y1-y2);
 }
 
-bool f(ll x1, ll y1, ll x2, ll y2){
-    ll l=r=0;
-    if(x1>y1) swap(x1,y1);
-    if(x2>y2) swap(x2,y2);
-    return (y2-y1)*(x2-x1)<=0;
+ll ff(void){
+    ll summ=0;
+    for(ll i=1;i<=sum;i++){
+        ll mini=INF;
+        for(ll j=1;j<=t;j++)
+            mini=min(mini,taxi(a1[i],a2[i],a[d[j]],b[d[j]]));
+        summ+=mini;
+    }
+    return summ;
+}
+
+void f(ll lev, ll x){
+    d[lev]=x;
+    if(lev==t){
+        ll ans =ff();
+        minim=min(ans,minim);
+        return;
+    }
+    y=t-lev;
+    for(ll i=x+1;i<=cnt-y+1;i++) f(lev+1,i);
+    return;
 }
 
 int main(void) {
     FASTIO;
-    scanna;
+    scann;
+    scant;
+    mn;
+    scanaa;
     fori{
-        if(visited[i]) continue;
-        k=i;
-        forjn check[j]=0;
-        while(1){
-            if(visited[k]||check[k]) break;
-            check[k]=1;
-            k=a[k];
-        }
-        if(k==i) {
-            while (1) {
-                k = a[k];
-                visited[k]=1;
-                cnt++;
-                if(k==i) break;
+        forjn{
+            if(aa[i][j]==2) {
+                a[++cnt]=i;
+                b[cnt]=j;
+            }
+            else if(aa[i][j]==1){
+                a1[++sum]=i;
+                a2[sum]=j;
             }
         }
     };
-    prcnt;
-    fori if(visited[i]) pr1(i);
+    for(i=1;i<=cnt-t+1;i++)
+        f(1,i);
+    pr(minim);
 }
