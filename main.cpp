@@ -16,9 +16,9 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 100002
+#define M 1002
 #define MM 1002
-#define N 100002
+#define N 200002
 
 #define ll long long
 #define ull unsigned ll
@@ -219,7 +219,7 @@ ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[M], alis[M], dd[M][5], p[N], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
-ll qry[M][4], dp[M][2], matn = 2, mu[M];
+ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[M], suffix[N];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
@@ -960,25 +960,6 @@ ld rotating_calipers(vector<xy> vxy) { // 시계방향으로 회전하는 캘리
     return maxim;
 }
 
-vll changebase(ll n, ll m) {
-    vll a;
-    vll b;
-    w1{
-        a.pb(n%m);
-        cnt++;
-        if (n < m)
-            break;
-        n /= m;
-    };
-    foi0(cnt) {
-        if (a[cnt-1 - i] <= 9)
-            b.pb(a[cnt-1 - i] + '0');
-        else
-            b.pb(a[cnt-1 - i] + 55);
-    }
-    return b;
-}
-
 ll fibo(ll n) {
     matrix x = { {1, 0},
                  {0, 1} };
@@ -1043,17 +1024,6 @@ void union_find(void) { // 최적화된 union find (균형 트리)
     fori h[i] = 1, p[i] = i; // h:높이, p: 부모
 }
 
-struct student {
-    string name;
-    ll kor, eng, math;
-};
-
-bool cmp(student a, student b) {
-    if (a.kor != b.kor) return (a.kor < b.kor);
-    if (a.eng != b.eng) return(a.eng > b.eng);
-    if (a.math != b.math) return (a.math < b.math);
-    return a.name > b.name;
-}
 
 string lcs(string st1, string st2) { //string st1, st2의 lcs 구하기.
     ll maxi = 0, cnt = 0;
@@ -1159,6 +1129,7 @@ bool dfs(ll x, ll xx){
     }
     return false;
 }
+
 ld distance(ld x1, ld y1, ld x2, ld y2){
     return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 }
@@ -1166,74 +1137,51 @@ ll taxi(ll x1, ll y1, ll x2, ll y2){
     return abs(x1-x2)+abs(y1-y2);
 }
 
-ll ff(void){
-    ll summ=0;
-    for(ll i=1;i<=sum;i++){
-        ll mini=INF;
-        for(ll j=1;j<=t;j++)
-            mini=min(mini,taxi(a1[i],a2[i],a[d[j]],b[d[j]]));
-        summ+=mini;
-    }
-    return summ;
+bool sacompare(ll x, ll y){
+    if(a1[x]==a1[y]) return a1[x+e]<a1[y+e];
+    return a1[x]<a1[y];
 }
 
+void suffixArray(string s){
+    ll t=1;
+    ll n = s.length();
+    fori0 suffix[i]=i;
+    fori0 a1[i]=s[i]-'a';
+    while(t<=n){
+        a1[n]=-1;
+        e=t;
+        sort(suffix,suffix+n,sacompare);
+        a2[suffix[0]]=0; //
+        fo(i,1,n-1){
+            if(sacompare(suffix[i-1],suffix[i])) a2[suffix[i]]=a2[suffix[i-1]]+1;
+            else a2[suffix[i]]=a2[suffix[i-1]];
+        }
+        fori0 a1[i]=a2[i];
+        t*=2;
+    }
+}
+
+vll lcp(string s){
+    ll n = s.size(), len=0;
+    vll lcp(n);
+    fori0 tmp[suffix[i]]=i;
+    fori0{
+        if(tmp[i]){
+            ll j = suffix[tmp[i]-1];
+            while(s[len+j]==s[len+i]) len++;
+            lcp[tmp[i]]=len;
+            if(len)len--;
+        }
+    };
+    return lcp;
+}
 
 int main(void) {
     FASTIO;
-    scannm;
-    if(n>=m){
-        pr(n-m);
-        prl;
-
-        for(ll i=n;i>=m;i--)
-            pr1(i);
-        return 0;
-    }
-    q.push(n);
-    for(ll i=0;i<=200000;i++) d[i]=INF, p[i]=i;
-
-
-    while(q.size()){
-        cnt++;
-        while(q.size()) {
-            x = q.front();
-            q.pop();
-            v.pb(x);
-        }
-        for(auto i:v){
-            d[i]=cnt;
-            if(i==m) {
-                sum++;
-                continue;
-            }
-            if(i>0) {
-                if (d[i - 1] >d[i]+1) {
-                    q.push(i - 1);
-                    p[i-1]=i;
-                    d[i-1]=d[i]+1;
-                }
-            }
-            if(d[i+1]>d[i]+1) {
-                q.push(i+1);
-                p[i+1]=i;
-                d[i+1]=d[i]+1;
-            }
-            if(d[i*2]>d[i]+1&&i<=50000&&i>0) {
-                q.push(i * 2);
-                p[i*2]=i;
-                d[i*2]=d[i]+1;
-            }
-        }
-        v.clear();
-    }
-    pr1l(d[m]-1);
-    t=m;
-    cnt=0;
-    while(1){
-       if(p[t]==t) break;
-       a[++cnt]=t;
-       t=p[t];
-    }
-    pr1(n);
-    for(i=cnt;i>=1;i--) pr1(a[i]);
+    scann;
+    scans;
+    suffixArray(s);
+    auto v = lcp(s);
+    for(auto i:v) maxi=max(maxi,i);
+    prmax;
 }
