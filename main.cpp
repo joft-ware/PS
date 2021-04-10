@@ -18,7 +18,7 @@
 
 #define M 1002
 #define MM 1002
-#define N 200002
+#define N 1000002
 
 #define ll long long
 #define ull unsigned ll
@@ -217,9 +217,9 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll a[N], b1[M], a1[N], a2[N], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[M], alis[M], dd[M][5], p[N], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
-ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[M], suffix[N];
+ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
@@ -1178,10 +1178,9 @@ vll lcp(string s){
 
 int main(void) {
     FASTIO;
-    scann;
     scans;
+    n=s.size();
     suffixArray(s);
     auto v = lcp(s);
-    for(auto i:v) maxi=max(maxi,i);
-    prmax;
+    fo(i,0,n-1) pr1l(suffix[i]);
 }
