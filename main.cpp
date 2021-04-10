@@ -1178,14 +1178,13 @@ vll lcp(string s){
 
 int main(void) {
     FASTIO;
-    scannm;
+    scann;
     scana;
-    forj sum+=a[j];
-    maxi=sum;
-    fo(i,m+1,n){
-        sum+=a[i];
-        sum-=a[i-m];
-        maxi=max(maxi,sum);
+    sorta;
+    forin1{
+        x=a[i]-cnt;
+        if(x>0) sum+=x;
+        cnt++;
     };
-    prmax;
+    prsum;
 }
