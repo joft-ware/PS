@@ -1179,11 +1179,12 @@ vll lcp(string s){
 int main(void) {
     FASTIO;
     scann;
-    fori {
-        scans;
-        foj0(s.size())
-            a[s[j]-'A']++;
-    };
-    foi0(26) sum+=a[i];
-prsum;
+    scans;
+    foi0(n){
+        if(s[i]=='E')
+            a[i+1]=1;
+        else a[i+1]=-1;
+        if(s[i]=='W'&&s[i+1]=='E') cnt++;
+    }
+    pr(cnt+1);
 }
