@@ -1182,5 +1182,8 @@ int main(void) {
     n=s.size();
     suffixArray(s);
     auto v = lcp(s);
-    fo(i,0,n-1) pr1l(suffix[i]);
+    fo(i,0,n-1) pr1(suffix[i]+1);
+    prl;
+    pr1('x');
+    fo(i,1,n-1) pr1(v[i]);
 }
