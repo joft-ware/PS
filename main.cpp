@@ -1178,13 +1178,14 @@ vll lcp(string s){
 
 int main(void) {
     FASTIO;
-    scann;
-    scans;
-    foi0(n){
-        if(s[i]=='E')
-            a[i+1]=1;
-        else a[i+1]=-1;
-        if(s[i]=='W'&&s[i+1]=='E') cnt++;
-    }
-    pr(cnt+1);
+    scannm;
+    scana;
+    forj sum+=a[j];
+    maxi=sum;
+    fo(i,m+1,n){
+        sum+=a[i];
+        sum-=a[i-m];
+        maxi=max(maxi,sum);
+    };
+    prmax;
 }
