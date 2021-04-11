@@ -1084,6 +1084,17 @@ vll manacher(string temp){
     return v;
 }
 
+bool isPalindrome(vll v){
+    ll n = v.size();
+    fori0 if(v[i]!=v[n-1-i]) return false;
+    return true;
+}
+
+bool isPrime(ll n){
+    for(ll i=2;i*i<=n;i++) if(n%i==0) return false;
+    return true;
+}
+
 void scc_(ll x, vll &list) {
     visit[x]=true;
     for(auto y:vv[x]) if(!visit[y]) scc_(y, list);
@@ -1176,28 +1187,21 @@ vll lcp(string s){
     return lcp;
 }
 
-
-void solve(){
+ll solve(){
     scann;
-    fori{
-        scanxy;
-        pqxy.push({y,x});
-    };
-    t=INF;
-    while(pqxy.size()){
-        x=pqxy.top().X;
-        y=pqxy.top().Y;
-        pqxy.pop();
-        t = min(t,x);
-        t-=y;
+    if(1==n) return 2;
+    fo(i,n,INF){
+        auto v = ntov(i);
+        if(isPalindrome(v)){
+            if(isPrime(i))
+                return i;
+        }
     }
-    if(t<0) pr(-1);
-    else pr(t);
 }
 
 
 
 int main(void) {
     FASTIO;
-    solve();
+    pr(solve());
 }
