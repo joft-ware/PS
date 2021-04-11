@@ -16,9 +16,9 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 1002
+#define M 100002
 #define MM 1002
-#define N 1000002
+#define N 100002
 
 #define ll long long
 #define ull unsigned ll
@@ -1176,15 +1176,28 @@ vll lcp(string s){
     return lcp;
 }
 
+
+void solve(){
+    scann;
+    fori{
+        scanxy;
+        pqxy.push({y,x});
+    };
+    t=INF;
+    while(pqxy.size()){
+        x=pqxy.top().X;
+        y=pqxy.top().Y;
+        pqxy.pop();
+        t = min(t,x);
+        t-=y;
+    }
+    if(t<0) pr(-1);
+    else pr(t);
+}
+
+
+
 int main(void) {
     FASTIO;
-    scann;
-    scana;
-    sorta;
-    forin1{
-        x=a[i]-cnt;
-        if(x>0) sum+=x;
-        cnt++;
-    };
-    prsum;
+    solve();
 }
