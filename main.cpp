@@ -59,7 +59,7 @@
 
 #define scann sc(n)
 #define scanm sc(m);
-#define scant sc(t);
+#define scant sc(ttttt);
 #define scanx sc(x);
 #define scany sc(y);
 #define scank sc(k);
@@ -134,7 +134,7 @@
 
 #define lens len = strlen(s);
 #define test pr1l("TEST!");
-#define wt while(t--)
+#define wt while(ttttt--)
 #define w1 while(1)
 #define INF (ll) 1e10
 #define br break
@@ -206,7 +206,7 @@
 #define prstr for(ll wq=1;wq<=slen;wq++) pr(str[wq]);
 
 using namespace std;
-ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
+ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ttttt, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
 ll dx[5] = { 0,0,1,0,-1 };
 ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
@@ -1187,21 +1187,28 @@ vll lcp(string s){
     return lcp;
 }
 
-ll solve(){
-    scann;
-    if(1==n) return 2;
-    fo(i,n,INF){
-        auto v = ntov(i);
-        if(isPalindrome(v)){
-            if(isPrime(i))
-                return i;
-        }
-    }
+void solve(){
+    scant;
+    wt{
+        scann;
+        t=n;
+        fori{
+            if(i==1) continue;
+            if(t%i==0) {
+                cnt = 0;
+                while (t % i == 0) {
+                    t /= i;
+                    cnt++;
+                }
+                pr2l(i, cnt);
+            }
+        };
+    };
 }
 
 
 
 int main(void) {
     FASTIO;
-    pr(solve());
+    solve();
 }
