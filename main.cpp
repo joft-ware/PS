@@ -1187,26 +1187,28 @@ vll lcp(string s){
     return lcp;
 }
 
-void solve(){
-    scant;
-    wt{
-        scann;
-        t=n;
-        fori{
-            if(i==1) continue;
-            if(t%i==0) {
-                cnt = 0;
-                while (t % i == 0) {
-                    t /= i;
-                    cnt++;
-                }
-                pr2l(i, cnt);
-            }
-        };
-    };
+void f(ll left, ll right, vll &v, ll sum, ll zero){
+    if(left>right){
+        if(zero==0) return;
+        v.pb(sum);
+        return;
+    }
+    f(left+1,right,v,sum, zero);
+    f(left+1,right,v,sum+a[left], zero+1);
 }
 
-
+void solve(){
+    scannm;
+    scana;sorta;
+    l=1;r=1;
+    while(l<=r&&r<=n&&l<=n){
+        x=a[r]-a[l];
+        if(x>=m) mini=min(x,mini);
+        if(x<m) r++;
+        else l++;
+    }
+    prmin;
+}
 
 int main(void) {
     FASTIO;
