@@ -1198,16 +1198,28 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 }
 
 void solve(){
-    scannm;
-    scana;sorta;
-    l=1;r=1;
-    while(l<=r&&r<=n&&l<=n){
-        x=a[r]-a[l];
-        if(x>=m) mini=min(x,mini);
-        if(x<m) r++;
-        else l++;
+    scann;
+    l=1;
+    r=1;
+    while(l<=r){
+        x=r*r-l*l;
+        if(x==n) {
+            a[++cnt]=r;
+            r++;
+        }
+        else if(x<n){
+            r++;
+        }
+        else {
+            if(r-l==1) break;
+            l++;
+        }
     }
-    prmin;
+    if(cnt) {
+        n=cnt;
+        printa;
+    }
+    else pr(-1);
 }
 
 int main(void) {
