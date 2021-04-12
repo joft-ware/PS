@@ -18,7 +18,7 @@
 
 #define M 100002
 #define MM 1002
-#define N 100002
+#define N 1000002
 
 #define ll long long
 #define ull unsigned ll
@@ -1198,28 +1198,25 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 }
 
 void solve(){
-    scann;
+    scannm;
+    scana;
     l=1;
-    r=1;
-    while(l<=r){
-        x=r*r-l*l;
-        if(x==n) {
-            a[++cnt]=r;
-            r++;
+    cnt=0;
+    fori{
+        if(a[i]==1) cnt++;
+        while(cnt>m){
+            if(a[++l]==1) cnt--;
         }
-        else if(x<n){
-            r++;
+
+        if(cnt==m) {
+            while(a[l]==2){
+                l++;
+            }
+            mini=min(mini,i-l+1);
         }
-        else {
-            if(r-l==1) break;
-            l++;
-        }
-    }
-    if(cnt) {
-        n=cnt;
-        printa;
-    }
-    else pr(-1);
+    };
+    if(mini==INF) pr(-1);
+    else prmini;
 }
 
 int main(void) {
