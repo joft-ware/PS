@@ -16,9 +16,9 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 580002
+#define M 100002
 #define MM 1002
-#define N 580002
+#define N 100002
 
 #define ll int
 #define ull unsigned ll
@@ -217,8 +217,8 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[N], b1[M], a1[N], a2[N], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[600001], sumtree[600001], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], alis[M], dd[M][5], p[N], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[600001], hablazy[600001];
+ll a[N], b1[M], a1[N], a2[N], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[M], alis[M], dd[M][5], p[N], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -1187,6 +1187,27 @@ vll lcp(string s){
     return lcp;
 }
 
+bool bi_dfs(ll x){
+    if(visit[x]) return false;
+    visit[x]=true;
+    ll y = vv[x].size();
+    for(auto i:vv[x]){
+        if(!d[i]||bi_dfs(d[i]))
+        {
+            d[i]=x;
+            return true;
+        }
+    }
+    return false;
+}
+
+void bi_matching(){
+    fori{
+        fill_n(visit,n,false);
+        if(bi_dfs(i)) cnt++;
+    }
+}
+
 void f(ll left, ll right, vll &v, ll sum, ll zero){
     if(left>right){
         if(zero==0) return;
@@ -1199,32 +1220,21 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 
 void solve(){
     scannm;
-    l=n+m;
-    foi(l){
-        a[i] = 0;
-        sumlazy[i]=0;
-        sumtree[i]=0;
-        d[i]=0;
-    }
-    fori {
-        a[i] = 1;
-        d[i] = n + 1 - i;
-    }
-    maketree_sum(1,l,1);
-    forj{
-        scanx;
-        y=d[x];
-        d[x]=n+j;
-        pr1(query_sum(1,1,l,y+1,l));
-        update_sum(1,l,-1,1,y,y);
-        update_sum(1,l,1,1,d[x],d[x]);
+    scana;
+    vv.resize(n+1);
+    forj sc1(b[j]);
+    fori{
+        forj{
+            ll w=a[i];
+            ll e=b[j];
+            if((e*2>=w&&e*4<=w*3)||(e>=w&&e*4<=w*5)) vv[i].pb(j);
+        }
     };
-    prl;
+    bi_matching();
+    prcnt;
 }
 
 int main(void) {
     FASTIO;
-    scant;wt {
-        solve();
-    }
+    solve();
 }
