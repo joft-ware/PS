@@ -16,11 +16,11 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 100002
+#define M 580002
 #define MM 1002
-#define N 1000002
+#define N 580002
 
-#define ll long long
+#define ll int
 #define ull unsigned ll
 #define ld double
 #define vll vector<ll>
@@ -1199,27 +1199,32 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 
 void solve(){
     scannm;
-    scana;
-    l=1;
-    cnt=0;
-    fori{
-        if(a[i]==1) cnt++;
-        while(cnt>m){
-            if(a[++l]==1) cnt--;
-        }
-
-        if(cnt==m) {
-            while(a[l]==2){
-                l++;
-            }
-            mini=min(mini,i-l+1);
-        }
+    l=n+m;
+    foi(l){
+        a[i] = 0;
+        sumlazy[i]=0;
+        sumtree[i]=0;
+        d[i]=0;
+    }
+    fori {
+        a[i] = 1;
+        d[i] = n + 1 - i;
+    }
+    maketree_sum(1,l,1);
+    forj{
+        scanx;
+        y=d[x];
+        d[x]=n+j;
+        pr1(query_sum(1,1,l,y+1,l));
+        update_sum(1,l,-1,1,y,y);
+        update_sum(1,l,1,1,d[x],d[x]);
     };
-    if(mini==INF) pr(-1);
-    else prmini;
+    prl;
 }
 
 int main(void) {
     FASTIO;
-    solve();
+    scant;wt {
+        solve();
+    }
 }
