@@ -124,6 +124,7 @@
 #define sortd sort(d+1,d+n+1);
 #define sortv(v) sort(full(v));
 #define vsort(v) sort(v.begin(),v.end());
+#define asort(a) sort(a+1,a+n+1);
 #define suma sum=0; fori sum+=a[i];
 #define inf(a) fori a[i]=INF;
 #define reverse(a) fori tempa[i]=a[n+1-i]; fori a[i]=tempa[i];
@@ -240,7 +241,7 @@ deque<ll> dq;
 deque<xy> dqxy;
 vll v, v1, v2, v3, print, rv[M];
 vector<vll> vv;
-vector<xy> vxy, vxya[M], vxy2;
+vector<xy> vxy, vxya[M], vxy2, vxy3;
 vector<xy> vpa[M];
 vector<pair<ll,xy>> vxyz;
 xy xy1, xya[M];
@@ -1210,8 +1211,9 @@ void bi_matching(){
     }
 }
 
-ll mst(ll n, ll m){ // vxyz : {cost, {from, to}}
+ll mst(){ // vxyz : {cost, {from, to}}
     sortv(vxyz);
+    ll m = vxyz.size();
     fori p[i]=i;
     foi0(m){
         x=vxyz[i].Y.X;
@@ -1238,12 +1240,23 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 }
 
 void solve(){
-    scannm;
-    forj{
-        scanxyz;
-        vxyz.pb({z,{x,y}});
+    scann;
+    fori {
+        sc3(x,y,z);
+        vxy.pb({x,i});
+        vxy2.pb({y,i});
+        vxy3.pb({z,i});
     };
-    pr(mst(n,m)-maxi);
+    vsort(vxy);
+    vsort(vxy2);
+    vsort(vxy3);
+    fori0{
+        if(i==0) continue;
+        vxyz.pb({vxy[i].X-vxy[i-1].X,{vxy[i].Y,vxy[i-1].Y}});
+        vxyz.pb({vxy2[i].X-vxy2[i-1].X,{vxy2[i].Y,vxy2[i-1].Y}});
+        vxyz.pb({vxy3[i].X-vxy3[i-1].X,{vxy3[i].Y,vxy3[i-1].Y}});
+    };
+    pr(mst());
 }
 
 int main(void) {
