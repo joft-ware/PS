@@ -208,7 +208,7 @@
 #define prstr for(ll wq=1;wq<=slen;wq++) pr(str[wq]);
 
 using namespace std;
-ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ttttt, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
+ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ttttt, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, re, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
 ll dx[5] = { 0,0,1,0,-1 };
 ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
@@ -1214,7 +1214,8 @@ void bi_matching(){
 ll mst(){ // vxyz : {cost, {from, to}}
     sortv(vxyz);
     ll m = vxyz.size();
-    fori p[i]=i;
+    ll sum=0;
+    fori p[i]=i, h[i]=0, un[i]=0;
     foi0(m){
         x=vxyz[i].Y.X;
         y=vxyz[i].Y.Y;
@@ -1240,26 +1241,26 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 }
 
 void solve(){
-    scann;
-    fori {
-        sc3(x,y,z);
-        vxy.pb({x,i});
-        vxy2.pb({y,i});
-        vxy3.pb({z,i});
+    scannm;
+    cnt=0;
+    if(n==0) {
+        re = 1;
+        return;
+    }
+    forj{
+        scanxyz;
+        x++, y++;
+        cnt+=z;
+        vxyz.pb({z,{x,y}});
     };
-    vsort(vxy);
-    vsort(vxy2);
-    vsort(vxy3);
-    fori0{
-        if(i==0) continue;
-        vxyz.pb({vxy[i].X-vxy[i-1].X,{vxy[i].Y,vxy[i-1].Y}});
-        vxyz.pb({vxy2[i].X-vxy2[i-1].X,{vxy2[i].Y,vxy2[i-1].Y}});
-        vxyz.pb({vxy3[i].X-vxy3[i-1].X,{vxy3[i].Y,vxy3[i-1].Y}});
-    };
-    pr(mst());
+    pr1l(cnt-mst());
+    vxyz.clear();
 }
 
 int main(void) {
     FASTIO;
-    solve();
+    w1 {
+        solve();
+        if(re) break;
+    }
 }
