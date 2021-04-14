@@ -20,7 +20,7 @@
 #define MM 1002
 #define N 100002
 
-#define ll int
+#define ll long long
 #define ull unsigned ll
 #define ld double
 #define vll vector<ll>
@@ -75,6 +75,7 @@
 #define scana fori sc(a[i]);
 #define scanna scann; scana;
 #define scanb fori sc(b[i]);
+#define scanbm forj sc(b[j]);
 #define scand fori sc(d[i]);
 #define scanaa fori forj sc(aa[i][j]);
 #define scanaa1 fori{scans;forj0{aa[i][j+1] = s[j] - '0';}s.clear();}
@@ -1220,30 +1221,22 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 }
 
 void solve(){
-    cnt=0;
-    maxi=0;
-    scannm;
-    scanx;
-    start=x;
-    forj{
-        scanxyz;
-        vpa[y].pb({x,z});
+    scann; mn; scanaa;
+    fori forjn vxyz.pb({aa[i][j],{i,j}});
+    sortv(vxyz);
+    fori p[i]=i;
+    foi0(n*n){
+        x=vxyz[i].Y.X;
+        y=vxyz[i].Y.Y;
+        if(find(x)==find(y))
+            continue;
+        uni(x,y);
+        sum+=vxyz[i].X;
     };
-    auto v = dijk(vpa,start,n);
-    for(auto i:v){
-        if(i!=INF){
-            cnt++;
-            maxi=max(maxi,i);
-        }
-    }
-    pr2l(cnt, maxi);
-    fori vpa[i].clear();
+    prsum;
 }
 
 int main(void) {
     FASTIO;
-    scant;
-    wt {
-        solve();
-    }
+    solve();
 }
