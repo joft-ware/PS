@@ -136,7 +136,7 @@
 #define test pr1l("TEST!");
 #define wt while(ttttt--)
 #define w1 while(1)
-#define INF (ll) 1e10
+#define INF (ll) 1e18
 #define br break
 #define braek break
 #define bk break
@@ -240,6 +240,7 @@ deque<xy> dqxy;
 vll v, v1, v2, v3, print, rv[M];
 vector<vll> vv;
 vector<xy> vxy, vxya[M], vxy2;
+vector<xy> vpa[M];
 vector<pair<ll,xy>> vxyz;
 xy xy1, xya[M];
 vector<vll> scc;
@@ -1219,22 +1220,30 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 }
 
 void solve(){
+    cnt=0;
+    maxi=0;
     scannm;
-    scana;
-    vv.resize(n+1);
-    forj sc1(b[j]);
-    fori{
-        forj{
-            ll w=a[i];
-            ll e=b[j];
-            if((e*2>=w&&e*4<=w*3)||(e>=w&&e*4<=w*5)) vv[i].pb(j);
-        }
+    scanx;
+    start=x;
+    forj{
+        scanxyz;
+        vpa[y].pb({x,z});
     };
-    bi_matching();
-    prcnt;
+    auto v = dijk(vpa,start,n);
+    for(auto i:v){
+        if(i!=INF){
+            cnt++;
+            maxi=max(maxi,i);
+        }
+    }
+    pr2l(cnt, maxi);
+    fori vpa[i].clear();
 }
 
 int main(void) {
     FASTIO;
-    solve();
+    scant;
+    wt {
+        solve();
+    }
 }
