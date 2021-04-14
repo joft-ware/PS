@@ -1210,6 +1210,23 @@ void bi_matching(){
     }
 }
 
+ll mst(ll n, ll m){ // vxyz : {cost, {from, to}}
+    sortv(vxyz);
+    fori p[i]=i;
+    foi0(m){
+        x=vxyz[i].Y.X;
+        y=vxyz[i].Y.Y;
+        z=vxyz[i].X;
+        if(find(x)==find(y))
+            continue;
+        uni(x,y);
+        sum+=z;
+        if(maxi<z)
+            maxi=z;
+    };
+    return sum;
+}
+
 void f(ll left, ll right, vll &v, ll sum, ll zero){
     if(left>right){
         if(zero==0) return;
@@ -1221,19 +1238,12 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 }
 
 void solve(){
-    scann; mn; scanaa;
-    fori forjn vxyz.pb({aa[i][j],{i,j}});
-    sortv(vxyz);
-    fori p[i]=i;
-    foi0(n*n){
-        x=vxyz[i].Y.X;
-        y=vxyz[i].Y.Y;
-        if(find(x)==find(y))
-            continue;
-        uni(x,y);
-        sum+=vxyz[i].X;
+    scannm;
+    forj{
+        scanxyz;
+        vxyz.pb({z,{x,y}});
     };
-    prsum;
+    pr(mst(n,m)-maxi);
 }
 
 int main(void) {
