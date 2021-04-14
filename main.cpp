@@ -282,6 +282,10 @@ ll zegob(ll x, ll y)
     return k;
 }
 
+ll zegob2(ll x){
+    return x*x;
+}
+
 ll binary_search(vll v, ll x, ll left, ll right) {
     ll mid = (left + right) / 2;
     if (v[mid] == x)
@@ -1211,11 +1215,10 @@ void bi_matching(){
     }
 }
 
-ll mst(){ // vxyz : {cost, {from, to}}
+ld mst(){ // vxyz : {cost, {from, to}}
     sortv(vxyz);
     ll m = vxyz.size();
-    ll sum=0;
-    fori p[i]=i, h[i]=0, un[i]=0;
+    ld sum=0;
     foi0(m){
         x=vxyz[i].Y.X;
         y=vxyz[i].Y.Y;
@@ -1223,9 +1226,7 @@ ll mst(){ // vxyz : {cost, {from, to}}
         if(find(x)==find(y))
             continue;
         uni(x,y);
-        sum+=z;
-        if(maxi<z)
-            maxi=z;
+        sum+=sqrt(z);
     };
     return sum;
 }
@@ -1242,25 +1243,25 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 
 void solve(){
     scannm;
-    cnt=0;
-    if(n==0) {
-        re = 1;
-        return;
-    }
+    vector<pair<ld,xy>> v;
+    fori sc2(a[i],b[i]);
+    fori p[i]=i;
     forj{
-        scanxyz;
-        x++, y++;
-        cnt+=z;
-        vxyz.pb({z,{x,y}});
+        scanxy;
+        uni(x,y);
     };
-    pr1l(cnt-mst());
+    fori{
+        forjn{
+            if(i==j) continue;
+            ll w = zegob2(a[i]-a[j])+zegob2(b[j]-b[i]);
+            vxyz.pb({w,{i,j}});
+        }
+    };
+    prld(2,mst());
     vxyz.clear();
 }
 
 int main(void) {
     FASTIO;
-    w1 {
-        solve();
-        if(re) break;
-    }
+    solve();
 }
