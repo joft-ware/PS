@@ -1243,22 +1243,57 @@ void f(ll left, ll right, vll &v, ll sum, ll zero){
 
 void solve(){
     scannm;
-    vector<pair<ld,xy>> v;
-    fori sc2(a[i],b[i]);
-    fori p[i]=i;
+    fori forjn aa[i][j]=INF;
     forj{
         scanxy;
-        uni(x,y);
+        aa[x][y]=aa[y][x]=1;
     };
-    fori{
-        forjn{
-            if(i==j) continue;
-            ll w = zegob2(a[i]-a[j])+zegob2(b[j]-b[i]);
-            vxyz.pb({w,{i,j}});
+    forkn{
+        fori{
+            forjn{
+                if(aa[i][j]>aa[i][k]+aa[k][j])
+                    aa[i][j]=aa[i][k]+aa[k][j];
+            }
         }
     };
-    prld(2,mst());
-    vxyz.clear();
+    fori{
+        if(!visit[i]){
+            cnt++;
+            while(pq.size()) {pq.pop();}
+            pq.push(i);
+            mini=INF;
+            v.clear();
+            while(pq.size()){
+                x=pq.top();
+                pq.pop();
+                if(visit[x]) continue;
+                visit[x]=true;
+                v.pb(x);
+                forjn{
+                    if(visit[j])
+                        continue;
+                    if(aa[x][j]!=INF)
+                        pq.push(j);
+                }
+            }
+            mini=INF;
+            for(auto j:v){
+                maxi=-1;
+                for(auto k:v){
+                    if(j==k) continue;
+                    maxi=max(maxi, aa[j][k]);
+                }
+                if(mini>maxi){
+                    mini=maxi;
+                    num=j;
+                }
+            }
+            d[cnt]=num;
+        }
+    };
+    pr1l(cnt);
+    sort(d+1,d+cnt+1);
+    foi(cnt) pr1l(d[i]);
 }
 
 int main(void) {
