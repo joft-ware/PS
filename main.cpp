@@ -18,6 +18,7 @@
 
 #define M 100002
 #define MM 1002
+#define MMM 102
 #define N 100002
 
 #define ll long long
@@ -221,7 +222,7 @@ ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], b1[M], a1[N], a2[N], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[M], alis[M], dd[M][5], p[N], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
-ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N];
+ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[MMM][MMM][MMM];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
@@ -1231,69 +1232,66 @@ ld mst(){ // vxyz : {cost, {from, to}}
     return sum;
 }
 
-void f(ll left, ll right, vll &v, ll sum, ll zero){
-    if(left>right){
-        if(zero==0) return;
-        v.pb(sum);
+void ff(ll x, ll y){
+    if(bb[x][y]==0){
         return;
     }
-    f(left+1,right,v,sum, zero);
-    f(left+1,right,v,sum+a[left], zero+1);
+    ff(x,bb[x][y]);
+    cnt++;
+    ff(bb[x][y],y);
+}
+
+void f(ll x, ll y){
+    if(bb[x][y]==0){
+        return;
+    }
+    f(x,bb[x][y]);
+    pr1(bb[x][y]);
+    f(bb[x][y],y);
 }
 
 void solve(){
     scannm;
     fori forjn aa[i][j]=INF;
+    fori forjn aaa[i][j][i]=j;
+    fori forjn aaa[i][j][j]=j;
     forj{
-        scanxy;
-        aa[x][y]=aa[y][x]=1;
+        scanxyz;
+        if(aa[x][y]>z) aa[x][y]=z;
     };
     forkn{
         fori{
             forjn{
-                if(aa[i][j]>aa[i][k]+aa[k][j])
+                if(i==j) continue;
+                if(aa[i][j]>=aa[i][k]+aa[k][j]){
+                    bb[i][j]=k;
                     aa[i][j]=aa[i][k]+aa[k][j];
+                }
             }
         }
     };
+    fori {
+        forjn {
+            if(aa[i][j]==INF) aa[i][j]=0;
+            pr1(aa[i][j]);
+        };
+        prl;
+    }
     fori{
-        if(!visit[i]){
-            cnt++;
-            while(pq.size()) {pq.pop();}
-            pq.push(i);
-            mini=INF;
-            v.clear();
-            while(pq.size()){
-                x=pq.top();
-                pq.pop();
-                if(visit[x]) continue;
-                visit[x]=true;
-                v.pb(x);
-                forjn{
-                    if(visit[j])
-                        continue;
-                    if(aa[x][j]!=INF)
-                        pq.push(j);
-                }
+        forjn{
+            if(aa[i][j]==0){
+                pr1l(0);
+                continue;
             }
-            mini=INF;
-            for(auto j:v){
-                maxi=-1;
-                for(auto k:v){
-                    if(j==k) continue;
-                    maxi=max(maxi, aa[j][k]);
-                }
-                if(mini>maxi){
-                    mini=maxi;
-                    num=j;
-                }
-            }
-            d[cnt]=num;
+            cnt=0;
+            ff(i,j);
+            pr1(cnt+2);
+            pr1(i);
+            f(i,j);
+            pr1(j);
+            prl;
         }
     };
-    pr1l(cnt);
-    sort(d+1,d+cnt+1);
-    foi(cnt) pr1l(d[i]);
 }
 
 int main(void) {
