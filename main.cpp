@@ -1245,8 +1245,10 @@ void f(ll x, ll y){
     if(bb[x][y]==0){
         return;
     }
+    if(cnt) return;
     f(x,bb[x][y]);
-    pr1(bb[x][y]);
+    cnt++;
+    if(cnt==1) pr1(bb[x][y]);
     f(bb[x][y],y);
 }
 
@@ -1258,6 +1260,7 @@ void solve(){
     forj{
         scanxyz;
         if(aa[x][y]>z) aa[x][y]=z;
+        if(aa[y][x]>z) aa[y][x]=z;
     };
     forkn{
         fori{
@@ -1270,27 +1273,17 @@ void solve(){
             }
         }
     };
-    fori {
-        forjn {
-            if(aa[i][j]==INF) aa[i][j]=0;
-            pr1(aa[i][j]);
-        };
-        prl;
-    }
     fori{
         forjn{
-            if(aa[i][j]==0){
-                pr1l(0);
+            if(aa[i][j]==0||i==j){
+                pr1("-");
                 continue;
             }
             cnt=0;
-            ff(i,j);
-            pr1(cnt+2);
-            pr1(i);
             f(i,j);
-            pr1(j);
-            prl;
+            if(cnt==0) pr1(j);
         }
+        prl;
     };
 }
 
