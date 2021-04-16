@@ -19,7 +19,7 @@
 #define M 100002
 #define MM 1002
 #define MMM 102
-#define N 100002
+#define N 1000002
 
 #define ll long long
 #define ull unsigned ll
@@ -1253,41 +1253,27 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    scannm;
-    fori forjn aa[i][j]=INF;
-    fori forjn aaa[i][j][i]=j;
-    fori forjn aaa[i][j][j]=j;
-    forj{
-        scanxyz;
-        if(aa[x][y]>z) aa[x][y]=z;
-        if(aa[y][x]>z) aa[y][x]=z;
+    cnt++;
+    scann;
+    scana;
+    sum=0;
+    fori pq.push(a[i]);
+    foi(n-1){
+        x=pq.top();
+        pq.pop();
+        y=pq.top();
+        pq.pop();
+        sum+=(x+y);
+        pq.push(x+y);
     };
-    forkn{
-        fori{
-            forjn{
-                if(i==j) continue;
-                if(aa[i][j]>=aa[i][k]+aa[k][j]){
-                    bb[i][j]=k;
-                    aa[i][j]=aa[i][k]+aa[k][j];
-                }
-            }
-        }
-    };
-    fori{
-        forjn{
-            if(aa[i][j]==0||i==j){
-                pr1("-");
-                continue;
-            }
-            cnt=0;
-            f(i,j);
-            if(cnt==0) pr1(j);
-        }
-        prl;
-    };
+    if(cnt!=1) prl;
+    pr(sum);
+    while(pq.size()) pq.pop();
 }
 
 int main(void) {
     FASTIO;
-    solve();
+    scant;wt {
+        solve();
+    }
 }
