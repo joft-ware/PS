@@ -1258,9 +1258,22 @@ void f(ll x, ll y){
 }
 
 void solve() {
-    sc(ld1);
-    ld2=sqrt(ld1/PI);
-    prld(10,ld2*PI*2.0);
+    w1{
+        scannm;
+        if(n+m==0) break;
+        n-=m;
+        if(n<2){
+            pr2l(0,0);
+        }
+        else{
+            if(n%2){
+                n-=3;
+                pr2l(n/2,1);
+            }
+            else
+                pr2l(n/2,0);
+        }
+    }
 }
 
 int main(void) {
