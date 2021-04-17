@@ -60,7 +60,8 @@
 
 #define scann sc(n)
 #define scanm sc(m);
-#define scant sc(ttttt);
+#define scant sc(t);
+#define scantt sc(ttttt);
 #define scanx sc(x);
 #define scany sc(y);
 #define scank sc(k);
@@ -1259,20 +1260,14 @@ void f(ll x, ll y){
 void solve(){
     scanxy;
     scannm;
-    if(n*2>=m){
-        sum+=m*min(x,y);
-        x=(x+y)-2*min(x,y);
-        if(x) {
-            if(x%2) {
-                sum+=n;
-                x-=1;
-            }
-            sum += x*min(n,m);
-        }
-        prsum;
-        return;
-    }
-    pr((x+y)*n);
+    scant;
+    w1{
+        if(x%10==t||x/10==t||y%10==t||y/10==t) cnt++;
+        if(x==n&&y==m) break;
+        y=(y+1)%60;
+        if(y==0) x++;
+    };
+    prcnt;
 }
 
 int main(void) {
