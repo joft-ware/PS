@@ -1253,34 +1253,20 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    scann;
-    mn; scanaa;
-    fori{
-        forjn{
-            if(aa[i][j]==5)
-            {
-                xx=i;
-                yy=j;
-            }
-            else if(aa[i][j]==2)
-            {
-                x=i;
-                y=j;
-            }
+    w1{
+        sc3(a[1],a[2],a[3]);
+        sort(a+1,a+4);
+        if(a[3]>=a[1]+a[2]){
+            pr4l(x,y,z,r);
+            break;
         }
-    };
-    fori {
-        forjn {
-            if(aa[i][j]==1){
-                if(min(xx,x)<=i&&i<=max(xx,x)&&min(yy,y)<=j&&j<=max(yy,y)){
-                    cnt++;
-                }
-            }
-        }
+        x++;
+        w=a[1]*a[1]+a[2]*a[2];
+        e=a[3]*a[3];
+        if(w==e) y++;
+        if(w<e) r++;
+        if(w>e) z++;
     }
-    if(cnt>2&&(xx-x)*(xx-x)+(yy-y)*(yy-y)>=25)
-        pr(1);
-    else pr0;
 }
 
 int main(void) {
