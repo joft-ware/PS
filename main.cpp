@@ -1260,18 +1260,16 @@ void f(ll x, ll y){
 void solve(){
     scantt;
     wt{
-        n=3;
-        sc3(ld1,ld2,ld3);
-        sc3(ld4,ld5,ld6);
-
-        ld7=ld1*ld5+ld2*ld6+ld3*ld4;
-        ld8=ld1*ld6+ld2*ld4+ld3*ld5;
-
-        if(abs(ld7-ld8)<0.000001) pr1l("=");
-        else if(ld7>ld8) pr1l("ADAM");
-        else pr1l("GOSIA");
-
-    };
+        cnt=0;
+        scannm;
+        w1{
+            if(n>=m)
+                break;
+            ++cnt;
+            n*=2;
+        };
+        pr1l(cnt);
+    }
 }
 
 int main(void) {
