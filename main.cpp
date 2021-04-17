@@ -1257,19 +1257,35 @@ void f(ll x, ll y){
     f(bb[x][y],y);
 }
 
-void solve(){
-    scantt;
-    wt{
-        cnt=0;
-        scannm;
-        w1{
-            if(n>=m)
-                break;
-            ++cnt;
-            n*=2;
-        };
-        pr1l(cnt);
+void solve() {
+    sc4(a[1], b[1], a[2], b[2]);
+    sc4(a[3], b[3], a[4], b[4]);
+    if (a[1] <= a[3] && a[4] <= a[2]) {
+        x = a[4] - a[3];
+    } else if (a[3] <= a[1] && a[2] <= a[4]) {
+        x = a[2] - a[1];
+    } else if (a[1] <= a[3] && a[3] <= a[2]) {
+        x = a[2] - a[3];
+    } else if (a[1] <= a[4] && a[4] <= a[2]) {
+        x = a[4] - a[1];
     }
+    else x=0;
+
+    swap(b[1],b[2]);
+    swap(b[3],b[4]);
+    n=4;fori a[i]=b[i];
+    if (a[1] <= a[3] && a[4] <= a[2]) {
+        y = a[4] - a[3];
+    } else if (a[3] <= a[1] && a[2] <= a[4]) {
+        y = a[2] - a[1];
+    } else if (a[1] <= a[3] && a[3] <= a[2]) {
+        y = a[2] - a[3];
+    } else if (a[1] <= a[4] && a[4] <= a[2]) {
+        y = a[4] - a[1];
+    }
+    else y=0;
+    x=abs(x*y);
+    pr(x);
 }
 
 int main(void) {
