@@ -1254,15 +1254,13 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    scansn;
-    fori0{
-        forjn0{
-            if(i==j) continue;
-            if(s[i]==s[j])
-                no=1;
-        }
+    sc(ld1);
+    scann;
+    fori{
+        sc2(ld2,ld3);
+        ld4+=(ld2*ld3);
     };
-    pr1(!no);
+    prld(10,ld4*ld1);
 }
 
 int main(void) {
