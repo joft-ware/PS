@@ -1258,21 +1258,20 @@ void f(ll x, ll y){
 }
 
 void solve() {
+    set<string> st;
     w1{
-        scannm;
-        if(n+m==0) break;
-        n-=m;
-        if(n<2){
-            pr2l(0,0);
+        scann;
+        if(n==0)
+            break;
+        scanline(s);
+        fori{
+            scanline(s);
+            st.insert(s);
         }
-        else{
-            if(n%2){
-                n-=3;
-                pr2l(n/2,1);
-            }
-            else
-                pr2l(n/2,0);
-        }
+        cnt=0;
+        for(auto i:st) cnt++;
+        cout<<"Week " << ++w << " "<<cnt <<endl;
+        st.clear();
     }
 }
 
