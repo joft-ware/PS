@@ -1257,18 +1257,13 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    n=3;
-    scana;sorta;
+    scann;
     fori{
-        if(a[i]%2) cnt++;
+        scanxy;
+        z=y/x;
+        mini=min(z,mini);
     };
-    if(cnt){
-        k=1;
-        fori if(a[i]%2) k*=a[i];
-    }
-    else
-        k=a[1]*a[2]*a[3];
-    pr(k);
+    prmin;
 }
 
 int main(void) {
