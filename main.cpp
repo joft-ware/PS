@@ -1258,19 +1258,18 @@ void f(ll x, ll y){
 }
 
 void solve() {
-    scanxy;
     scann;
     fori{
-        if(i%x==0&&i%y==0){
-            pr("FizzBuzz");
+        scans;
+        if(s=="mumble"){
+            continue;
         }
-        else if(i%x==0)
-            pr("Fizz");
-        else if(i%y==0)
-            pr("Buzz");
-        else pr(i);
-        prl;
+        x=stod(s);
+        if(x!=i)
+            no=1;
     };
+    if(no) pr("something is fishy");
+    else pr("makes sense");
 }
 
 int main(void) {
