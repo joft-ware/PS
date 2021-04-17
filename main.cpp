@@ -1260,16 +1260,11 @@ void f(ll x, ll y){
 void solve() {
     scann;
     fori{
-        scans;
-        if(s=="mumble"){
-            continue;
-        }
-        x=stod(s);
-        if(x!=i)
-            no=1;
+        x=n-i;
+        if(i>=x&&i<=5)
+            cnt++;
     };
-    if(no) pr("something is fishy");
-    else pr("makes sense");
+    prcnt;
 }
 
 int main(void) {
