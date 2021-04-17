@@ -1257,9 +1257,11 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    n=6;
+    scann;
     scana;suma;
-    pr(sum*5);
+    fori cnt+=(sum-a[i])*a[i];
+    cnt/=2;
+    prcnt;
 }
 
 int main(void) {
