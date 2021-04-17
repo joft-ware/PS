@@ -1258,19 +1258,19 @@ void f(ll x, ll y){
 }
 
 void solve() {
-    w1 {
-        scann;
-        sum=0;
-        if(!n) break;
-        fori{
-            scanx;
-            foj(x-sum){
-                pr1(i);
-            }
-            sum=x;
-        };
+    scanxy;
+    scann;
+    fori{
+        if(i%x==0&&i%y==0){
+            pr("FizzBuzz");
+        }
+        else if(i%x==0)
+            pr("Fizz");
+        else if(i%y==0)
+            pr("Buzz");
+        else pr(i);
         prl;
-    }
+    };
 }
 
 int main(void) {
