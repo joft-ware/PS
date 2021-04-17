@@ -224,7 +224,7 @@ ll dddy[9] = { 0,-1,0,1,-2,2,-1,0,1 };
 ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
-ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
+ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, ld8, lda[M], ldb[M];
 ll a[N], b1[M], a1[N], a2[N], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[M], alis[M], dd[M][5], p[N], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[MMM][MMM][MMM];
@@ -1258,16 +1258,20 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    scanxy;
-    scannm;
-    scant;
-    w1{
-        if(x%10==t||x/10==t||y%10==t||y/10==t) cnt++;
-        if(x==n&&y==m) break;
-        y=(y+1)%60;
-        if(y==0) x++;
+    scantt;
+    wt{
+        n=3;
+        sc3(ld1,ld2,ld3);
+        sc3(ld4,ld5,ld6);
+
+        ld7=ld1*ld5+ld2*ld6+ld3*ld4;
+        ld8=ld1*ld6+ld2*ld4+ld3*ld5;
+
+        if(abs(ld7-ld8)<0.000001) pr1l("=");
+        else if(ld7>ld8) pr1l("ADAM");
+        else pr1l("GOSIA");
+
     };
-    prcnt;
 }
 
 int main(void) {
