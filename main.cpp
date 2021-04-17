@@ -1258,20 +1258,18 @@ void f(ll x, ll y){
 }
 
 void solve() {
-    set<string> st;
-    w1{
+    w1 {
         scann;
-        if(n==0)
-            break;
-        scanline(s);
+        sum=0;
+        if(!n) break;
         fori{
-            scanline(s);
-            st.insert(s);
-        }
-        cnt=0;
-        for(auto i:st) cnt++;
-        cout<<"Week " << ++w << " "<<cnt <<endl;
-        st.clear();
+            scanx;
+            foj(x-sum){
+                pr1(i);
+            }
+            sum=x;
+        };
+        prl;
     }
 }
 
