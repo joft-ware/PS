@@ -1257,11 +1257,22 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    scann;
-    scana;suma;
-    fori cnt+=(sum-a[i])*a[i];
-    cnt/=2;
-    prcnt;
+    scanxy;
+    scannm;
+    if(n*2>=m){
+        sum+=m*min(x,y);
+        x=(x+y)-2*min(x,y);
+        if(x) {
+            if(x%2) {
+                sum+=n;
+                x-=1;
+            }
+            sum += x*min(n,m);
+        }
+        prsum;
+        return;
+    }
+    pr((x+y)*n);
 }
 
 int main(void) {
