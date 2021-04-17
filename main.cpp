@@ -71,6 +71,7 @@
 #define scanxyz sc3(x,y,z);
 #define scanxyzr sc4(x,y,z,r);
 #define scans sc(s);slen=s.size();
+#define scansn sc(s);n=s.size();
 #define scans1 cin >> s1; len1 = s1.size();
 #define scans2 cin >> s1; len1 = s1.size();
 #define scana fori sc(a[i]);
@@ -1253,20 +1254,15 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    w1{
-        sc3(a[1],a[2],a[3]);
-        sort(a+1,a+4);
-        if(a[3]>=a[1]+a[2]){
-            pr4l(x,y,z,r);
-            break;
+    scansn;
+    fori0{
+        forjn0{
+            if(i==j) continue;
+            if(s[i]==s[j])
+                no=1;
         }
-        x++;
-        w=a[1]*a[1]+a[2]*a[2];
-        e=a[3]*a[3];
-        if(w==e) y++;
-        if(w<e) r++;
-        if(w>e) z++;
-    }
+    };
+    pr1(!no);
 }
 
 int main(void) {
