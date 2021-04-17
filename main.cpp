@@ -1258,17 +1258,21 @@ void f(ll x, ll y){
 }
 
 void solve() {
-    scantt;
-    wt{
-        scann;
-        no=0;
-        scana;
-        fo(i,3,n){
-            if(a[i]!=a[i-1]+a[i-2]) no=1;
+    scannm;
+    scana;
+    scanbm;
+    j=1;
+    forj{
+        w1{
+            if(b[j]<=a[i]) {
+                a[i] -= b[j];
+                break;
+            }
+            i++;
         }
-        if(no) prNO;
-        else prYES;
     };
+    fori sum+=a[i];
+    prsum;
 }
 
 int main(void) {
