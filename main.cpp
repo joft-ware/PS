@@ -50,7 +50,7 @@
 #define fori0 for(ll i=0;i<n;i++)
 #define forj for(ll j=1;j<=m;j++)
 #define forjn for(ll j=1;j<=n;j++)
-#define forji for(ll j=1;j<i;j++)
+#define forji for(ll j=1;j<=i;j++)
 #define forjn0 for(ll j=0;j<n;j++)
 #define forj0 for(ll j=0;j<m;j++)
 #define fork for(ll k=1;k<=l;k++)
@@ -94,8 +94,8 @@
 #define prld(a,b) {cout << fixed; cout.precision(a); pr1(b);}
 #define printld(a) prld(a)
 #define printsum pr1(sum);
-#define printcase pr("Case "); pr(++casenum);pr(": ");
-#define printcases pr("Case #"); pr(++casenum);pr(": ");
+#define printcase pr("Case "); pr(++casenum);pr(":");
+#define printcases pr("Case #"); pr(++casenum);pr(":");
 #define prints pr(s);
 #define printc pr(c);
 #define printmax pr(maxi);
@@ -1258,20 +1258,17 @@ void f(ll x, ll y){
 }
 
 void solve() {
-    w1{
-        scann;if(!n) break;
-        scana;
-        sum=0, cnt=0;
-        suma;
-        w=sum/n;
-        fori cnt+=abs(w-a[i]);
-        pr("Set #");
-        pr1l(++e);
-        pr("The minimum number of moves is ");
-        pr(cnt/2);
-        pr1l('.');
-        prl;
-    }
+    num=0;
+    scann;
+    scana;
+    scanb;
+    fori{
+        sum+=a[i];
+        cnt+=b[i];
+        if(sum==cnt)
+            num=i;
+    };
+    prnum;
 }
 
 int main(void) {
