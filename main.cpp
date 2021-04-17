@@ -1257,19 +1257,18 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    scanxyzr;
-    n=100;
-    foi0(x){
-        foj0(x){
-            w=(i*y+j)%x;
-            if(w==z){
-                if(r==(i*w+j)%x){
-                    pr2l(i,j);
-                    return;
-                }
-            }
-        }
+    n=3;
+    scana;sorta;
+    fori{
+        if(a[i]%2) cnt++;
     };
+    if(cnt){
+        k=1;
+        fori if(a[i]%2) k*=a[i];
+    }
+    else
+        k=a[1]*a[2]*a[3];
+    pr(k);
 }
 
 int main(void) {
