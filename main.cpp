@@ -1258,16 +1258,20 @@ void f(ll x, ll y){
 }
 
 void solve() {
-    scannm;
-    cnt=3;
     w1{
-        t=n-m;
-        if(t>m) break;
-        cnt++;
-        n=m;
-        m=t;
-    };
-    prcnt;
+        scann;
+        if(!n) break;
+        sum=0;
+        fori{
+            if(n%i==0) sum+=i;
+        };
+        sum-=n;
+        pr1(n);
+        if(sum==n) pr("PERFECT");
+        else if(sum<n) pr("DEFICIENT");
+        else pr("ABUNDANT");
+        prl;
+    }
 }
 
 int main(void) {
