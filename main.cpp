@@ -1258,20 +1258,17 @@ void f(ll x, ll y){
 }
 
 void solve() {
-    w1{
+    scantt;
+    wt{
         scann;
-        if(!n) break;
-        sum=0;
-        fori{
-            if(n%i==0) sum+=i;
-        };
-        sum-=n;
-        pr1(n);
-        if(sum==n) pr("PERFECT");
-        else if(sum<n) pr("DEFICIENT");
-        else pr("ABUNDANT");
-        prl;
-    }
+        no=0;
+        scana;
+        fo(i,3,n){
+            if(a[i]!=a[i-1]+a[i-2]) no=1;
+        }
+        if(no) prNO;
+        else prYES;
+    };
 }
 
 int main(void) {
