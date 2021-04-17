@@ -1258,11 +1258,14 @@ void f(ll x, ll y){
 }
 
 void solve() {
-    scann;
-    fori{
-        x=n-i;
-        if(i>=x&&i<=5)
-            cnt++;
+    scannm;
+    cnt=3;
+    w1{
+        t=n-m;
+        if(t>m) break;
+        cnt++;
+        n=m;
+        m=t;
     };
     prcnt;
 }
