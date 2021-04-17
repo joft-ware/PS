@@ -1253,38 +1253,34 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    scannm;
-    fori forjn aa[i][j]=INF;
-    fori forjn aaa[i][j][i]=j;
-    fori forjn aaa[i][j][j]=j;
-    forj{
-        scanxyz;
-        if(aa[x][y]>z) aa[x][y]=z;
-        if(aa[y][x]>z) aa[y][x]=z;
+    scann;
+    mn; scanaa;
+    fori{
+        forjn{
+            if(aa[i][j]==5)
+            {
+                xx=i;
+                yy=j;
+            }
+            else if(aa[i][j]==2)
+            {
+                x=i;
+                y=j;
+            }
+        }
     };
-    forkn{
-        fori{
-            forjn{
-                if(i==j) continue;
-                if(aa[i][j]>=aa[i][k]+aa[k][j]){
-                    bb[i][j]=k;
-                    aa[i][j]=aa[i][k]+aa[k][j];
+    fori {
+        forjn {
+            if(aa[i][j]==1){
+                if(min(xx,x)<=i&&i<=max(xx,x)&&min(yy,y)<=j&&j<=max(yy,y)){
+                    cnt++;
                 }
             }
         }
-    };
-    fori{
-        forjn{
-            if(aa[i][j]==0||i==j){
-                pr1("-");
-                continue;
-            }
-            cnt=0;
-            f(i,j);
-            if(cnt==0) pr1(j);
-        }
-        prl;
-    };
+    }
+    if(cnt>2&&(xx-x)*(xx-x)+(yy-y)*(yy-y)>=25)
+        pr(1);
+    else pr0;
 }
 
 int main(void) {
