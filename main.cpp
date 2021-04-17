@@ -1258,21 +1258,20 @@ void f(ll x, ll y){
 }
 
 void solve() {
-    scannm;
-    scana;
-    scanbm;
-    j=1;
-    forj{
-        w1{
-            if(b[j]<=a[i]) {
-                a[i] -= b[j];
-                break;
-            }
-            i++;
-        }
-    };
-    fori sum+=a[i];
-    prsum;
+    w1{
+        scann;if(!n) break;
+        scana;
+        sum=0, cnt=0;
+        suma;
+        w=sum/n;
+        fori cnt+=abs(w-a[i]);
+        pr("Set #");
+        pr1l(++e);
+        pr("The minimum number of moves is ");
+        pr(cnt/2);
+        pr1l('.');
+        prl;
+    }
 }
 
 int main(void) {
