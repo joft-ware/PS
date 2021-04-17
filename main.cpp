@@ -1257,13 +1257,9 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    scann;
-    fori{
-        scanxy;
-        z=y/x;
-        mini=min(z,mini);
-    };
-    prmin;
+    n=6;
+    scana;suma;
+    pr(sum*5);
 }
 
 int main(void) {
