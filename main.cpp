@@ -19,7 +19,7 @@
 #define M 100002
 #define MM 1002
 #define MMM 102
-#define N 100002
+#define N 1000002
 
 #define ll long long
 #define ull unsigned ll
@@ -86,6 +86,9 @@
 #define scanline(s) getline(cin,s); slen=s.size();
 #define scanv v.resize(n); fori0 sc(v[i]);
 #define scannv scann; scanv;
+#define maxx(a,n) *max_element(a+1,a+n+1)
+#define minn(a,n) *min_element(a+1,a+n+1)
+
 
 #define prld(a,b) {cout << fixed; cout.precision(a); pr1(b);}
 #define printld(a) prld(a)
@@ -1254,13 +1257,19 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    sc(ld1);
-    scann;
-    fori{
-        sc2(ld2,ld3);
-        ld4+=(ld2*ld3);
+    scanxyzr;
+    n=100;
+    foi0(x){
+        foj0(x){
+            w=(i*y+j)%x;
+            if(w==z){
+                if(r==(i*w+j)%x){
+                    pr2l(i,j);
+                    return;
+                }
+            }
+        }
     };
-    prld(10,ld4*ld1);
 }
 
 int main(void) {
