@@ -19,7 +19,7 @@
 #define M 100002
 #define MM 1002
 #define MMM 102
-#define N 1000002
+#define N 100002
 
 #define ll long long
 #define ull unsigned ll
@@ -1253,23 +1253,23 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    scannm;
-    scana;
-    scanbm;
-    x=1;
-    fori{
-        if(i==1) continue;
-        if(a[i]>a[i-1]) a[i]=a[i-1];
-    };
-    forin1{
-        if(a[i]>=b[x])
-            x++;
-        if(x>m){
-            num=i;
-            break;
-        }
-    };
-    prnum;
+   scann;scana;
+   if(n==1) pr("A");
+   else if(n==2){
+       if(a[1]==a[2]) pr(a[1]);
+       else pr("A");
+   }
+   else{
+       x=a[3]-a[2];
+       y=a[2]-a[1];
+       if(y!=0) w = x/y;
+       e=a[2]-w*a[1];
+       for(i=3;i<=n;i++){
+           if(a[i]!=a[i-1]*w+e) no=1;
+       }
+       if(no) pr("B");
+       else pr(a[n]*w+e);
+   }
 }
 
 int main(void) {
