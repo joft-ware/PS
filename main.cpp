@@ -560,6 +560,7 @@ ll update_sum(ll left, ll right, ll val, ll node, ll start, ll end) {
 
 ll query_sum(ll node, ll left, ll right, ll start, ll end) {
     update_lazy_sum(node, left, right);
+    if(start>end) return 0;
     if (right < start || end < left)
         return 0; // 겹치지 않는 경우(영향이 없는 값을 반환)
     if (start <= left && end >= right) // 범위 내부에 속함
@@ -1253,23 +1254,30 @@ void f(ll x, ll y){
 }
 
 void solve(){
-   scann;scana;
-   if(n==1) pr("A");
-   else if(n==2){
-       if(a[1]==a[2]) pr(a[1]);
-       else pr("A");
-   }
-   else{
-       x=a[3]-a[2];
-       y=a[2]-a[1];
-       if(y!=0) w = x/y;
-       e=a[2]-w*a[1];
-       for(i=3;i<=n;i++){
-           if(a[i]!=a[i-1]*w+e) no=1;
-       }
-       if(no) pr("B");
-       else pr(a[n]*w+e);
-   }
+   scannm;
+   fori a[i]=1;
+   maketree_sum(1,n,1);
+   last=1;
+   update_sum(1,n,-1,1,m,m);
+   last=m;
+   pr('<');
+   pr(m);
+   visit[last]=1;
+   fori{
+       if(i==1) continue;
+       x=n-i+1;
+       y=m%x;
+       if(y==0) y=x;
+       r=query_sum(1,1,n,last,n);
+       l=query_sum(1,1,n,1,last);
+       if(y<=r) last=find_sum(1,n,1,y+l);
+       else last=find_sum(1,n,1,y-r);
+       pr(", ");
+       pr(last);
+       update_sum(1,n,-1,1,last,last);
+       visit[last]=1;
+   };
+    pr('>');
 }
 
 int main(void) {
