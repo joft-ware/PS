@@ -1253,27 +1253,26 @@ void f(ll x, ll y){
 }
 
 void solve(){
-    cnt++;
-    scann;
+    scannm;
     scana;
-    sum=0;
-    fori pq.push(a[i]);
-    foi(n-1){
-        x=pq.top();
-        pq.pop();
-        y=pq.top();
-        pq.pop();
-        sum+=(x+y);
-        pq.push(x+y);
+    scanbm;
+    x=1;
+    fori{
+        if(i==1) continue;
+        if(a[i]>a[i-1]) a[i]=a[i-1];
     };
-    if(cnt!=1) prl;
-    pr(sum);
-    while(pq.size()) pq.pop();
+    forin1{
+        if(a[i]>=b[x])
+            x++;
+        if(x>m){
+            num=i;
+            break;
+        }
+    };
+    prnum;
 }
 
 int main(void) {
     FASTIO;
-    scant;wt {
-        solve();
-    }
+    solve();
 }
