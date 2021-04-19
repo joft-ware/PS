@@ -59,26 +59,26 @@
 #define foriw for(ll i=1;;i++)
 
 #define scann sc(n)
-#define scanm sc(m);
-#define scant sc(ttttt);
-#define scanx sc(x);
-#define scany sc(y);
-#define scank sc(k);
-#define scanc sc(c);
-#define scanxy sc2(x,y);
-#define scannm sc2(n,m);
-#define scanmn sc2(m,n);
-#define scanxyz sc3(x,y,z);
-#define scanxyzr sc4(x,y,z,r);
-#define scans sc(s);slen=s.size();
-#define scans1 cin >> s1; len1 = s1.size();
-#define scans2 cin >> s1; len1 = s1.size();
+#define scanm sc(m)
+#define scant sc(ttttt)
+#define scanx sc(x)
+#define scany sc(y)
+#define scank sc(k)
+#define scanc sc(c)
+#define scanxy sc2(x,y)
+#define scannm sc2(n,m)
+#define scanmn sc2(m,n)
+#define scanxyz sc3(x,y,z)
+#define scanxyzr sc4(x,y,z,r)
+#define scans sc(s);slen=s.size()
+#define scans1 cin >> s1; len1 = s1.size()
+#define scans2 cin >> s1; len1 = s1.size()
 #define scana fori sc(a[i]);
 #define scanna scann; scana;
-#define scanb fori sc(b[i]);
-#define scanbm forj sc(b[j]);
-#define scand fori sc(d[i]);
-#define scanaa fori forj sc(aa[i][j]);
+#define scanb fori sc(b[i])
+#define scanbm forj sc(b[j])
+#define scand fori sc(d[i])
+#define scanaa fori forj sc(aa[i][j])
 #define scanaa1 fori{scans;forj0{aa[i][j+1] = s[j] - '0';}s.clear();}
 #define scanbb1 fori{scans;forj0{bb[i][j+1] = s[j] - '0';}s.clear();}
 #define scanbb fori forj sc(bb[i][j]);
@@ -88,14 +88,14 @@
 
 #define prld(a,b) {cout << fixed; cout.precision(a); pr1(b);}
 #define printld(a) prld(a)
-#define printsum pr1(sum);
-#define printcase pr("Case "); pr(++casenum);pr(": ");
-#define printcases pr("Case #"); pr(++casenum);pr(": ");
-#define prints pr(s);
-#define printc pr(c);
-#define printmax pr(maxi);
-#define printmin pr(min);
-#define printmini pr(mini);
+#define printsum pr1(sum)
+#define printcase pr("Case "); pr(++casenum);pr(": ")
+#define printcases pr("Case #"); pr(++casenum);pr(": ")
+#define prints pr(s)
+#define printc pr(c)
+#define printmax pr(maxi)
+#define printmin pr(min)
+#define printmini pr(mini)
 #define printa fori {pr1(a[i]); }prl;
 #define printal fori {pr1(a[i]); prl;}
 #define printa1 fori {pr1(a1[i]); }prl;
@@ -120,12 +120,12 @@
 #define cleana for(ll i=0;i<=n;i++) a[i]=0;
 #define cleanb for(ll i=0;i<=n;i++) b[i]=0;
 #define cleanaa(x) for(ll iii=0;iii<=n+1;iii++) {for(ll jjj=0;jjj<=m+1;jjj++) {aa[iii][jjj]=x;}};
-#define sorta sort(a+1,a+n+1);
-#define sortb sort(b+1,b+n+1);
-#define sortd sort(d+1,d+n+1);
-#define sortv(v) sort(full(v));
-#define vsort(v) sort(v.begin(),v.end());
-#define asort(a) sort(a+1,a+n+1);
+#define sorta sort(a+1,a+n+1)
+#define sortb sort(b+1,b+n+1)
+#define sortd sort(d+1,d+n+1)
+#define sortv(v) sort(full(v))
+#define vsort(v) sort(v.begin(),v.end())
+#define asort(a) sort(a+1,a+n+1)
 #define suma sum=0; fori sum+=a[i];
 #define inf(a) fori a[i]=INF;
 #define reverse(a) fori tempa[i]=a[n+1-i]; fori a[i]=tempa[i];
@@ -1255,29 +1255,24 @@ void f(ll x, ll y){
 
 void solve(){
    scannm;
-   fori a[i]=1;
-   maketree_sum(1,n,1);
-   last=1;
-   update_sum(1,n,-1,1,m,m);
-   last=m;
-   pr('<');
-   pr(m);
-   visit[last]=1;
-   fori{
-       if(i==1) continue;
-       x=n-i+1;
-       y=m%x;
-       if(y==0) y=x;
-       r=query_sum(1,1,n,last,n);
-       l=query_sum(1,1,n,1,last);
-       if(y<=r) last=find_sum(1,n,1,y+l);
-       else last=find_sum(1,n,1,y-r);
-       pr(", ");
-       pr(last);
-       update_sum(1,n,-1,1,last,last);
-       visit[last]=1;
-   };
-    pr('>');
+   scana;
+   suma;
+   l=0;
+   r=sum+1;
+   while(l+1<r){
+       mid=(l+r)/2;
+       sum=0;k=0;
+       fori{
+           sum+=a[i];
+           if(sum>=mid){
+               sum=0;
+               k++;
+           }
+       }
+       if(k<m) r=mid;
+       else l=mid;
+   }
+   pr(l);
 }
 
 int main(void) {
