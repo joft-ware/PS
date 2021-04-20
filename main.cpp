@@ -1233,50 +1233,50 @@ ld mst(){ // vxyz : {cost, {from, to}}
     return sum;
 }
 
-void ff(ll x, ll y){
-    if(bb[x][y]==0){
+void f(ll x, ll lev, ll cnt){
+    if(x) d[lev]=1;
+    else d[lev]=0;
+    if(lev==n){
+        if(cnt!=n/2) return;
+        w=0,e=0;
+        foi(n){
+            if(d[i]){
+                w+=a[i];
+                e+=b[i];
+            }
+        }
+        w-=(xx-w);
+        e-=(yy-e);
+        mini=min(mini,w*w+e*e);
         return;
     }
-    ff(x,bb[x][y]);
-    cnt++;
-    ff(bb[x][y],y);
-}
-
-void f(ll x, ll y){
-    if(bb[x][y]==0){
-        return;
+    if(cnt+(n-lev)==n/2) f(1,lev+1,cnt+1);
+    else if(cnt==n/2) f(0,lev+1,cnt);
+    else{
+        f(1,lev+1,cnt+1);
+        f(0,lev+1,cnt);
     }
-    if(cnt) return;
-    f(x,bb[x][y]);
-    cnt++;
-    if(cnt==1) pr1(bb[x][y]);
-    f(bb[x][y],y);
 }
 
 void solve(){
-   scannm;
-   fori forjn aa[i][j]=INF;
-   forj{
-       scanxyz;
-       if(z) aa[x][y]=aa[y][x]=0;
-       else aa[x][y]=0, aa[y][x]=1;
-   };
-   fori aa[i][i]=0;
-   forkn{
-       fori{
-           forjn{
-               if(aa[i][j]>aa[i][k]+aa[k][j]) aa[i][j]=aa[i][k]+aa[k][j];
-           }
-       }
-   };
-   scanm;
-   forj{
+   scann;
+   mini=INF;
+   xx=0;
+   yy=0;
+   fori{
        scanxy;
-       pr1l(aa[x][y]);
+       a[i]=x;
+       b[i]=y;
+       xx+=x;
+       yy+=y;
    };
+   f(1,1, 1);
+   f(0,1, 0);
+   prld(10,sqrt(mini));prl;
 }
 
 int main(void) {
     FASTIO;
-    solve();
+        scant;wt{solve();};
+    //    solve();
 }
