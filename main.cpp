@@ -1255,22 +1255,25 @@ void f(ll x, ll y){
 
 void solve(){
    scannm;
-   scank;
-   scana;
-   sorta;
-   a[++n]=k;
-   l=0;
-   r=k;
-   while(l+1<r){
-       mid=(l+r)/2;
-       sum=0;t=0;
+   fori forjn aa[i][j]=INF;
+   forj{
+       scanxyz;
+       if(z) aa[x][y]=aa[y][x]=0;
+       else aa[x][y]=0, aa[y][x]=1;
+   };
+   fori aa[i][i]=0;
+   forkn{
        fori{
-           if(a[i]-a[i-1]>mid) t+=(a[i]-a[i-1]-1)/mid;
-       };
-       if(t<=m) r=mid;
-       else l=mid;
-   }
-   pr(r);
+           forjn{
+               if(aa[i][j]>aa[i][k]+aa[k][j]) aa[i][j]=aa[i][k]+aa[k][j];
+           }
+       }
+   };
+   scanm;
+   forj{
+       scanxy;
+       pr1l(aa[x][y]);
+   };
 }
 
 int main(void) {
