@@ -17,10 +17,10 @@
 #include <regex>
 
 #define M 100001
-#define MM 1
+#define MM 1001
 #define MMM 1
 #define N 100001
-#define NN 1
+#define NN 1001
 
 #define ll long long
 #define ull unsigned ll
@@ -1234,62 +1234,45 @@ ld mst(){ // vxyz : {cost, {from, to}}
     return sum;
 }
 
-void f(ll x, ll lev, ll cnt){
-    if(x) d[lev]=1;
-    else d[lev]=0;
-    if(lev==n){
-        if(cnt!=n/2) return;
-        w=0,e=0;
-        foi(n){
-            if(d[i]){
-                w+=a[i];
-                e+=b[i];
-            }
-        }
-        w-=(xx-w);
-        e-=(yy-e);
-        mini=min(mini,w*w+e*e);
+
+void f(ll status, ll cnt, ll sum){
+    if(cnt>=m){
+        mini=min(mini, sum);
         return;
     }
-    if(cnt+(n-lev)==n/2) f(1,lev+1,cnt+1);
-    else if(cnt==n/2) f(0,lev+1,cnt);
-    else{
-        f(1,lev+1,cnt+1);
-        f(0,lev+1,cnt);
+    forjn {
+        if(status&(1 << (j-1))) { // j: 이미 방문
+            fori {
+                if(i==j) continue;
+                if (status & (1 << (i-1))) continue; // i: 다음에 방문할 후보(아직 방문x)
+                ll new_status = status | (1 << (i-1));
+                if (d[new_status] > d[status] + aa[j][i]) {
+                    d[new_status] = d[status] + aa[j][i];
+                    f(new_status, cnt + 1, d[new_status]);
+                }
+            }
+        }
     }
-}
-
-ll dfs(ll k){
-    visit[k]=true;
-    vll v;
-    for(auto i:vxya[k]){
-        ll x=i.X;
-        ll y=i.Y;
-        if(visit[x]) continue;
-        ll z=dfs(x);
-        v.pb(z+y);
-    }
-    if(v.empty()) return 0;
-    v.pb(0);
-    vsort(v);
-    ll l = v.size();
-    maxi=max(maxi,v[l-1]+v[l-2]);
-    return v[l-1];
 }
 
 
 void solve(){
-    scann;
-    if(n==1) {
-        pr0;return;
+    scann;mn;
+    scanaa;
+    scans;
+    scanm;
+    if(m==0){
+        pr(0);return;
     }
-    foi(n-1){
-        scanxyz;
-        vxya[x].pb({y,z});
-        vxya[y].pb({x,y});
+    foi0(s.size()) if(s[i]=='Y') a[i+1]=1, yes=1;
+    if(!yes) {
+        pr(-1); return;
     }
-    dfs(1);
-    prmaxi;
+    foi0(1<<17) d[i]=INF;
+    fori if(a[i]) k=k|(1<<(i-1)), sum++;
+    d[k]=0;
+    f(k,sum,0);
+    prmini;
 }
 
 int main(void) {
