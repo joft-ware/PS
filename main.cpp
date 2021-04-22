@@ -16,10 +16,11 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 100002
-#define MM 1002
-#define MMM 102
-#define N 100002
+#define M 100001
+#define MM 1
+#define MMM 1
+#define N 100001
+#define NN 1
 
 #define ll long long
 #define ull unsigned ll
@@ -221,7 +222,7 @@ ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], b1[M], a1[N], a2[N], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], alis[M], dd[M][5], p[N], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
+ll b[M], alis[M], dd[M][5], p[N], h[M], ax[M], un[M], ay[M], az[M], d[N], dist[M], aa[NN][NN], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[MMM][MMM][MMM];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -1258,25 +1259,44 @@ void f(ll x, ll lev, ll cnt){
     }
 }
 
+ll dfs(ll k){
+    visit[k]=true;
+    vll v;
+    for(auto i:vxya[k]){
+        ll x=i.X;
+        ll y=i.Y;
+        if(visit[x]) continue;
+        ll z=dfs(x);
+        v.pb(z+y);
+    }
+    if(v.empty()) return 0;
+    v.pb(0);
+    vsort(v);
+    ll l = v.size();
+    maxi=max(maxi,v[l-1]+v[l-2]);
+    return v[l-1];
+}
+
+
 void solve(){
-   scann;
-   mini=INF;
-   xx=0;
-   yy=0;
-   fori{
-       scanxy;
-       a[i]=x;
-       b[i]=y;
-       xx+=x;
-       yy+=y;
-   };
-   f(1,1, 1);
-   f(0,1, 0);
-   prld(10,sqrt(mini));prl;
+    scann;
+    if(n==1) {
+        pr0;return;
+    }
+    foi(n-1){
+        scanxyz;
+        vxya[x].pb({y,z});
+        vxya[y].pb({x,y});
+    }
+    dfs(1);
+    prmaxi;
 }
 
 int main(void) {
+
     FASTIO;
-        scant;wt{solve();};
-    //    solve();
+    //    scant;wt{solve();};
+    solve();
+    return 0;
+
 }
