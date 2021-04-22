@@ -51,7 +51,7 @@
 #define fori0 for(ll i=0;i<n;i++)
 #define forj for(ll j=1;j<=m;j++)
 #define forjn for(ll j=1;j<=n;j++)
-#define forji for(ll j=1;j<i;j++)
+#define forji for(ll j=1;j<=i;j++)
 #define forjn0 for(ll j=0;j<n;j++)
 #define forj0 for(ll j=0;j<m;j++)
 #define fork for(ll k=1;k<=l;k++)
@@ -1257,29 +1257,30 @@ void f(ll status, ll cnt, ll sum){
 
 
 void solve(){
-    scann;mn;
-    scanaa;
-    scans;
-    scanm;
-    if(m==0){
-        pr(0);return;
-    }
-    foi0(s.size()) if(s[i]=='Y') a[i+1]=1, yes=1;
-    if(!yes) {
-        pr(-1); return;
-    }
-    foi0(1<<17) d[i]=INF;
-    fori if(a[i]) k=k|(1<<(i-1)), sum++;
-    d[k]=0;
-    f(k,sum,0);
-    prmini;
+    scannm;
+    mod=1e9+9;
+    aa[1][1]=1;
+    aa[2][1]=1;
+    aa[2][2]=1;
+    aa[3][1]=1;
+    aa[3][2]=2;
+    aa[3][3]=1;
+    fori{
+        if(i<4) continue;
+        ll k=min(i,m);
+        foj(k){
+            aa[i][j]=aa[i-1][j-1]+aa[i-2][j-1]+aa[i-3][j-1];
+            aa[i][j]%=mod;
+        }
+    };
+    pr1l(aa[n][m]%mod);
 }
 
 int main(void) {
 
     FASTIO;
-    //    scant;wt{solve();};
-    solve();
+        scant;wt{solve();};
+    // solve();
     return 0;
 
 }
