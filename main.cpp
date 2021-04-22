@@ -1273,7 +1273,12 @@ void solve(){
             aa[i][j]%=mod;
         }
     };
-    pr1l(aa[n][m]%mod);
+    sum=0;
+    forj{
+        sum+=aa[n][j];
+        sum%=mod;
+    };
+    pr1l(sum%mod);
 }
 
 int main(void) {
