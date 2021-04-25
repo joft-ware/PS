@@ -1258,34 +1258,33 @@ void f(ll status, ll cnt, ll sum){
 
 void solve(){
     scannm;
-    mod=1e9+9;
-    aa[1][1]=1;
-    aa[2][1]=1;
-    aa[2][2]=1;
-    aa[3][1]=1;
-    aa[3][2]=2;
-    aa[3][3]=1;
     fori{
-        if(i<4) continue;
-        ll k=min(i,m);
-        foj(k){
-            aa[i][j]=aa[i-1][j-1]+aa[i-2][j-1]+aa[i-3][j-1];
-            aa[i][j]%=mod;
+        scans;
+        foj0(s.size()){
+            if(s[j]>='0'&&s[j]<='9'){
+                x=s[j]-'0';
+                a[x]=j;
+            }
         }
     };
-    sum=0;
-    forj{
-        sum+=aa[n][j];
-        sum%=mod;
-    };
-    pr1l(sum%mod);
+    foi(9){
+        cnt=1;
+        forj check[j]=0;
+        foj(9){
+            if(a[i]<a[j]) {
+                if(check[a[j]]==0) cnt++;
+                check[a[j]]=1;
+            }
+        }
+        pr1l(cnt);
+    }
 }
 
 int main(void) {
 
     FASTIO;
-        scant;wt{solve();};
-    // solve();
+    //    scant;wt{solve();};
+     solve();
     return 0;
 
 }
