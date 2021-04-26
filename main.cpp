@@ -210,7 +210,7 @@
 #define prstr for(ll wq=1;wq<=slen;wq++) pr(str[wq]);
 
 using namespace std;
-ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ttttt, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, tt, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, re, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
+ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ttttt, ja, mo, he, l1, l2, l3, mm, l4, end, zero, finish, tt, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, re, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
 ll dx[5] = { 0,0,1,0,-1 };
 ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
@@ -1257,29 +1257,28 @@ void f(ll status, ll cnt, ll sum){
 
 
 void solve(){
+    scanxy;
+    he=y;
+    e=x;
     scannm;
-    fori{
-        scanxy;
-        vxy.pb({y,x});
+    fori sc2(a[i],b[i]);
+    fori {
+        forjn{
+            x=min(a[i],a[j]);
+            y=min(b[i],b[j]);
+            cnt=0;
+            forkn{
+                if(abs(a[k]-x)<=m&&abs(b[k]-y)<=m&&a[k]>=x&&b[k]>=y) cnt++;
+            };
+            if(maxi<cnt){
+                maxi=cnt;
+                xx=min(x,e-m);
+                yy=min(y+m,he);
+            }
+        }
     };
-    m*=2;
-    sortv(vxy);
-    r=0;
-    d[0]=vxy[0].Y;
-    fo(i,1,n-1) d[i]=d[i-1]+vxy[i].Y;
-    fori0{
-        x=vxy[i].X;
-        y=vxy[i].Y;
-        w1{
-            if(r==n-1) break;
-            if(vxy[r+1].X-x<=m) r++;
-            else break;
-        };
-        if(i!=0) w=d[i-1];
-        sum=d[r]-w;
-        maxi=max(sum,maxi);
-    };
-    prmaxi;
+    pr2l(xx,yy);pr(maxi);
+
 }
 
 int main(void) {
