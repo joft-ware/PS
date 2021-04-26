@@ -210,7 +210,7 @@
 #define prstr for(ll wq=1;wq<=slen;wq++) pr(str[wq]);
 
 using namespace std;
-ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ttttt, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, re, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
+ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ttttt, ja, mo, l1, l2, l3, mm, l4, end, zero, finish, tt, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, re, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
 ll dx[5] = { 0,0,1,0,-1 };
 ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
@@ -1257,27 +1257,29 @@ void f(ll status, ll cnt, ll sum){
 
 
 void solve(){
-    scannm;
-    fori{
-        scans;
-        foj0(s.size()){
-            if(s[j]>='0'&&s[j]<='9'){
-                x=s[j]-'0';
-                a[x]=j;
-            }
-        }
+    scann;
+    scanm;
+    scank;
+    scana;sorta;
+    last=1;
+    forj{
+        scanxy;
+        vxy.pb({x,y});
     };
-    foi(9){
-        cnt=1;
-        forj check[j]=0;
-        foj(9){
-            if(a[i]<a[j]) {
-                if(check[a[j]]==0) cnt++;
-                check[a[j]]=1;
-            }
+    sortv(vxy);
+    foi0(m){
+        x=vxy[i].X;
+        y=vxy[i].Y;
+        mini=INF;
+        while(1){
+            t=abs(a[last]-x)+y;
+            tt=abs(a[last+1]-x)+y;
+            if(t<tt||last==n) break;
+            last++;
         }
-        pr1l(cnt);
+        if(t<=k) cnt++;
     }
+    prcnt;
 }
 
 int main(void) {
