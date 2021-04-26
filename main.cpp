@@ -1258,26 +1258,19 @@ void f(ll status, ll cnt, ll sum){
 
 void solve(){
     scanxy;
-    he=y;
-    e=x;
-    scannm;
+    scanmn;
     fori sc2(a[i],b[i]);
     fori {
         forjn{
             x=min(a[i],a[j]);
             y=min(b[i],b[j]);
             cnt=0;
-            forkn{
+            forkn
                 if(abs(a[k]-x)<=m&&abs(b[k]-y)<=m&&a[k]>=x&&b[k]>=y) cnt++;
-            };
-            if(maxi<cnt){
-                maxi=cnt;
-                xx=min(x,e-m);
-                yy=min(y+m,he);
-            }
+            if(maxi<cnt) maxi=cnt;
         }
     };
-    pr2l(xx,yy);pr(maxi);
+    pr(n-maxi);
 
 }
 
