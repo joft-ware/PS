@@ -1257,29 +1257,29 @@ void f(ll status, ll cnt, ll sum){
 
 
 void solve(){
-    scann;
-    scanm;
-    scank;
-    scana;sorta;
-    last=1;
-    forj{
+    scannm;
+    fori{
         scanxy;
-        vxy.pb({x,y});
+        vxy.pb({y,x});
     };
+    m*=2;
     sortv(vxy);
-    foi0(m){
+    r=0;
+    d[0]=vxy[0].Y;
+    fo(i,1,n-1) d[i]=d[i-1]+vxy[i].Y;
+    fori0{
         x=vxy[i].X;
         y=vxy[i].Y;
-        mini=INF;
-        while(1){
-            t=abs(a[last]-x)+y;
-            tt=abs(a[last+1]-x)+y;
-            if(t<tt||last==n) break;
-            last++;
-        }
-        if(t<=k) cnt++;
-    }
-    prcnt;
+        w1{
+            if(r==n-1) break;
+            if(vxy[r+1].X-x<=m) r++;
+            else break;
+        };
+        if(i!=0) w=d[i-1];
+        sum=d[r]-w;
+        maxi=max(sum,maxi);
+    };
+    prmaxi;
 }
 
 int main(void) {
