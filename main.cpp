@@ -1233,24 +1233,46 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    scannm;
-    fori{
-        scanx;
-        if(i%2) a[++cnt]=x;
-        else b[++w]=x;
+    scann;
+    scans;
+    l=s.size();
+    fori0{
+        if(s[i]=='s') x++;
+        else y++;
+        if((i+1)*2==n){
+            if(x==y){
+                pr1l(1);
+                pr(n/2);
+                return;
+            }
+        }
     };
-    n/=2;
-    sorta;
-    sortb;
-    fori d[a[i]]++;
-    forj d[j]+=d[j-1];
+    fori0{
+        if(s[i]=='s') a[i+1]=1;
+    };
+    fo(i,2,2+n/2-1){
+        if(a[i]) one++;
+        else zero++;
+    };
+    if(one==zero){
+        pr1l(2);
+        pr2(1,1+n/2);
+        return;
+    }
+    for(ll i = 2+n/2;i<=n-1;i++){
+        if(a[i]) one++;
+        else zero++;
+        if(a[i-n/2]) one--;
+        else zero--;
 
-    fori d1[m+1-b[i]]++;
-    forj d1[j]+=d1[j-1];
+        if(one==zero){
+            pr1l(2);
+            pr2(i-n/2,i);
+            return;
+        }
 
-    forj mini=min(mini,n-d[j-1]+d1[j]);
-    forj if(n-d[j-1]+d1[j]==mini) e++;
-    pr2l(mini,e);
+    }
+
 }
 
 int main(void) {
