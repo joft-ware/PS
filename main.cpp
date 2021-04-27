@@ -16,7 +16,7 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 11
+#define M 100001
 #define MM 1001
 #define MMM 101
 #define N 200001
@@ -1233,39 +1233,28 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    scannm;
-    if(n<m) swap(n,m);
-
-    fori forj aa[i][j]=i*j;
-    forj{
-        if(j==1) continue;
-        for(k=j;k<=n;k+=j)
-            aa[k][j]=min(aa[k][j],k/j);
-        for(k=j;k<=m;k+=j)
-            aa[j][k]=min(aa[j][k],k/j);
-    };
+    scann;
+    sum=0;
+    fori sc2(a[i],b[i]);
+    suma;
+    m=sum;
+    mini=sum;
+    forj d[j]=INF;
     fori{
-        forj{
-            if(i>j*3){
-                aa[i][j]=min(aa[i][j],aa[i-j][j]+1);
-                continue;
-            }
-            if(j>i*3){
-                aa[i][j]=min(aa[i][j],aa[i][j-i]+1);
-                continue;
-            }
-            fok(j-1)
-                aa[i][j]=min(aa[i][j],aa[i][k]+aa[i][j-k]);
-            fok(i-1)
-                aa[i][j]=min(aa[i][j],aa[k][j]+aa[i-k][j]);
-        }
+        for(j=m;j>=a[i];j--)
+            d[j]=min(d[j],d[j-a[i]]+b[i]);
     };
-    pr(aa[n][m]);
+    forj{
+        if(d[j]==INF) continue;
+        t=max(sum-j,d[j]);
+        mini=min(mini,t);
+    };
+    prmini;
 }
 
 int main(void) {
 
     FASTIO;
-    //    scant;wt{solve();};
+     //   scant;wt{solve();};
     solve();
 }
