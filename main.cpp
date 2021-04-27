@@ -222,7 +222,7 @@ ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[N], alis[M], dd[M][5], p[M], h[M], ax[M], un[M], ay[M], az[M], d[500002], dist[M], aa[NN][NN], d1[500002], d2[M], tempa[M], sumlazy[M], hablazy[M];
+ll b[N], alis[M], dd[M][5], p[M], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[10202][202], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[MMM][MMM][MMM];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -1234,22 +1234,33 @@ void dfs(ll k, ll cnt){
 
 void solve(){
     scannm;
-    scanaa;
-    foi(m){
-        foj(m){
-            if(i==j) continue;
-            fok(m){
-                if(i==k) continue;
-                if(k==j) continue;
-                sum=0;
-                for(l=1;l<=n;l++){
-                    sum+=biggest(aa[l][i],aa[l][j],aa[l][k]);
-                }
-                maxi=max(maxi,sum);
+    if(n<m) swap(n,m);
+
+    fori forj aa[i][j]=i*j;
+    forj{
+        if(j==1) continue;
+        for(k=j;k<=n;k+=j)
+            aa[k][j]=min(aa[k][j],k/j);
+        for(k=j;k<=m;k+=j)
+            aa[j][k]=min(aa[j][k],k/j);
+    };
+    fori{
+        forj{
+            if(i>j*3){
+                aa[i][j]=min(aa[i][j],aa[i-j][j]+1);
+                continue;
             }
+            if(j>i*3){
+                aa[i][j]=min(aa[i][j],aa[i][j-i]+1);
+                continue;
+            }
+            fok(j-1)
+                aa[i][j]=min(aa[i][j],aa[i][k]+aa[i][j-k]);
+            fok(i-1)
+                aa[i][j]=min(aa[i][j],aa[k][j]+aa[i-k][j]);
         }
-    }
-    prmaxi;
+    };
+    pr(aa[n][m]);
 }
 
 int main(void) {
