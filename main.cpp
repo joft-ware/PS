@@ -16,11 +16,11 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 100001
-#define MM 1001
-#define MMM 101
-#define N 200001
-#define NN 2001
+#define M 100002
+#define MM 1002
+#define MMM 102
+#define N 200002
+#define NN 2002
 
 #define ll long long
 #define ull unsigned ll
@@ -222,7 +222,7 @@ ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[N], alis[M], dd[M][5], p[M], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[10202][202], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
+ll b[N], alis[M], dd[M][5], p[M], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[MMM][MMM][MMM];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -1233,23 +1233,40 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    scann;
-    sum=0;
-    fori sc2(a[i],b[i]);
-    suma;
-    m=sum;
-    mini=sum;
-    forj d[j]=INF;
-    fori{
-        for(j=m;j>=a[i];j--)
-            d[j]=min(d[j],d[j-a[i]]+b[i]);
-    };
-    forj{
-        if(d[j]==INF) continue;
-        t=max(sum-j,d[j]);
-        mini=min(mini,t);
-    };
-    prmini;
+    w1{
+        scannm;
+        maxi=0;
+        forj d[j]=0;
+        if(!n) return;
+        scanaa;
+        fori{
+            forj{
+                if(!aa[i][j]) {
+                    a[j]=0;
+                    d[j] = 0;
+                }
+                else{
+                    if(!d[j]) d[j]=i;
+                    a[j]=i-d[j]+1;
+                }
+            }
+            a[m+1]=0;
+            a[0]=0;
+            foj(m+1){
+                while(st.size()&&a[st.top()]>=a[j]){
+                    x=st.top();
+                    st.pop();
+                    if(st.empty()) l=0;
+                    else l=st.top();
+                    maxi=max(maxi,a[x]*(j-l-1));
+                }
+                st.push(j);
+            };
+            while(!st.empty())
+                st.pop();
+        };
+        prmaxi;
+    }
 }
 
 int main(void) {
