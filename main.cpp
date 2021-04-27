@@ -17,8 +17,8 @@
 #include <regex>
 
 #define M 11
-#define MM 21
-#define MMM 10
+#define MM 1001
+#define MMM 101
 #define N 200001
 #define NN 2001
 
@@ -1233,46 +1233,23 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    scann;
-    scans;
-    l=s.size();
-    fori0{
-        if(s[i]=='s') x++;
-        else y++;
-        if((i+1)*2==n){
-            if(x==y){
-                pr1l(1);
-                pr(n/2);
-                return;
+    scannm;
+    scanaa;
+    foi(m){
+        foj(m){
+            if(i==j) continue;
+            fok(m){
+                if(i==k) continue;
+                if(k==j) continue;
+                sum=0;
+                for(l=1;l<=n;l++){
+                    sum+=biggest(aa[l][i],aa[l][j],aa[l][k]);
+                }
+                maxi=max(maxi,sum);
             }
         }
-    };
-    fori0{
-        if(s[i]=='s') a[i+1]=1;
-    };
-    fo(i,2,2+n/2-1){
-        if(a[i]) one++;
-        else zero++;
-    };
-    if(one==zero){
-        pr1l(2);
-        pr2(1,1+n/2);
-        return;
     }
-    for(ll i = 2+n/2;i<=n-1;i++){
-        if(a[i]) one++;
-        else zero++;
-        if(a[i-n/2]) one--;
-        else zero--;
-
-        if(one==zero){
-            pr1l(2);
-            pr2(i-n/2,i);
-            return;
-        }
-
-    }
-
+    prmaxi;
 }
 
 int main(void) {
