@@ -16,11 +16,11 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 100001
-#define MM 1001
-#define MMM 1
-#define N 100001
-#define NN 1001
+#define M 200001
+#define MM 2001
+#define MMM 10
+#define N 200001
+#define NN 2001
 
 #define ll long long
 #define ull unsigned ll
@@ -1132,24 +1132,6 @@ ll square_free(ll x){
     return cnt;
 }
 
-bool dfs(ll x, ll xx){
-    if(visit[x])
-        return false;
-    visit[x]=true;
-    ll y=aa[x][0];
-    fo(i,1,y){
-        ll e = aa[x][i];
-        if(e==xx||e==1)
-            continue;
-        if(d[e]==-1||(visit[d[e]]==false&&dfs(d[e],xx)))
-        {
-            d[e]=x;
-            d[x]=e;
-            return true;
-        }
-    }
-    return false;
-}
 
 ld distance(ld x1, ld y1, ld x2, ld y2){
     return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
@@ -1234,51 +1216,44 @@ ld mst(){ // vxyz : {cost, {from, to}}
     return sum;
 }
 
-
-void f(ll status, ll cnt, ll sum){
-    if(cnt>=m){
-        mini=min(mini, sum);
-        return;
-    }
-    forjn {
-        if(status&(1 << (j-1))) { // j: 이미 방문
-            fori {
-                if(i==j) continue;
-                if (status & (1 << (i-1))) continue; // i: 다음에 방문할 후보(아직 방문x)
-                ll new_status = status | (1 << (i-1));
-                if (d[new_status] > d[status] + aa[j][i]) {
-                    d[new_status] = d[status] + aa[j][i];
-                    f(new_status, cnt + 1, d[new_status]);
-                }
-            }
-        }
+void dfs(ll k, ll cnt){
+    if(cnt>=4)
+        yes=1;
+    if(yes) return;
+    for(auto i:vxya[k]){
+        ll x=i.X;
+        ll y=i.Y;
+        if(visit[x]) continue;
+        aa[k][1]=1;
+        visit[k]=true;
+        dfs(x, cnt+1);
+        visit[k]=false;
     }
 }
 
 
 void solve(){
-    scanxy;
-    scanmn;
-    fori sc2(a[i],b[i]);
-    fori {
-        forjn{
-            x=min(a[i],a[j]);
-            y=min(b[i],b[j]);
-            cnt=0;
-            forkn
-                if(abs(a[k]-x)<=m&&abs(b[k]-y)<=m&&a[k]>=x&&b[k]>=y) cnt++;
-            if(maxi<cnt) maxi=cnt;
-        }
+    scannm;
+    forj{
+        scanxy;
+        x++;
+        y++;
+        vxya[x].pb({y,1});
+        vxya[y].pb({x,1});
     };
-    pr(n-maxi);
+    fori {
+        forj visit[j]=false;
 
+        visit[k]=true;
+        dfs(i, 0);
+        visit[k]=false;
+    }
+    pr(yes);
 }
 
 int main(void) {
 
     FASTIO;
     //    scant;wt{solve();};
-     solve();
-    return 0;
-
+    solve();
 }
