@@ -16,8 +16,8 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 200001
-#define MM 2001
+#define M 11
+#define MM 21
 #define MMM 10
 #define N 200001
 #define NN 2001
@@ -221,15 +221,15 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[N], b1[M], a1[N], a2[N], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], alis[M], dd[M][5], p[N], h[M], ax[M], un[M], ay[M], az[M], d[N], dist[M], aa[NN][NN], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
+ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[N], alis[M], dd[M][5], p[M], h[M], ax[M], un[M], ay[M], az[M], d[500002], dist[M], aa[NN][NN], d1[500002], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[MMM][MMM][MMM];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
 ld ldx1,ldx2,ldx3,ldx4,ldy1,ldy2,ldy3,ldy4;
 
-string str, s, s1, s2, s3, ss[M], ss1[M], ss2[M];
+string str, s, s1, s2, s3, ss[M], ss1[M], ss2[M], sa[N];
 typedef pair<ll, ll> xy;
 typedef vector<vll> matrix;
 ull u1, u2, u3, u4;
@@ -1234,21 +1234,23 @@ void dfs(ll k, ll cnt){
 
 void solve(){
     scannm;
-    forj{
-        scanxy;
-        x++;
-        y++;
-        vxya[x].pb({y,1});
-        vxya[y].pb({x,1});
+    fori{
+        scanx;
+        if(i%2) a[++cnt]=x;
+        else b[++w]=x;
     };
-    fori {
-        forj visit[j]=false;
+    n/=2;
+    sorta;
+    sortb;
+    fori d[a[i]]++;
+    forj d[j]+=d[j-1];
 
-        visit[k]=true;
-        dfs(i, 0);
-        visit[k]=false;
-    }
-    pr(yes);
+    fori d1[m+1-b[i]]++;
+    forj d1[j]+=d1[j-1];
+
+    forj mini=min(mini,n-d[j-1]+d1[j]);
+    forj if(n-d[j-1]+d1[j]==mini) e++;
+    pr2l(mini,e);
 }
 
 int main(void) {
