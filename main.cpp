@@ -1233,45 +1233,30 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    w1{
-        scannm;
-        maxi=0;
-        forj d[j]=0;
-        if(!n) return;
-        scanaa;
-        fori{
-            forj{
-                if(!aa[i][j]) {
-                    a[j]=0;
-                    d[j] = 0;
-                }
-                else{
-                    if(!d[j]) d[j]=i;
-                    a[j]=i-d[j]+1;
-                }
+    scannm;
+    forj{
+        scanxy;
+        if(x==y) pr1l(1);
+        else {
+            if(x<y){
+                t=n-y;
+                if(x+t<y-1) k=0;
+                else k=1;
             }
-            a[m+1]=0;
-            a[0]=0;
-            foj(m+1){
-                while(st.size()&&a[st.top()]>=a[j]){
-                    x=st.top();
-                    st.pop();
-                    if(st.empty()) l=0;
-                    else l=st.top();
-                    maxi=max(maxi,a[x]*(j-l-1));
-                }
-                st.push(j);
+            else{
+                t=n-x+1;
+                if(y+t<x-1) k=0;
+                else k=1;
             };
-            while(!st.empty())
-                st.pop();
-        };
-        prmaxi;
-    }
+            pr1l(k);
+        }
+
+    };
 }
 
 int main(void) {
 
     FASTIO;
-     //   scant;wt{solve();};
+    //   scant;wt{solve();};
     solve();
 }
