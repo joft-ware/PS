@@ -16,11 +16,12 @@
 #include <unordered_map>
 #include <regex>
 
-#define M 100002
-#define MM 1002
-#define MMM 102
-#define N 100002
-#define NN 2002
+
+#define M 100001
+#define MM 1001
+#define MMM 101
+#define N 100001
+#define NN 2001
 
 #define ll long long
 #define ull unsigned ll
@@ -221,8 +222,8 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[N], alis[M], dd[M][5], p[M], h[M], ax[M], un[M], ay[M], az[M], d[M], dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
+ll a[N], d[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[N], alis[M], dd[M][5], p[M], h[M], ax[M], un[M], ay[M], az[M],  dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[MMM][MMM][MMM];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M];
 char c1, c2, c, c3, c4, cc[M];
@@ -1232,37 +1233,38 @@ void dfs(ll k, ll cnt){
 }
 
 
-void solve() {
-    scannm;
-    scanxy;
-    x++;y++;
-    xx = x, yy = y;
-    fori p[i] = i;
-    l = 0;
-    r = 1001;
-    forj sc3(a[j], b[j], d[j]);
-    while(l+1<r) {
-        fori p[i] = i;
-        fori h[i]=0;
-        mid=(l+r)/2;
-        forj {
-            x=a[j]+1;
-            y=b[j]+1;
-            z=d[j];
-            if(z<mid) continue;
-            uni(x, y);
-        }
-        if(find(xx)==find(yy)) {
-            l=mid;
-        }
-        else
-            r=mid;
-    };
-    pr(l);
+void solve(){
+    w1{
+        scannm;
+        if(n+m==0) return;
+        fori {
+            h[i]=0;
+            p[i]=i;
+            check[i]=0;
+            a[i]=0;
+            cnt=0;
+        };
+        forj{
+            scanxy;
+            if(find(x)==find(y)) a[find(x)]=-1;
+            else uni(x,y);
+        };
+        fori{
+            x=find(i);
+            if(check[x]) continue;
+            check[x]=1;
+            if(!a[x]) cnt++;
+        };
+        prcase;
+        if(cnt==1) pr("There is one tree.");
+        else if(cnt==0) pr("No trees.");
+        else cout << "A forest of " << cnt <<" trees.";
+        prl;
+    }
 }
 
 int main(void) {
     FASTIO;
-    //   scant;wt{solve();};
+      // scant;wt{solve();};
     solve();
 }
