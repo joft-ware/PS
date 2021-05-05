@@ -17,11 +17,11 @@
 #include <regex>
 
 
-#define M 100001
+#define M 3001
 #define MM 1001
 #define MMM 101
-#define N 100001
-#define NN 2001
+#define N 3001
+#define NN 3001
 
 #define ll long long
 #define ull unsigned ll
@@ -225,7 +225,7 @@ ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], d[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
 ll b[N], alis[M], dd[M][5], p[M], h[M], ax[M], un[M], ay[M], az[M],  dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[MMM][MMM][MMM];
-bool check[M], visit[M], treecheck[M], boo[M], visited[M];
+bool check[M], visit[M], treecheck[M], boo[M], visited[M], checkk[NN][NN];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
 ld ldx1,ldx2,ldx3,ldx4,ldy1,ldy2,ldy3,ldy4;
@@ -1234,25 +1234,26 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    scann;
-    foi(n-1){
-        scanxyz;
-        vxyz.pb({-z,{x,y}});
-    }
-    fori{
-        p[i]=i;
-        h[i]=0;
-        un[i]=1;
+    scannm;
+    fori p[i]=i;
+    forj{
+        scanxy;
+        if(checkk[x][y]) continue;
+        checkk[x][y]=checkk[y][x]=1;
+        a[x]++;
+        a[y]++;
+        uni(x,y);
     };
-    vsort(vxyz);
-    foi0(n-1){
-      z=-vxyz[i].X;
-      x=vxyz[i].Y.X;
-      y=vxyz[i].Y.Y;
-      sum+=z*un[find(x)]*un[find(y)];
-      uni(x,y);
-    }
-    prsum;
+    fori{
+        if(a[i]%2) cnt++;
+    };
+    if(cnt!=2&&cnt!=0) no=1;
+    fori{
+        if(i==1) continue;
+        if(find(i)!=find(i-1)) no=1;
+    };
+    if(no) prNO;
+    else prYES;
 }
 
 int main(void) {
