@@ -1234,33 +1234,25 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    w1{
-        scannm;
-        if(n+m==0) return;
-        fori {
-            h[i]=0;
-            p[i]=i;
-            check[i]=0;
-            a[i]=0;
-            cnt=0;
-        };
-        forj{
-            scanxy;
-            if(find(x)==find(y)) a[find(x)]=-1;
-            else uni(x,y);
-        };
-        fori{
-            x=find(i);
-            if(check[x]) continue;
-            check[x]=1;
-            if(!a[x]) cnt++;
-        };
-        prcase;
-        if(cnt==1) pr("There is one tree.");
-        else if(cnt==0) pr("No trees.");
-        else cout << "A forest of " << cnt <<" trees.";
-        prl;
+    scann;
+    foi(n-1){
+        scanxyz;
+        vxyz.pb({-z,{x,y}});
     }
+    fori{
+        p[i]=i;
+        h[i]=0;
+        un[i]=1;
+    };
+    vsort(vxyz);
+    foi0(n-1){
+      z=-vxyz[i].X;
+      x=vxyz[i].Y.X;
+      y=vxyz[i].Y.Y;
+      sum+=z*un[find(x)]*un[find(y)];
+      uni(x,y);
+    }
+    prsum;
 }
 
 int main(void) {
