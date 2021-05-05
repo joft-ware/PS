@@ -17,10 +17,10 @@
 #include <regex>
 
 
-#define M 3001
+#define M 300001
 #define MM 1001
 #define MMM 101
-#define N 3001
+#define N 300001
 #define NN 3001
 
 #define ll long long
@@ -1234,26 +1234,17 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    scannm;
+    scann;
     fori p[i]=i;
-    forj{
+    foi(n-2){
         scanxy;
-        if(checkk[x][y]) continue;
-        checkk[x][y]=checkk[y][x]=1;
-        a[x]++;
-        a[y]++;
         uni(x,y);
+    }
+    fori {
+        if(find(i)!=find(i+1)){
+            pr2l(i,i+1); return;
+        }
     };
-    fori{
-        if(a[i]%2) cnt++;
-    };
-    if(cnt!=2&&cnt!=0) no=1;
-    fori{
-        if(i==1) continue;
-        if(find(i)!=find(i-1)) no=1;
-    };
-    if(no) prNO;
-    else prYES;
 }
 
 int main(void) {
