@@ -19,7 +19,7 @@
 #define M 100002
 #define MM 1002
 #define MMM 102
-#define N 200002
+#define N 100002
 #define NN 2002
 
 #define ll long long
@@ -1232,30 +1232,36 @@ void dfs(ll k, ll cnt){
 }
 
 
-void solve(){
+void solve() {
     scannm;
-    forj{
-        scanxy;
-        if(x==y) pr1l(1);
-        else {
-            if(x<y){
-                t=n-y;
-                if(x+t<y-1) k=0;
-                else k=1;
-            }
-            else{
-                t=n-x+1;
-                if(y+t<x-1) k=0;
-                else k=1;
-            };
-            pr1l(k);
+    scanxy;
+    x++;y++;
+    xx = x, yy = y;
+    fori p[i] = i;
+    l = 0;
+    r = 1001;
+    forj sc3(a[j], b[j], d[j]);
+    while(l+1<r) {
+        fori p[i] = i;
+        fori h[i]=0;
+        mid=(l+r)/2;
+        forj {
+            x=a[j]+1;
+            y=b[j]+1;
+            z=d[j];
+            if(z<mid) continue;
+            uni(x, y);
         }
-
+        if(find(xx)==find(yy)) {
+            l=mid;
+        }
+        else
+            r=mid;
     };
+    pr(l);
 }
 
 int main(void) {
-
     FASTIO;
     //   scant;wt{solve();};
     solve();
