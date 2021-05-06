@@ -18,11 +18,11 @@
 #include <random>
 
 
-#define M 100
-#define MM 10
-#define MMM 10
-#define N 10
-#define NN 10
+#define M 1001
+#define MM 11
+#define MMM 11
+#define N 100001
+#define NN 11
 
 #define ll long long
 #define ull unsigned ll
@@ -223,8 +223,8 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[1000100], d[1000100], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[N], alis[M], dd[MM][MM], p[M], h[M], ax[M], un[M], ay[M], az[M],  dist[M], aa[MM][MM], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
+ll a[N], d[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[N], alis[M], dd[MM][MM], p[M], h[M], un[M], dist[M], aa[MM][MM], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[NN][NN][NN];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M], checkk[NN][NN];
 char c1, c2, c, c3, c4, cc[M];
@@ -1367,33 +1367,22 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    set<xy> s;
     scann;
+    scanxy;
+    foi(y){
+        sc(k);
+        a[k]=1;
+    }
     fori{
-        scanxy;
-        vxy.pb({x,y});
-    };
-    vsort(vxy);
-    s.insert({vxy[0].Y,vxy[0].X});
-    s.insert({vxy[1].Y,vxy[1].X});
-    mini=distxy2(vxy[0],vxy[1]);
-    for(ll i=2;i<n;i++){
-        while(idx<i){
-            diff=vxy[i].X-vxy[idx].X;
-            if(diff*diff<=mini) break;
-            else{
-                s.erase({vxy[idx].Y,vxy[idx].X});
-                idx++;
-            }
+        if(a[i]) cnt++;
+        if(i-x+1>=1) {
+            if (a[i - x + 1]) cnt--;
+        }
+        if(i>=x){
+            mini=min(mini,cnt);
         }
 
-        auto start=s.lower_bound({vxy[i].Y-sqrt(mini),-INF});
-        auto end = s.upper_bound({vxy[i].Y+sqrt(mini),INF});
-        for(auto j=start;j!=end;j++){
-            mini=min(mini,distxy2(vxy[i],{j->Y,j->X}));
-        }
-        s.insert({vxy[i].Y,vxy[i].X});
-    }
+    };
     prmini;
 }
 
