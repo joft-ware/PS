@@ -19,7 +19,7 @@
 
 
 #define M 1001
-#define MM 11
+#define MM 1001
 #define MMM 11
 #define N 100001
 #define NN 11
@@ -1368,22 +1368,31 @@ void dfs(ll k, ll cnt){
 
 void solve(){
     scann;
-    scanxy;
-    foi(y){
-        sc(k);
-        a[k]=1;
-    }
     fori{
-        if(a[i]) cnt++;
-        if(i-x+1>=1) {
-            if (a[i - x + 1]) cnt--;
+        sc2(a[i],b[i]);
+    };
+    fori{
+        forjn{
+            if(b[i]<a[j]||b[j]<a[i]) aa[i][j]=INF;
+            else aa[i][j]=1;
         }
-        if(i>=x){
-            mini=min(mini,cnt);
+    };
+    forkn{
+        fori{
+            if(aa[i][k]==INF) continue;
+            forjn{
+                if(aa[k][j]==INF) continue;
+                if(aa[i][j]>aa[i][k]+aa[k][j]) aa[i][j]=aa[i][k]+aa[k][j];
+            }
         }
+    };
+    scann;
+    fori{
+        scxy;
+        if(aa[x][y]==INF) pr1l(-1);
+        else pr1l(aa[x][y]);
 
     };
-    prmini;
 }
 
 int main(void) {
