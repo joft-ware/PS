@@ -15,13 +15,14 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <regex>
+#include <random>
 
 
-#define M 300001
-#define MM 1001
-#define MMM 101
-#define N 300001
-#define NN 3001
+#define M 1
+#define MM 2002
+#define MMM 1
+#define N 1
+#define NN 1
 
 #define ll long long
 #define ull unsigned ll
@@ -130,7 +131,7 @@
 #define asort(a) sort(a+1,a+n+1)
 #define suma sum=0; fori sum+=a[i];
 #define inf(a) fori a[i]=INF;
-#define reverse(a) fori tempa[i]=a[n+1-i]; fori a[i]=tempa[i];
+#define reversea(a) fori tempa[i]=a[n+1-i]; fori a[i]=tempa[i];
 #define findmax(a) maxi=a[1]; fori if(a[i]>maxi) maxi=a[i];
 #define findmaxn(a) maxi=a[1]; fori if(a[i]>maxi) {maxi=a[i]; num=i;}
 #define findmin(a) mini=a[1]; fori if(a[i]<mini) mini=a[i];
@@ -222,9 +223,9 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[N], d[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[N], alis[M], dd[M][5], p[M], h[M], ax[M], un[M], ay[M], az[M],  dist[M], aa[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
-ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[MMM][MMM][MMM];
+ll a[1000100], d[1000100], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[N], alis[M], dd[MM][MM], p[M], h[M], ax[M], un[M], ay[M], az[M],  dist[M], aa[MM][MM], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
+ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[NN][NN][NN];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M], checkk[NN][NN];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
@@ -815,6 +816,134 @@ vll stov(string s) //문자열 s를 vector로 변환
     return a;
 }
 
+const int modd = 1e9+7;
+using lint = long long;
+lint ipow(lint x, lint p){
+    lint ret = 1, piv = x;
+    while(p){
+        if(p & 1) ret = ret * piv % modd;
+        piv = piv * piv % modd;
+        p >>= 1;
+    }
+    return ret;
+}
+vector<int> berlekamp_massey(vector<int> x){
+    vector<int> ls, cur;
+    int lf, ldd;
+    for(int i=0; i<x.size(); i++){
+        lint t = 0;
+        for(int j=0; j<cur.size(); j++){
+            t = (t + 1ll * x[i-j-1] * cur[j]) % modd;
+        }
+        if((t - x[i]) % modd == 0) continue;
+        if(cur.empty()){
+            cur.resize(i+1);
+            lf = i;
+            ldd = (t - x[i]) % modd;
+            continue;
+        }
+        lint k = -(x[i] - t) * ipow(ldd, modd - 2) % modd;
+        vector<int> c(i-lf-1);
+        c.push_back(k);
+        for(auto &j : ls) c.push_back(-j * k % modd);
+        if(c.size() < cur.size()) c.resize(cur.size());
+        for(int j=0; j<cur.size(); j++){
+            c[j] = (c[j] + cur[j]) % modd;
+        }
+        if(i-lf+(int)ls.size()>=(int)cur.size()){
+            tie(ls, lf, ldd) = make_tuple(cur, i, (t - x[i]) % modd);
+        }
+        cur = c;
+    }
+    for(auto &i : cur) i = (i % modd + modd) % modd;
+    return cur;
+}
+int get_nth(vector<int> rec, vector<int> dp, lint n){
+    int m = rec.size();
+    vector<int> s(m), t(m);
+    s[0] = 1;
+    if(m != 1) t[1] = 1;
+    else t[0] = rec[0];
+    auto mul = [&rec](vector<int> v, vector<int> w){
+        int m = v.size();
+        vector<int> t(2 * m);
+        for(int j=0; j<m; j++){
+            for(int k=0; k<m; k++){
+                t[j+k] += 1ll * v[j] * w[k] % modd;
+                if(t[j+k] >= modd) t[j+k] -= modd;
+            }
+        }
+        for(int j=2*m-1; j>=m; j--){
+            for(int k=1; k<=m; k++){
+                t[j-k] += 1ll * t[j] * rec[k-1] % modd;
+                if(t[j-k] >= modd) t[j-k] -= modd;
+            }
+        }
+        t.resize(m);
+        return t;
+    };
+    while(n){
+        if(n & 1) s = mul(s, t);
+        t = mul(t, t);
+        n >>= 1;
+    }
+    lint ret = 0;
+    for(int i=0; i<m; i++) ret += 1ll * s[i] * dp[i] % modd;
+    return ret % modd;
+}
+int guess_nth_term(vector<int> x, lint n){
+    if(n < x.size()) return x[n];
+    vector<int> v = berlekamp_massey(x);
+    if(v.empty()) return 0;
+    return get_nth(v, x, n);
+}
+struct elem{int x, y, v;}; // A_(x, y) <- v, 0-based. no duplicate please..
+vector<int> get_min_poly(int n, vector<elem> vvs){
+    // smallest poly P such that A^i = sum_{j < i} {A^j \times P_j}
+    vector<int> rnd1, rnd2;
+    mt19937 rng(0x14004);
+    auto randint = [&rng](int lb, int ub){
+        return uniform_int_distribution<int>(lb, ub)(rng);
+    };
+    for(int i=0; i<n; i++){
+        rnd1.push_back(randint(1, modd - 1));
+        rnd2.push_back(randint(1, modd - 1));
+    }
+    vector<int> gobs;
+    for(int i=0; i<2*n+2; i++){
+        int tmp = 0;
+        for(int j=0; j<n; j++){
+            tmp += 1ll * rnd2[j] * rnd1[j] % modd;
+            if(tmp >= modd) tmp -= modd;
+        }
+        gobs.push_back(tmp);
+        vector<int> nxt(n);
+        for(auto &i : vvs){
+            nxt[i.x] += 1ll * i.v * rnd1[i.y] % modd;
+            if(nxt[i.x] >= modd) nxt[i.x] -= modd;
+        }
+        rnd1 = nxt;
+    }
+    auto sol = berlekamp_massey(gobs);
+    reverse(sol.begin(), sol.end());
+    return sol;
+}
+lint det(int n, vector<elem> vvs){
+    vector<int> rnd;
+    mt19937 rng(0x14004);
+    auto randint = [&rng](int lb, int ub){
+        return uniform_int_distribution<int>(lb, ub)(rng);
+    };
+    for(int i=0; i<n; i++) rnd.push_back(randint(1, modd - 1));
+    for(auto &i : vvs){
+        i.v = 1ll * i.v * rnd[i.y] % modd;
+    }
+    auto sol = get_min_poly(n, vvs)[0];
+    if(n % 2 == 0) sol = modd - sol;
+    for(auto &i : rnd) sol = 1ll * sol * ipow(i, modd - 2) % modd;
+    return sol;
+}
+
 ll banolim(ld a) {
     ll x = (ll)a;
     ld y = (ld)x;
@@ -1235,20 +1364,11 @@ void dfs(ll k, ll cnt){
 
 void solve(){
     scann;
-    fori p[i]=i;
-    foi(n-2){
-        scanxy;
-        uni(x,y);
-    }
-    fori {
-        if(find(i)!=find(i+1)){
-            pr2l(i,i+1); return;
-        }
-    };
+    pr(guess_nth_term({0,1,1,2,3,5,8,13},n));
 }
 
 int main(void) {
     FASTIO;
-      // scant;wt{solve();};
+       //scant;wt{solve();};
     solve();
 }
