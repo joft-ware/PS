@@ -817,9 +817,8 @@ vll stov(string s) //문자열 s를 vector로 변환
 }
 
 const int modd = 1e9+7;
-using lint = long long;
-lint ipow(lint x, lint p){
-    lint ret = 1, piv = x;
+ll ipow(ll x, ll p){
+    ll ret = 1, piv = x;
     while(p){
         if(p & 1) ret = ret * piv % modd;
         piv = piv * piv % modd;
@@ -827,12 +826,12 @@ lint ipow(lint x, lint p){
     }
     return ret;
 }
-vector<int> berlekamp_massey(vector<int> x){
-    vector<int> ls, cur;
-    int lf, ldd;
-    for(int i=0; i<x.size(); i++){
-        lint t = 0;
-        for(int j=0; j<cur.size(); j++){
+vector<ll> berlekamp_massey(vector<ll> x){
+    vector<ll> ls, cur;
+    ll lf, ldd;
+    for(ll i=0; i<x.size(); i++){
+        ll t = 0;
+        for(ll j=0; j<cur.size(); j++){
             t = (t + 1ll * x[i-j-1] * cur[j]) % modd;
         }
         if((t - x[i]) % modd == 0) continue;
@@ -842,15 +841,15 @@ vector<int> berlekamp_massey(vector<int> x){
             ldd = (t - x[i]) % modd;
             continue;
         }
-        lint k = -(x[i] - t) * ipow(ldd, modd - 2) % modd;
-        vector<int> c(i-lf-1);
+        ll k = -(x[i] - t) * ipow(ldd, modd - 2) % modd;
+        vector<ll> c(i-lf-1);
         c.push_back(k);
         for(auto &j : ls) c.push_back(-j * k % modd);
         if(c.size() < cur.size()) c.resize(cur.size());
-        for(int j=0; j<cur.size(); j++){
+        for(ll j=0; j<cur.size(); j++){
             c[j] = (c[j] + cur[j]) % modd;
         }
-        if(i-lf+(int)ls.size()>=(int)cur.size()){
+        if(i-lf+(ll)ls.size()>=(ll)cur.size()){
             tie(ls, lf, ldd) = make_tuple(cur, i, (t - x[i]) % modd);
         }
         cur = c;
@@ -858,23 +857,23 @@ vector<int> berlekamp_massey(vector<int> x){
     for(auto &i : cur) i = (i % modd + modd) % modd;
     return cur;
 }
-int get_nth(vector<int> rec, vector<int> dp, lint n){
-    int m = rec.size();
-    vector<int> s(m), t(m);
+ll get_nth(vector<ll> rec, vector<ll> dp, ll n){
+    ll m = rec.size();
+    vector<ll> s(m), t(m);
     s[0] = 1;
     if(m != 1) t[1] = 1;
     else t[0] = rec[0];
-    auto mul = [&rec](vector<int> v, vector<int> w){
-        int m = v.size();
-        vector<int> t(2 * m);
-        for(int j=0; j<m; j++){
-            for(int k=0; k<m; k++){
+    auto mul = [&rec](vector<ll> v, vector<ll> w){
+        ll m = v.size();
+        vector<ll> t(2 * m);
+        for(ll j=0; j<m; j++){
+            for(ll k=0; k<m; k++){
                 t[j+k] += 1ll * v[j] * w[k] % modd;
                 if(t[j+k] >= modd) t[j+k] -= modd;
             }
         }
-        for(int j=2*m-1; j>=m; j--){
-            for(int k=1; k<=m; k++){
+        for(ll j=2*m-1; j>=m; j--){
+            for(ll k=1; k<=m; k++){
                 t[j-k] += 1ll * t[j] * rec[k-1] % modd;
                 if(t[j-k] >= modd) t[j-k] -= modd;
             }
@@ -887,37 +886,37 @@ int get_nth(vector<int> rec, vector<int> dp, lint n){
         t = mul(t, t);
         n >>= 1;
     }
-    lint ret = 0;
-    for(int i=0; i<m; i++) ret += 1ll * s[i] * dp[i] % modd;
+    ll ret = 0;
+    for(ll i=0; i<m; i++) ret += 1ll * s[i] * dp[i] % modd;
     return ret % modd;
 }
-int guess_nth_term(vector<int> x, lint n){
+ll guess_nth_term(vector<ll> x, ll n){
     if(n < x.size()) return x[n];
-    vector<int> v = berlekamp_massey(x);
+    vector<ll> v = berlekamp_massey(x);
     if(v.empty()) return 0;
     return get_nth(v, x, n);
 }
-struct elem{int x, y, v;}; // A_(x, y) <- v, 0-based. no duplicate please..
-vector<int> get_min_poly(int n, vector<elem> vvs){
+struct elem{ll x, y, v;}; // A_(x, y) <- v, 0-based. no duplicate please..
+vector<ll> get_min_poly(ll n, vector<elem> vvs){
     // smallest poly P such that A^i = sum_{j < i} {A^j \times P_j}
-    vector<int> rnd1, rnd2;
+    vector<ll> rnd1, rnd2;
     mt19937 rng(0x14004);
-    auto randint = [&rng](int lb, int ub){
-        return uniform_int_distribution<int>(lb, ub)(rng);
+    auto randint = [&rng](ll lb, ll ub){
+        return uniform_int_distribution<ll>(lb, ub)(rng);
     };
-    for(int i=0; i<n; i++){
+    for(ll i=0; i<n; i++){
         rnd1.push_back(randint(1, modd - 1));
         rnd2.push_back(randint(1, modd - 1));
     }
-    vector<int> gobs;
-    for(int i=0; i<2*n+2; i++){
-        int tmp = 0;
-        for(int j=0; j<n; j++){
+    vector<ll> gobs;
+    for(ll i=0; i<2*n+2; i++){
+        ll tmp = 0;
+        for(ll j=0; j<n; j++){
             tmp += 1ll * rnd2[j] * rnd1[j] % modd;
             if(tmp >= modd) tmp -= modd;
         }
         gobs.push_back(tmp);
-        vector<int> nxt(n);
+        vector<ll> nxt(n);
         for(auto &i : vvs){
             nxt[i.x] += 1ll * i.v * rnd1[i.y] % modd;
             if(nxt[i.x] >= modd) nxt[i.x] -= modd;
@@ -928,13 +927,13 @@ vector<int> get_min_poly(int n, vector<elem> vvs){
     reverse(sol.begin(), sol.end());
     return sol;
 }
-lint det(int n, vector<elem> vvs){
-    vector<int> rnd;
+ll det(ll n, vector<elem> vvs){
+    vector<ll> rnd;
     mt19937 rng(0x14004);
-    auto randint = [&rng](int lb, int ub){
-        return uniform_int_distribution<int>(lb, ub)(rng);
+    auto randint = [&rng](ll lb, ll ub){
+        return uniform_int_distribution<ll>(lb, ub)(rng);
     };
-    for(int i=0; i<n; i++) rnd.push_back(randint(1, modd - 1));
+    for(ll i=0; i<n; i++) rnd.push_back(randint(1, modd - 1));
     for(auto &i : vvs){
         i.v = 1ll * i.v * rnd[i.y] % modd;
     }
@@ -1363,8 +1362,19 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    scann;
-    pr(guess_nth_term({0,1,1,2,3,5,8,13},n));
+    sc2(k,n);
+    foi(1000){
+        aa[0][i]=i;
+    }
+    foi(1000){
+        foj(k){
+            fo(l,1,i) aa[j][i]=(aa[j][i]+aa[j-1][l])%modd;
+        }
+    }
+    foi0(1000){
+        v.pb(aa[k][i]);
+    };
+    pr(guess_nth_term(v,n));
 }
 
 int main(void) {
