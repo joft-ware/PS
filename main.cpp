@@ -19,7 +19,7 @@
 
 
 #define M 1
-#define MM 2002
+#define MM 1
 #define MMM 1
 #define N 1
 #define NN 1
@@ -1362,22 +1362,20 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    sc2(k,n);
-    foi(1000){
-        aa[0][i]=i;
+    sc2(n,k);
+    v.pb(0);
+    for(i=1;i<=200;i++){
+        ll x= zegobmod(i,k);
+        sum+=x;
+        sum%=modd;
+        v.pb(sum);
     }
-    foi(1000){
-        foj(k){
-            fo(l,1,i) aa[j][i]=(aa[j][i]+aa[j-1][l])%modd;
-        }
-    }
-    foi0(1000){
-        v.pb(aa[k][i]);
-    };
+
     pr(guess_nth_term(v,n));
 }
 
 int main(void) {
+    mod=1e9+7;
     FASTIO;
        //scant;wt{solve();};
     solve();
