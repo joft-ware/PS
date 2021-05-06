@@ -18,11 +18,11 @@
 #include <random>
 
 
-#define M 1
-#define MM 1
-#define MMM 1
-#define N 1
-#define NN 1
+#define M 100
+#define MM 10
+#define MMM 10
+#define N 10
+#define NN 10
 
 #define ll long long
 #define ull unsigned ll
@@ -212,7 +212,7 @@
 #define prstr for(ll wq=1;wq<=slen;wq++) pr(str[wq]);
 
 using namespace std;
-ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ttttt, ja, mo, he, l1, l2, l3, mm, l4, end, zero, finish, tt, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, re, ok, last, tx, ty, k, num2, start, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
+ll i, j, ii, jj, n, zz, yyy, xxx, maxim, ttttt, ja, mo, he, l1, l2, l3, mm, l4, end, zero, finish, tt, next, bre, cnt, ans, slen, to, casenum, nn, hab, count, t, now, one, two, yy, m, yes, cntt, x1, x2, x3, x4, y4, Y1, y2, y3, temp, i1, i2, J1, j2, i3, j3, len1, len2, low, mid, left, right, high, re, ok, last, tx, ty, k, num2, start, diff, cha, idx, num, xx, qq, w, e, no, r, sum, minim = INF, x, y, z, l, len, mini = INF, maxi = -INF, x11, x22, x33, y11, y22, y33;
 ll dx[5] = { 0,0,1,0,-1 };
 ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
@@ -399,7 +399,7 @@ ll find_max(long long* a, ll n)
     return maxi;
 }
 
-void clean(long long* a, int n)
+void clean(long long* a, ll n)
 {
     fori
         a[i] = 0;
@@ -460,7 +460,7 @@ ll query_minindex(ll node, ll left, ll right, ll start, ll end)
     if (right < start || end < left)
         return 0; // 겹치지 않는 경우(영향이 없는 값을 반환)
     if (start <= left && right <= end) return minindextree[node]; // 모두 겹치는 경우
-    int mid = (left + right) / 2; // 일부만 겹치는 경우
+    ll mid = (left + right) / 2; // 일부만 겹치는 경우
     ll leftnode = query_minindex(node * 2, left, mid, start, end);
     ll rightnode = query_minindex(node * 2 + 1, mid + 1, right, start, end);
     return minindex(leftnode, rightnode);
@@ -472,7 +472,7 @@ ll maketree_min(ll left, ll right, ll node)
         return mintree[node] = a[left];
     else
     {
-        int mid = (left + right) / 2;
+        ll mid = (left + right) / 2;
         mintree[node] = smaller(maketree_min(left, mid, node * 2), maketree_min(mid + 1, right, node * 2 + 1)); //작은거
         return mintree[node];
     }
@@ -483,7 +483,7 @@ ll query_min(ll node, ll left, ll right, ll start, ll end)
     if (right < start || end < left)
         return INF; // 겹치지 않는 경우(영향이 없는 값을 반환)
     if (start <= left && right <= end) return mintree[node]; // 모두 겹치는 경우
-    int mid = (left + right) / 2; // 일부만 겹치는 경우
+    ll mid = (left + right) / 2; // 일부만 겹치는 경우
     return smaller(query_min(node * 2, left, mid, start, end), query_min(node * 2 + 1, mid + 1, right, start, end));
 }
 
@@ -517,7 +517,7 @@ ll query_max(ll node, ll left, ll right, ll start, ll end)
     if (right < start || end < left)
         return -1; // 겹치지 않는 경우(영향이 없는 값을 반환)
     if (start <= left && right <= end) return maxtree[node]; // 모두 겹치는 경우
-    int mid = (left + right) / 2; // 일부만 겹치는 경우
+    ll mid = (left + right) / 2; // 일부만 겹치는 경우
     return bigger(query_max(node * 2, left, mid, start, end), query_max(node * 2 + 1, mid + 1, right, start, end));
 }
 
@@ -816,7 +816,7 @@ vll stov(string s) //문자열 s를 vector로 변환
     return a;
 }
 
-const int modd = 1e9+7;
+const ll modd = 1e9+7;
 ll ipow(ll x, ll p){
     ll ret = 1, piv = x;
     while(p){
@@ -1013,6 +1013,11 @@ ld distxy(xy a, xy b) { // 좌표 거리
     ld w = a.X - b.X;
     ld e = a.Y - b.Y;
     return sqrt(w*w + e * e);
+}
+ll distxy2(xy a, xy b){
+    ll w = a.X-b.X;
+    ll e = a.Y-b.Y;
+    return w*w+e*e;
 }
 
 bool ccwcmp(xy a, xy b) {
@@ -1362,16 +1367,34 @@ void dfs(ll k, ll cnt){
 
 
 void solve(){
-    sc2(n,k);
-    v.pb(0);
-    for(i=1;i<=200;i++){
-        ll x= zegobmod(i,k);
-        sum+=x;
-        sum%=modd;
-        v.pb(sum);
-    }
+    set<xy> s;
+    scann;
+    fori{
+        scanxy;
+        vxy.pb({x,y});
+    };
+    vsort(vxy);
+    s.insert({vxy[0].Y,vxy[0].X});
+    s.insert({vxy[1].Y,vxy[1].X});
+    mini=distxy2(vxy[0],vxy[1]);
+    for(ll i=2;i<n;i++){
+        while(idx<i){
+            diff=vxy[i].X-vxy[idx].X;
+            if(diff*diff<=mini) break;
+            else{
+                s.erase({vxy[idx].Y,vxy[idx].X});
+                idx++;
+            }
+        }
 
-    pr(guess_nth_term(v,n));
+        auto start=s.lower_bound({vxy[i].Y-sqrt(mini),-INF});
+        auto end = s.upper_bound({vxy[i].Y+sqrt(mini),INF});
+        for(auto j=start;j!=end;j++){
+            mini=min(mini,distxy2(vxy[i],{j->Y,j->X}));
+        }
+        s.insert({vxy[i].Y,vxy[i].X});
+    }
+    prmini;
 }
 
 int main(void) {
