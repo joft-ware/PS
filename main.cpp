@@ -21,7 +21,7 @@
 #define M 1001
 #define MM 1001
 #define MMM 11
-#define N 100001
+#define N 1000001
 #define NN 11
 
 #define ll long long
@@ -223,8 +223,8 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[N], d[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[N], alis[M], dd[MM][MM], p[M], h[M], un[M], dist[M], aa[MM][MM], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
+ll a[M], d[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[M], alis[M], dd[MM][MM], p[M], h[M], un[M], dist[M], aa[MM][MM], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[NN][NN][NN];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M], checkk[NN][NN];
 char c1, c2, c, c3, c4, cc[M];
@@ -1369,30 +1369,12 @@ void dfs(ll k, ll cnt){
 void solve(){
     scann;
     fori{
-        sc2(a[i],b[i]);
+        scanx;
+        d[x]=d[x-1]+1;
+        maxi=max(maxi,d[x]);
     };
-    fori{
-        forjn{
-            if(b[i]<a[j]||b[j]<a[i]) aa[i][j]=INF;
-            else aa[i][j]=1;
-        }
-    };
-    forkn{
-        fori{
-            if(aa[i][k]==INF) continue;
-            forjn{
-                if(aa[k][j]==INF) continue;
-                if(aa[i][j]>aa[i][k]+aa[k][j]) aa[i][j]=aa[i][k]+aa[k][j];
-            }
-        }
-    };
-    scann;
-    fori{
-        scxy;
-        if(aa[x][y]==INF) pr1l(-1);
-        else pr1l(aa[x][y]);
-
-    };
+    maxi=n-maxi;
+    prmaxi;
 }
 
 int main(void) {
