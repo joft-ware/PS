@@ -18,10 +18,10 @@
 #include <random>
 
 
-#define M 11
-#define MM 11
+#define M 1001
+#define MM 1001
 #define MMM 101
-#define N 2000006
+#define N 100006
 #define NN 101
 
 #define ll long long
@@ -81,7 +81,8 @@
 #define scanb fori sc(b[i])
 #define scanbm forj sc(b[j])
 #define scand fori sc(d[i])
-#define scanaa fori forj sc(aa[i][j])
+#define scanaa fori forj sc(aa[i][j]);
+#define scanaan fori forjn sc(aa[i][j]);
 #define scanaa1 fori{scans;forj0{aa[i][j+1] = s[j] - '0';}s.clear();}
 #define scanbb1 fori{scans;forj0{bb[i][j+1] = s[j] - '0';}s.clear();}
 #define scanbb fori forj sc(bb[i][j]);
@@ -1403,16 +1404,68 @@ void make_scc(){
 }
 
 void solve(){
-    scann;
+    scannm;
+    scanaan;
     fori{
-        scanxy;
-        if(x==1) update(y,1);
-        else{
-            ll p = lowerbound(y);
-            pr1l(p);
-            update(p,-1);
+        no=0;
+        forjn d[j]=0;
+        forjn {
+            if (j == 1) continue;
+            if(aa[i][j]!=aa[i][j-1]){
+                if(abs(aa[i][j]-aa[i][j-1])>1) no=1;
+                if(aa[i][j]>aa[i][j-1]){
+                    for(k=j-1;k>=j-m;k--){
+                        if(k<1) no=1;
+                        if(no) break;
+                        d[k]++;
+                    }
+                }
+                else{
+                    for(k=j;k<=j+m-1;k++){
+                        if(k>n) no=1;
+                        if(no) break;
+                        d[k]++;
+                    }
+                }
+            }
+        }
+        forjn if(d[j]>1) no=1;
+        if(!no) cnt++;
+    };
+    fori{
+        forjn{
+            bb[i][j]=aa[j][i];
         }
     };
+    fori forjn aa[i][j]=bb[i][j];
+
+    fori{
+        no=0;
+        forjn d[j]=0;
+        forjn {
+            if (j == 1) continue;
+            if(aa[i][j]!=aa[i][j-1]){
+                if(abs(aa[i][j]-aa[i][j-1])>1) no=1;
+                if(aa[i][j]>aa[i][j-1]){
+                    for(k=j-1;k>=j-m;k--){
+                        if(k<1) no=1;
+                        if(no) break;
+                        d[k]++;
+                    }
+                }
+                else{
+                    for(k=j;k<=j+m-1;k++){
+                        if(k>n) no=1;
+                        if(no) break;
+                        d[k]++;
+                    }
+                }
+            }
+        }
+        forjn if(d[j]>1) no=1;
+        if(!no) cnt++;
+    };
+    pr(cnt);
 }
 
 int main(void) {
