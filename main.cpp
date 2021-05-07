@@ -18,7 +18,7 @@
 #include <random>
 
 
-#define M 1001
+#define M 100001
 #define MM 1001
 #define MMM 101
 #define N 100006
@@ -244,13 +244,12 @@ priority_queue<xy> pqxy2;
 stack<ll> st;
 deque<ll> dq;
 deque<xy> dqxy;
-vll v, v1, v2, v3, print, scv[M], rscv[M];
-vector<vll> vv;
+vll v, v1, v2, v3, print, scv[M], rscv[M], va[M];
+vector<vll> vv, scc;
 vector<xy> vxy, vxya[M], vxy2, vxy3;
 vector<xy> vpa[M];
 vector<pair<ll,xy>> vxyz;
 xy xy1, xya[M];
-vector<vll> scc;
 ll mod = INF;
 
 matrix operator *(matrix &a, matrix &b) {
@@ -1405,72 +1404,42 @@ void make_scc(){
 
 void solve(){
     scannm;
-    scanaan;
+    fori va[i].clear();
+    forj{
+        scanxy;
+        va[x].pb(y);
+        va[y].pb(x);
+    };
+    fori visit[i]=false;
+    fori d[i]=0;
+    no=0;
     fori{
-        no=0;
-        forjn d[j]=0;
-        forjn {
-            if (j == 1) continue;
-            if(aa[i][j]!=aa[i][j-1]){
-                if(abs(aa[i][j]-aa[i][j-1])>1) no=1;
-                if(aa[i][j]>aa[i][j-1]){
-                    for(k=j-1;k>=j-m;k--){
-                        if(k<1) no=1;
-                        if(no) break;
-                        d[k]++;
-                    }
+        if(visit[i]) continue;
+        visit[i]=true;
+        q.push(i);
+        d[i]=1;
+        while(q.size()){
+            x=q.front();
+            q.pop();
+            for(auto j : va[x]){
+                if(visit[j]){
+                    if(3-d[x]!=d[j]) no=1;
+                    continue;
                 }
-                else{
-                    for(k=j;k<=j+m-1;k++){
-                        if(k>n) no=1;
-                        if(no) break;
-                        d[k]++;
-                    }
-                }
+                visit[j]=true;
+                d[j]=3-d[x];
+                q.push(j);
             }
         }
-        forjn if(d[j]>1) no=1;
-        if(!no) cnt++;
     };
-    fori{
-        forjn{
-            bb[i][j]=aa[j][i];
-        }
-    };
-    fori forjn aa[i][j]=bb[i][j];
+    if(!no) prYES;
+    else prNO;
 
-    fori{
-        no=0;
-        forjn d[j]=0;
-        forjn {
-            if (j == 1) continue;
-            if(aa[i][j]!=aa[i][j-1]){
-                if(abs(aa[i][j]-aa[i][j-1])>1) no=1;
-                if(aa[i][j]>aa[i][j-1]){
-                    for(k=j-1;k>=j-m;k--){
-                        if(k<1) no=1;
-                        if(no) break;
-                        d[k]++;
-                    }
-                }
-                else{
-                    for(k=j;k<=j+m-1;k++){
-                        if(k>n) no=1;
-                        if(no) break;
-                        d[k]++;
-                    }
-                }
-            }
-        }
-        forjn if(d[j]>1) no=1;
-        if(!no) cnt++;
-    };
-    pr(cnt);
 }
 
 int main(void) {
     mod=1e9+7;
     FASTIO;
-       //scant;wt{solve();};
-    solve();
+    scant;wt{solve();};
+    //solve();
 }
