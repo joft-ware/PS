@@ -18,11 +18,11 @@
 #include <random>
 
 
-#define M 1001
-#define MM 1001
-#define MMM 11
-#define N 1000001
-#define NN 11
+#define M 11
+#define MM 11
+#define MMM 101
+#define N 2000006
+#define NN 101
 
 #define ll long long
 #define ull unsigned ll
@@ -223,8 +223,8 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[M], d[N], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], alis[M], dd[MM][MM], p[M], h[M], un[M], dist[M], aa[MM][MM], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
+ll a[M], d[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[M], tree[N], alis[M], dd[MM][MM], p[M], h[M], un[M], dist[M], aa[MM][MM], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[NN][NN][NN];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M], checkk[NN][NN];
 char c1, c2, c, c3, c4, cc[M];
@@ -243,7 +243,7 @@ priority_queue<xy> pqxy2;
 stack<ll> st;
 deque<ll> dq;
 deque<xy> dqxy;
-vll v, v1, v2, v3, print, rv[M];
+vll v, v1, v2, v3, print, scv[M], rscv[M];
 vector<vll> vv;
 vector<xy> vxy, vxya[M], vxy2, vxy3;
 vector<xy> vpa[M];
@@ -1239,17 +1239,6 @@ bool isPrime(ll n){
     return true;
 }
 
-void scc_(ll x, vll &list) {
-    visit[x]=true;
-    for(auto y:vv[x]) if(!visit[y]) scc_(y, list);
-    list.pb(x);
-}
-
-void scc_reverse(ll x, vll &list) {
-    visit[x]=true;
-    for(auto y:rv[x]) if(!visit[y]) scc_reverse(y, list);
-    list.pb(x);
-}
 
 void make_mu(){
     mu[0]=0;
@@ -1350,31 +1339,80 @@ ld mst(){ // vxyz : {cost, {from, to}}
     return sum;
 }
 
-void dfs(ll k, ll cnt){
-    if(cnt>=4)
-        yes=1;
-    if(yes) return;
-    for(auto i:vxya[k]){
-        ll x=i.X;
-        ll y=i.Y;
-        if(visit[x]) continue;
-        aa[k][1]=1;
-        visit[k]=true;
-        dfs(x, cnt+1);
-        visit[k]=false;
-    }
+void update(ll x, ll y){
+    for(;x<=N;x+=x&-x) tree[x]+=y;
 }
 
+ll lowerbound(ll x){
+    ll res=0;
+    ll max=20;
+    for(ll k=max;~k;--k){
+        ll p = res+(1<<k);
+        if(p<N && tree[p]<x){
+            x-=tree[p];
+            res+=1<<k;
+        }
+    }
+    return res+1;
+}
+
+void scc_(ll x, vll &list) {
+    visit[x]=true;
+    for(auto y:scv[x]) if(!visit[y]) scc_(y, list);
+    list.pb(x);
+    return;
+}
+
+void scc_reverse(ll x, vll &list) {
+    visit[x]=true;
+    for(auto y:rscv[x]) if(!visit[y]) scc_reverse(y, list);
+    list.pb(x);
+    return;
+}
+
+void make_scc(){
+    fori{
+        x=a[i];
+        if(x==i){
+            forjn{
+                if(a[j]==i) {
+                    scv[i].pb(j);
+                    rscv[j].pb(i);
+                }
+            }
+            continue;
+        }
+        scv[i].pb(x);
+        rscv[x].pb(i);
+    }
+
+    fori if(!visit[i]) scc_(i,v);
+    reverse(all(v));
+    fori visit[i]=false;
+    for(auto y:v) {
+        if (!visit[y]) {
+            vll list;
+            scc_reverse(y, list);
+            if(list.size()==1&&a[y]!=y) continue;
+            sort(all(list));
+            scc.pb(list);
+        }
+    }
+    sort(all(scc));
+    return;
+}
 
 void solve(){
     scann;
     fori{
-        scanx;
-        d[x]=d[x-1]+1;
-        maxi=max(maxi,d[x]);
+        scanxy;
+        if(x==1) update(y,1);
+        else{
+            ll p = lowerbound(y);
+            pr1l(p);
+            update(p,-1);
+        }
     };
-    maxi=n-maxi;
-    prmaxi;
 }
 
 int main(void) {
