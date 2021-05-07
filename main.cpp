@@ -18,10 +18,10 @@
 #include <random>
 
 
-#define M 100001
-#define MM 1001
-#define MMM 101
-#define N 100006
+#define M 1
+#define MM 1
+#define MMM 1
+#define N 1
 #define NN 101
 
 #define ll long long
@@ -224,8 +224,8 @@ ll knightdx[9] = { 0,-1,-1,1,1,-2,-2,2,2 };
 ll knightdy[9] = { 0,2,-2,2,-2,1,-1,-1,1 };
 ll alphabet_lines[27] = {0,3,2,1,2,4,3,1,3,1,1,3,1,3,2,1,2,2,2,1,2,1,1,1,2,2,1};
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[M], d[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[MM][MM], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
-ll b[M], tree[N], alis[M], dd[MM][MM], p[M], h[M], un[M], dist[M], aa[MM][MM], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
+ll a[M], d[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], rank[M], bb[NN][NN], habtree[M], sumtree[M], mintree[M], maxtree[M], minindextree[M], prime[M];
+ll b[M], tree[N], alis[M], dd[MM][MM], p[M], h[M], un[M], dist[M], aa[NN][NN], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M], tempa[M], sumlazy[M], hablazy[M];
 ll qry[M][4], dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[NN][NN][NN];
 bool check[M], visit[M], treecheck[M], boo[M], visited[M], checkk[NN][NN];
 char c1, c2, c, c3, c4, cc[M];
@@ -1403,43 +1403,42 @@ void make_scc(){
 }
 
 void solve(){
-    scannm;
-    fori va[i].clear();
-    forj{
-        scanxy;
-        va[x].pb(y);
-        va[y].pb(x);
-    };
-    fori visit[i]=false;
-    fori d[i]=0;
-    no=0;
-    fori{
-        if(visit[i]) continue;
-        visit[i]=true;
-        q.push(i);
-        d[i]=1;
-        while(q.size()){
-            x=q.front();
-            q.pop();
-            for(auto j : va[x]){
-                if(visit[j]){
-                    if(3-d[x]!=d[j]) no=1;
-                    continue;
+    scann; scanaan;
+    fok0(101) {
+        fori {forjn {bb[i][j] = (k >= aa[i][j]) ? 0 : 1;}}
+        cnt=0;
+        fori{
+            forjn{
+                if(bb[i][j]!=1) continue;
+                qx.push(i);
+                qy.push(j);
+                cnt++;
+                while(qx.size()){
+                    x=qx.front();  y=qy.front();
+                    bb[x][y]=-1;
+                    qx.pop(); qy.pop();
+                    for(l=1;l<=4;l++){
+                        tx=x+dx[l];
+                        ty=y+dy[l];
+                        if(bound(tx,ty,n,n)){
+                            if(bb[tx][ty]==1){
+                                bb[tx][ty]=-1;
+                                qx.push(tx);
+                                qy.push(ty);
+                            }
+                        }
+                    }
                 }
-                visit[j]=true;
-                d[j]=3-d[x];
-                q.push(j);
             }
         }
-    };
-    if(!no) prYES;
-    else prNO;
-
+        maxi=max(maxi,cnt);
+    }
+    prmaxi;
 }
 
 int main(void) {
     mod=1e9+7;
     FASTIO;
-    scant;wt{solve();};
-    //solve();
+    //scant;wt{solve();};
+    solve();
 }
