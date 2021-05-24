@@ -16,9 +16,9 @@
 #include <unordered_map>
 
 #define M 1
-#define MM 303
+#define MM 1
 #define MMM 1
-#define N 1
+#define N 200002
 #define NN 303
 
 #define ll long long
@@ -77,11 +77,12 @@
 #define printggg pr1l("ggg");
 #define printv(v) for(auto qwe:v) {pr1(qwe);}; prl;
 #define printvl(v) for(auto qwe:v) {pr1l(qwe);};
+#define all(v) v.begin(), v.end()
 
 #define sorta sort(a+1,a+n+1)
 #define sortb sort(b+1,b+n+1)
 #define sortd sort(d+1,d+n+1)
-#define sortv(v) sort(full(v))
+#define sortv(v) sort(all(v))
 #define vsort(v) sort(v.begin(),v.end())
 #define suma sum=0; fori sum+=a[i];
 
@@ -89,7 +90,6 @@
 #define w1 while(1)
 #define INF (ll) 1e18
 #define boundcheck(tx,ty) if(tx>=1&&ty>=1&&tx<=n&&ty<=m)
-#define all(v) v.begin(), v.end()
 
 #define X first
 #define Y second
@@ -130,8 +130,8 @@ ll dy[5] = { 0,1,0,-1,0 };
 ll ddx[9] = { 0,-1,-1,-1,0,0,1,1,1 };
 ll ddy[9] = { 0,-1,0,1,-1,1,-1,0,1 };
 ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
-ll a[M], d[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], bb[NN][NN];
-ll b[M], tree[N], alis[M], dd[MM][MM], p[M], h[M], un[M], dist[M], aa[NN][NN], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M];
+ll a[N], d[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], bb[NN][NN];
+ll b[N], tree[N], alis[M], dd[MM][MM], p[M], h[M], un[M], dist[M], aa[NN][NN], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M];
 ll dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[NN][NN][NN];
 bool check[M], vvisit[M], treecheck[M], boo[M], visited[M], checkk[NN][NN];
 char c1, c2, c, c3, c4, cc[M];
@@ -193,62 +193,29 @@ ld distance(ld x1, ld y1, ld x2, ld y2){
 }
 
 void solve(){
-    sc2(n,m); scanaa;
-    for(k=1;;k++){
-        fori forj bb[i][j]=aa[i][j];
-        cnt=0;
-        fori{
-            forj{
-                if(bb[i][j]>0){
-                    cnt++;
-                    qx.push(i);
-                    qy.push(j);
-                    bb[i][j]=0;
-                    while(qx.size()){
-                        x=qx.front();
-                        y=qy.front();
-                        qx.pop();qy.pop();
-                        for(ll l=1;l<=4;l++){
-                            tx=x+dx[l];
-                            ty=y+dy[l];
-                            if(bound(tx,ty,n,m)){
-                                if(bb[tx][ty]>0){
-                                    qx.push(tx);
-                                    qy.push(ty);
-                                    bb[tx][ty]=0;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+    sc(n);
+    vector<xy> v;
+    fori sc2(a[i],b[i]);
+    fori v.pb({a[i],-b[i]});
+    sortv(v);
+    x=0;
+    fori0{
+        x=v[i].X;
+        y=-v[i].Y;
+        if(pq.size()<x){
+            pq.push(y);
+            continue;
         }
-
-        if(cnt==0){
-            no=0; break;
+        if(pq.top()<y){
+            pq.pop();
+            pq.push(y);
         }
-        else if(cnt>1){
-            no=k-1; break;
-        }
-
-        fori forj bb[i][j]=aa[i][j];
-        fori{
-            forj{
-                if(bb[i][j]==0) continue;
-                cnt=0;
-                for(l=1;l<=4;l++){
-                    tx=i+dx[l];
-                    ty=j+dy[l];
-                    if(bound(tx,ty,n,m)){
-                        if(bb[tx][ty]==0) cnt++;
-                    }
-                }
-                aa[i][j]-=cnt;
-                if(aa[i][j]<0)aa[i][j]=0;
-            }
-        };
     };
-    pr(no);
+    while(pq.size()){
+        cnt+=pq.top();
+        pq.pop();
+    }
+    pr(cnt);
 }
 
 int main(void) {
