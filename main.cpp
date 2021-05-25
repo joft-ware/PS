@@ -193,34 +193,32 @@ ld distance(ld x1, ld y1, ld x2, ld y2){
 }
 
 void solve(){
-    sc(n);
-    vector<xy> v;
-    fori sc2(a[i],b[i]);
-    fori v.pb({a[i],-b[i]});
-    sortv(v);
-    x=0;
-    fori0{
-        x=v[i].X;
-        y=-v[i].Y;
-        if(pq.size()<x){
-            pq.push(y);
+    mod=1e9+7;
+    cin >> t;
+    while(t--){
+        cin >> n;
+        if(n%2){
+            cout << 0 << endl;
             continue;
         }
-        if(pq.top()<y){
-            pq.pop();
-            pq.push(y);
+        n/=2;
+        a[0]=1;
+        a[1]=1;
+        a[2]=2;
+        for(ll i=3;i<=n;i++){
+            a[i]=0;
+            for(ll j=0;j<=i-1;j++){
+                a[i]+=a[j]*a[i-1-j];
+                a[i]%=mod;
+            }
         }
-    };
-    while(pq.size()){
-        cnt+=pq.top();
-        pq.pop();
+        cout << a[n]%mod << endl;
     }
-    pr(cnt);
+
+
 }
 
 int main(void) {
-    mod=1e9+7;
     FASTIO;
-    //scant;wt{solve();};
     solve();
 }
