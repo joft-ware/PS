@@ -18,8 +18,8 @@
 #define M 1
 #define MM 1
 #define MMM 1
-#define N 200002
-#define NN 303
+#define N 10002
+#define NN 3
 
 #define ll long long
 #define ld double
@@ -133,7 +133,7 @@ ld ld1, ld0, ld2, ld3, ld4, ld5, ld6, ld7, lda[M], ldb[M];
 ll a[N], d[M], b1[M], a1[M], a2[M], a3[M], a4[M], a5[M], bb[NN][NN];
 ll b[N], tree[N], alis[M], dd[MM][MM], p[M], h[M], un[M], dist[M], aa[NN][NN], aa1[MM][MM], aa2[MM][MM], d1[M], d2[M];
 ll dp[M][2], matn = 2, mu[M], tmp[N], suffix[N], aaa[NN][NN][NN];
-bool check[M], vvisit[M], treecheck[M], boo[M], visited[M], checkk[NN][NN];
+bool check[M], visit[N], treecheck[M], boo[M], visited[M], checkk[NN][NN];
 char c1, c2, c, c3, c4, cc[M];
 ld ldmax, ldmin, ldmax1, ldmax2, ldmin1, ldmin2, ldd[M];
 ld ldx1,ldx2,ldx3,ldx4,ldy1,ldy2,ldy3,ldy4;
@@ -146,7 +146,7 @@ priority_queue<xy> pqxy2;
 stack<ll> st;
 deque<ll> dq;
 deque<xy> dqxy;
-vll v, v1, v2, v3, print, scv[M], rscv[M], va[M];
+vll v[M], v1, v2, v3, print, scv[M], rscv[M], va[M];
 vector<vll> vv, scc;
 vector<xy> vxy, vxya[M], vxy2, vxy3;
 vector<xy> vpa[M];
@@ -192,29 +192,64 @@ ld distance(ld x1, ld y1, ld x2, ld y2){
     return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 }
 
-void solve(){
-    mod=1e9+7;
-    cin >> t;
-    while(t--){
-        cin >> n;
-        if(n%2){
-            cout << 0 << endl;
-            continue;
-        }
-        n/=2;
-        a[0]=1;
-        a[1]=1;
-        a[2]=2;
-        for(ll i=3;i<=n;i++){
-            a[i]=0;
-            for(ll j=0;j<=i-1;j++){
-                a[i]+=a[j]*a[i-1-j];
-                a[i]%=mod;
-            }
-        }
-        cout << a[n]%mod << endl;
-    }
+ll lca(ll x, ll y) {
 
+    if (d[x] > d[y])
+        swap(x, y);
+    for (i = 20; i >= 0; i--) {
+        if (d[y] - d[x] >= (1 << i))
+            y = dp[y][i];
+    }
+    if (x == y) return x;
+    for (i = 20; i >= 0; i--) {
+        if (dp[x][i] != dp[y][i]) {
+            x = dp[x][i];
+            y = dp[y][i];
+        }
+    }
+    return dp[x][0];
+}
+
+
+void dfs(ll x, ll depth)
+{
+    visit[x] = true;
+    d[x] = depth;
+    ll l = v[x].size();
+    for (ll i = 0; i < l;i++) {
+        y = v[x][i];
+        if (visit[y])
+            continue;
+        dp[y][0] = x;
+        dfs(y, depth + 1);
+    }
+}
+
+void solve(){
+    sc(t);
+    while(t--){
+        sc(n);
+        fori a[i]=i;
+        fori visit[i]=false;
+        foi(n-1){
+            sc2(x, y);
+            a[y]=x;
+        }
+        sc2(x,y);
+        w1{
+            visit[x]=true;
+            if(a[x]==x) break;
+            x=a[x];
+        };
+        w1{
+            if(visit[y]) {
+                w=y;
+                break;
+            }
+            y=a[y];
+        };
+        pr1l(w);
+    }
 
 }
 
