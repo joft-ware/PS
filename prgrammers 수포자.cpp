@@ -22,3 +22,4 @@ vector<int> solution(vector<int> answers) {
     for(int i=1;i<=3;i++) if(arr[i]==maxi) answer.push_back(i);    
     return answer;
 }
+
